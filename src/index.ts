@@ -1,5 +1,6 @@
 import './styles/style.css';
 
-export function test() {
-  return = 1 + b;
+function test() {
+    console.log('Asynchronous sloths');
 }
+test();
