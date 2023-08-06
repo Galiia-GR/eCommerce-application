@@ -1,6 +1,6 @@
 import './styles/style.css';
 
 function test() {
-    console.log('Asynchronous sloths');
+    console.log('Asynchronous sloths test for test');
 }
 test();
