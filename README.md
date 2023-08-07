@@ -31,7 +31,7 @@ The application is powered by CommerceTools, a leading provider of commerce solu
 1. copy repository
 
 ```Bash
-  git clone repository_link
+  git clone https://github.com/Galiia-GR/eCommerce-application.git
 ```
 
 2. install dependencies
