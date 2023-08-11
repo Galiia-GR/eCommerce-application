@@ -1,9 +1,8 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+//  base/global styles
 
-body {
-    background-color: blanchedalmond;
-}
+@import './global/const';
+@import './global/global';
+
+// pages styles
+
+@import './pages/home.scss';
