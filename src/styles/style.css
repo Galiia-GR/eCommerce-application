@@ -1,157 +1,329 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 html,
 body {
-  height: 100%;
-  font-family: Montserrat, sans-serif;
+    height: 100%;
+    font-family: Montserrat, sans-serif;
 }
 
 .body-container {
-  display: flex;
-  min-height: 100%;
-  flex-direction: column;
-  background-color: rgb(252, 240, 221);
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+    background-color: rgb(252, 240, 221);
 }
 
 .header {
-  padding: 0 50px;
-  background-color: rgba(88, 152, 186, 0.7);
-  position: sticky;
-  top: 0;
+    padding: 0 50px;
+    background-color: rgba(88, 152, 186, 0.7);
+    position: sticky;
+    top: 0;
 }
 
 .main {
-  flex: 1 1 auto;
-  padding: 0 50px;
-  background: center/cover, rgba(0, 0, 0, 0.2);
-  background-blend-mode: multiply;
-  transition: background-image 1s ease-in-out;
-  background-repeat: no-repeat;
+    flex: 1 1 auto;
+    padding: 0 50px;
+    background: center/cover, rgba(0, 0, 0, 0.2);
+    background-blend-mode: multiply;
+    transition: background-image 1s ease-in-out;
+    background-repeat: no-repeat;
 }
 
 .footer {
-  padding: 0 50px;
-  background-color: rgb(96, 86, 80);
+    padding: 0 50px;
+    background-color: rgb(96, 86, 80);
 }
 
 .header-container,
 .footer-container {
-  padding: 5px 0 5px 0;
-  display: flex;
-  justify-content: space-between;
-  color: white;
-  font-size: 18px;
+    padding: 5px 0 5px 0;
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    font-size: 18px;
 }
 
 .logo-lang-container {
-  display: flex;
-  gap: 20px;
-  align-items: center;
+    display: flex;
+    gap: 20px;
+    align-items: center;
 }
 
 .logo_link {
-  cursor: pointer;
-  text-decoration: none;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .logo_img {
-  border: 2px solid white;
-  border-radius: 55%;
-  width: 45px;
-  height: 45px;
-  padding: 5px;
+    border: 2px solid white;
+    border-radius: 55%;
+    width: 45px;
+    height: 45px;
+    padding: 5px;
 }
 
 .logo_img:hover {
-  background-color: rgb(235, 160, 62);
+    background-color: rgb(235, 160, 62);
 }
 
 .logo-lang_switch {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .logo-lang_switch:hover {
-  color: rgb(252, 240, 221);
-  text-shadow: 1px 1px 1px rgba(31, 31, 31, 0.6117647059);
+    color: rgb(252, 240, 221);
+    text-shadow: 1px 1px 1px rgba(31, 31, 31, 0.6117647059);
 }
 
 .navigation-cotainer {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  justify-content: end;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    justify-content: end;
 }
 
 .navigation {
-  display: flex;
+    display: flex;
 }
 
 .navigation-item {
-  list-style-type: none;
+    list-style-type: none;
 }
 
 .navigation__link {
-  cursor: pointer;
-  text-decoration: none;
-  color: white;
-  font-size: 18px;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
 }
 
 .navigation__link:hover {
-  color: rgb(252, 240, 221);
-  text-shadow: 1px 1px 1px rgba(31, 31, 31, 0.6117647059);
+    color: rgb(252, 240, 221);
+    text-shadow: 1px 1px 1px rgba(31, 31, 31, 0.6117647059);
 }
 
 .main-title {
-  color: rgb(252, 240, 221);
-  text-align: center;
-  text-shadow: 2px 2px 2px #1f1f1f;
-  font-size: 72px;
-  padding-top: 40px;
+    color: rgb(252, 240, 221);
+    text-align: center;
+    text-shadow: 2px 2px 2px #1f1f1f;
+    font-size: 72px;
+    padding-top: 40px;
 }
 
 .home-cat__container {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  gap: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .home-cat__img {
-  margin-top: 20px;
-  width: 80px;
-  height: 60px;
-  align-self: center;
+    margin-top: 20px;
+    width: 80px;
+    height: 60px;
+    align-self: center;
 }
 
 .home-cat__item {
-  width: 110px;
-  height: 110px;
-  border: 5px solid rgb(60, 82, 113);
-  border-radius: 55%;
-  background-color: rgb(252, 240, 221);
-  display: flex;
-  flex-direction: column;
-  align-self: center;
+    width: 110px;
+    height: 110px;
+    border: 5px solid rgb(60, 82, 113);
+    border-radius: 55%;
+    background-color: rgb(252, 240, 221);
+    display: flex;
+    flex-direction: column;
+    align-self: center;
 }
 
 .home-cat__title {
-  color: rgb(216, 209, 198);
-  font-size: 22px;
-  font-weight: bold;
-  align-self: center;
+    color: rgb(216, 209, 198);
+    font-size: 22px;
+    font-weight: bold;
+    align-self: center;
 }
 
 .home-cats-container {
-  padding-top: 40px;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+    padding-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(4, 1fr);
 }
 
+/* registration and login */
+
+.account-window {
+    position: fixed;
+    background-color: rgb(255, 253, 249);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 2px;
+    top: 20%;
+    bottom: 25%;
+    left: 32%;
+    right: 32%;
+    box-shadow: 0px 0px 90px 0px rgb(27, 44, 54);
+    gap: 14px;
+    overflow-x: scroll;
+    overflow-x: hidden;
+}
+
+.account-window::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background: rgb(88 152 186 / 40%);
+}
+
+.account-window::-webkit-scrollbar {
+    width: 6px;
+}
+
+.account-window::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.164);
+}
+
+.account-window h2 {
+    font-size: 33px;
+    font-weight: 600;
+    color: rgba(27, 52, 67, 0.7);
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.account-window h4 {
+    width: 100%;
+    position: relative;
+    right: -24px;
+    color: rgba(17, 32, 42, 0.7);
+}
+
+.account-window h5 {
+    color: rgba(17, 32, 42, 0.7);
+    transform: translateY(45px);
+}
+
+.account-window button {
+    background-color: rgba(88, 152, 186, 0.7);
+    padding: 20px 100px 20px 100px;
+    border: 0px;
+    transform: translateY(20px);
+    border-radius: 2px;
+    color: white;
+    font-size: 18px;
+}
+
+.account-window h5 {
+    padding-bottom: 25px;
+}
+
+.account-window button:hover {
+    background-color: rgba(127, 165, 186, 0.7);
+}
+
+.account-window button:active {
+    background-color: rgba(62, 143, 187, 0.7);
+}
+
+.double-container input,
+.account-window input {
+    background-color: rgb(255, 253, 249);
+    width: 347px;
+    border: 2px solid rgba(88, 152, 186, 0.7);
+    border-radius: 3px;
+    padding: 14.5px 13px;
+    font-size: 15px;
+    transition: 0.01s;
+    color: rgb(39, 54, 63);
+}
+
+.double-container input {
+    width: 40%;
+}
+
+.double-container {
+    display: flex;
+    flex-direction: row;
+    gap: 27px;
+}
+
+input:hover,
+input:focus,
+input:active {
+    outline: 0;
+    outline-offset: 0;
+}
+
+.account-window input:hover {
+    border: 2px solid rgba(63, 103, 124, 0.7);
+}
+
+.account-window input:focus {
+    border: 2px dashed rgba(88, 152, 186, 0.7);
+}
+
+.account-window input {
+    background-color: rgb(255, 253, 249);
+}
+
+.account-window input {
+    background-color: rgb(255, 253, 249);
+}
+
+.account-background {
+    position: absolute;
+    background-color: rgba(123, 123, 123, 0.484);
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    opacity: 0;
+    transition: 0.2s;
+    position: fixed;
+}
+
+.account-window__header {
+    background-color: rgb(137 179 197);
+    position: sticky;
+    height: 45px;
+    width: 100%;
+    top: 0px;
+    z-index: 3;
+}
+
+.account-window__exit {
+    font-size: 50px;
+    color: rgb(255, 253, 249);
+    position: relative;
+    left: 357px;
+    top: -6px;
+    font-weight: 100;
+    cursor: pointer;
+}
+
+.account-window .account-window__checkbox,
+.account-window .account-window__checkbox:hover,
+.account-window .account-window__checkbox:active,
+.account-window .account-window__checkbox:focus {
+    width: 15px;
+    height: 15px;
+    position: relative;
+    left: -156px;
+}
+
+.account-window__checkbox::after {
+    content: 'Show password';
+    position: absolute;
+    left: 21px;
+    bottom: -1px;
+    color: rgba(17, 32, 42, 0.7);
+    font-weight: 500;
+    font-size: 13px;
+    width: 100px;
+}
 /*# sourceMappingURL=style.css.map */
