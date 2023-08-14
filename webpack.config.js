@@ -36,14 +36,14 @@ module.exports = {
                 test: /\.(png|svg|jpg|jpeg|ico|gif)$/i,
                 type: 'asset/resource',
                 generator: {
-                    filename: './images/[contenthash][ext]',
+                    filename: './assets/images/[name][ext]',
                 },
             },
             {
                 test: /\.(mp3|wav)$/,
                 type: 'asset/resource',
                 generator: {
-                    filename: './audio/[contenthash][ext]',
+                    filename: './assets/audio/[name][ext]',
                 },
             },
             {
