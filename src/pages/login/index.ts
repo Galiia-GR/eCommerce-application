@@ -1,7 +1,7 @@
 import { helpCreateEl } from '../global/global';
 
 export function createLoginWindow(): void {
-    const mainPage = document.querySelector('.body-container') as HTMLBodyElement;
+    const mainPage = document.querySelector('.body-container') as HTMLElement;
     const loginOpen = document.querySelector('.navigation-item:nth-child(6)') as HTMLElement;
 
     const loginBack = helpCreateEl('div', 'account-background') as HTMLElement;
@@ -63,6 +63,7 @@ export function openWindow(window: HTMLElement, container: HTMLElement): void {
     container.append(window);
     setTimeout(() => {
         window.style.opacity = '1';
+        console.log(window);
     });
 }
 

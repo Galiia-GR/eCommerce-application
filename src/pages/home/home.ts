@@ -17,7 +17,7 @@ import img14 from '../../assets/images/home/img14.png';
 import img15 from '../../assets/images/home/img15.png';
 import img16 from '../../assets/images/home/img16.png';
 
-export function createHome() {
+export function createMain() {
     const bodyContainer = document.querySelector('.body-container');
     const mainContainer = helpCreateEl('div', 'main-container');
     const mainTag = helpCreateEl('main', 'main');
@@ -70,6 +70,10 @@ export function createHome() {
     }
 }
 
-createHeader();
-createHome();
-createFooret();
+export function createHomePage() {
+    createHeader();
+    createMain();
+    createFooret();
+}
+
+createHomePage();

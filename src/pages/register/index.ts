@@ -2,7 +2,7 @@ import { openWindow, closeWindow, showPassword } from '../login';
 import { helpCreateEl } from '../global/global';
 
 export function createRegisterWindow(): void {
-    const mainPage = document.querySelector('.body-container') as HTMLBodyElement;
+    const mainPage = document.querySelector('.body-container') as HTMLElement;
     const registerBack = helpCreateEl('div', 'account-background') as HTMLElement;
     const registerWindow = helpCreateEl('div', 'account-window') as HTMLElement;
     const registerHeader = helpCreateEl('div', 'account-window__header') as HTMLElement;

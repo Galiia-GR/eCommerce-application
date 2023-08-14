@@ -37,15 +37,12 @@ export function createHeader() {
 
     const navigation = helpCreateEl('ul', 'navigation');
     navContainer.append(navigation);
-    const arrNav = ['SHOP', 'SPIPPING', 'ABOUT US', 'CONTACTS', 'LOG IN', 'REGISTER'];
+    const arrNav = ['SHOP', 'SHIPPING', 'ABOUT US', 'CONTACTS', 'LOG IN', 'REGISTER'];
 
     for (let i = 0; i < arrNav.length; i += 1) {
         const item = helpCreateEl('li', 'navigation-item');
-        const link = helpCreateEl('a', 'navigation__link');
         navContainer.appendChild(item);
-        link.textContent = arrNav[i];
-        link.setAttribute('href', `'./index.html#${arrNav[i]}`);
-        item.append(link);
+        item.textContent = arrNav[i];
     }
 }
 

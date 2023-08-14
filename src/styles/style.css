@@ -93,16 +93,13 @@ body {
 
 .navigation-item {
     list-style-type: none;
-}
-
-.navigation__link {
     cursor: pointer;
-    text-decoration: none;
     color: white;
     font-size: 18px;
 }
 
-.navigation__link:hover {
+.navigation-item:hover {
+    list-style-type: none;
     color: rgb(252, 240, 221);
     text-shadow: 1px 1px 1px rgba(31, 31, 31, 0.6117647059);
 }

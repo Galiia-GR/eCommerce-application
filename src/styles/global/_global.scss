@@ -92,16 +92,13 @@ body {
 
 .navigation-item {
     list-style-type: none;
-}
-
-.navigation__link {
     cursor: pointer;
-    text-decoration: none;
     color: #ffff;
     font-size: 18px;
 }
 
-.navigation__link:hover {
+.navigation-item:hover {
+    list-style-type: none;
     color: $color-primary-sand;
     text-shadow: 1px 1px 1px #1f1f1f9c;
 }
