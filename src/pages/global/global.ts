@@ -1,4 +1,6 @@
 import footprintImg from '../../assets/images/footprintImg.png';
+import git from '../../assets/images/gitSvg.svg';
+import rss from '../../assets/images/rss.svg';
 
 export function helpCreateEl(tagName: string, className: string) {
     const el = document.createElement(tagName);
@@ -58,4 +60,22 @@ export function createFooter() {
     const footerContainer = helpCreateEl('div', 'footer-container');
     bodyContainer?.append(footerTag);
     footerTag.append(footerContainer);
+    const temp = `
+      <a class="RSS" href="https://rs.school/js/" target="_blank">
+          <img src="${rss}" width="102" height="30" alt="RS School" />
+      </a>
+      <p>
+          2023 by
+          <a href="https://github.com/Galiia-GR" target="_blank">
+              <img src="${git}" width="25" height="25" alt="github"
+          /></a>
+          <a href="https://github.com/vlad-shkv" target="_blank">
+              <img src="${git}" width="25" height="25" alt="github"
+          /></a>
+          <a href="https://github.com/gregoryrubies" target="_blank">
+              <img src="${git}" width="25" height="25" alt="github"
+          /></a>
+      </p>
+    `;
+    footerContainer.innerHTML = temp;
 }

@@ -85,6 +85,15 @@ body {
     }
 }
 
+.footer-container {
+    padding: 10px 0 5px 0;
+}
+@media (min-width: 300px) and (max-width: 767px) {
+    .footer-container {
+        padding: 4px 0 2px 0;
+    }
+}
+
 .logo-container {
     display: flex;
     gap: 20px;
@@ -172,20 +181,63 @@ body {
     text-shadow: 1px 1px 1px rgba(31, 31, 31, 0.6117647059);
 }
 
-.error-404 {
-    font-size: 75px;
-    font-weight: bold;
-    color: rgb(96, 86, 80);
+.error-404-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: aliceblue;
+    padding: 30px 30px 0 30px;
+    margin: 100px 350px 100px 350px;
+    border-radius: 25px;
+    border: solid 5px rgb(60, 82, 113);
 }
 @media (min-width: 768px) and (max-width: 1080px) {
-    .error-404 {
-        font-size: 55px;
+    .error-404-container {
+        padding: 20px 20px 0 20px;
+        margin: 100px 150px 100px 150px;
     }
 }
 @media (min-width: 300px) and (max-width: 767px) {
-    .error-404 {
-        font-size: 35px;
+    .error-404-container {
+        padding: 10px 10px 0 10px;
+        margin: 100px 50px 100px 50px;
     }
+}
+
+.title-404 {
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(60, 82, 113);
+    text-shadow: 1px 1px 1px rgba(31, 31, 31, 0.6117647059);
+}
+@media (min-width: 768px) and (max-width: 1080px) {
+    .title-404 {
+        font-size: 30px;
+    }
+}
+@media (min-width: 300px) and (max-width: 767px) {
+    .title-404 {
+        font-size: 25px;
+    }
+}
+
+.foots-404-container {
+    display: flex;
+}
+
+.img__404 {
+    max-width: 100%;
+    height: auto;
+}
+
+.shipping-container,
+.shop-container,
+.about-container,
+.contacts-container {
+    font-size: 74px;
+    color: rgb(216, 209, 198);
 }
 
 .hamburger__line::after,
