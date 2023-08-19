@@ -1,4 +1,5 @@
 import { helpCreateEl } from '../global/global';
+import { signUpCustomer } from './signUp';
 
 export const loginBack = helpCreateEl('div', 'account-background') as HTMLElement;
 
@@ -46,6 +47,9 @@ export function createLoginWindow(): void {
         singUpLink
     );
     loginBack.append(loginWindow);
+    loginButton.addEventListener('click', () => {
+        signUpCustomer(emailInput.value, passwordInput.value);
+    });
     loginOpen.addEventListener('click', () => {
         openWindow(loginBack, mainPage);
     });
