@@ -1,10 +1,11 @@
 import { helpCreateEl } from '../global/global';
 
+export const loginBack = helpCreateEl('div', 'account-background') as HTMLElement;
+
 export function createLoginWindow(): void {
     const mainPage = document.querySelector('.body-container') as HTMLElement;
     const loginOpen = document.querySelector('.navigation-item:nth-child(6)') as HTMLElement;
 
-    const loginBack = helpCreateEl('div', 'account-background') as HTMLElement;
     const loginWindow = helpCreateEl('div', 'account-window') as HTMLElement;
     const loginHeader = helpCreateEl('div', 'account-window__header') as HTMLElement;
     const emailInput = document.createElement('input') as HTMLInputElement;
