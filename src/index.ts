@@ -5,6 +5,7 @@ import './pages/about/about';
 import './pages/login';
 import './pages/register';
 import './pages/routing.ts';
+import './pages/global/hamburger.ts';
 
 function test() {
     console.log('Asynchronous sloths test for test');

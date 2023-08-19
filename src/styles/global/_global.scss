@@ -23,6 +23,12 @@ body {
     background-color: rgba(rgb(88, 152, 186), 0.7);
     position: sticky;
     top: 0;
+    @include media-tablet {
+        padding: 0 25px;
+    }
+    @include media-mobile {
+        padding: 0 15px;
+    }
 }
 
 .main {
@@ -32,11 +38,23 @@ body {
     background-blend-mode: multiply;
     transition: background-image 1s ease-in-out;
     background-repeat: no-repeat;
+    @include media-tablet {
+        padding: 0 25px;
+    }
+    @include media-mobile {
+        padding: 0 15px;
+    }
 }
 
 .footer {
     padding: 0 50px;
     background-color: $color-primary-dark;
+    @include media-tablet {
+        padding: 0 25px;
+    }
+    @include media-mobile {
+        padding: 0 15px;
+    }
 }
 
 .header-container,
@@ -46,12 +64,22 @@ body {
     justify-content: space-between;
     color: #ffff;
     font-size: 18px;
+    @include media-mobile {
+        font-size: 14px;
+        padding: 2px 0 2px 0;
+    }
 }
 
-.logo-lang-container {
+.logo-container {
     display: flex;
     gap: 20px;
     align-items: center;
+    @include media-tablet {
+        gap: 10px;
+    }
+    @include media-mobile {
+        gap: 10px;
+    }
 }
 
 .logo_link {
@@ -70,35 +98,63 @@ body {
     background-color: $color-primary-orange;
 }
 
-.logo-lang_switch {
+.logo-currency_switch {
     cursor: pointer;
 }
 
-.logo-lang_switch:hover {
+.logo-currency_switch:hover {
     color: $color-primary-sand;
     text-shadow: 1px 1px 1px #1f1f1f9c;
 }
 
 .navigation-cotainer {
     display: flex;
-    align-items: center;
-    gap: 30px;
     justify-content: end;
+    align-items: center;
+
+    @include media-mobile {
+        display: none;
+    }
 }
 
 .navigation {
     display: flex;
+    gap: 30px;
+    @include media-tablet {
+        gap: 20px;
+    }
 }
 
 .navigation-item {
     list-style-type: none;
     cursor: pointer;
+}
+.navigation-link {
+    text-decoration: none;
     color: #ffff;
     font-size: 18px;
+    cursor: pointer;
+
+    @include media-mobile {
+        font-size: 14px;
+    }
 }
 
+.navigation-link:hover,
 .navigation-item:hover {
     list-style-type: none;
     color: $color-primary-sand;
     text-shadow: 1px 1px 1px #1f1f1f9c;
+}
+
+.error-404 {
+    font-size: 75px;
+    font-weight: bold;
+    color: $color-primary-dark;
+    @include media-tablet {
+        font-size: 55px;
+    }
+    @include media-mobile {
+        font-size: 35px;
+    }
 }
