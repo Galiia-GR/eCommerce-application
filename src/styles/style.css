@@ -405,12 +405,26 @@ body {
 }
 
 .double-container input,
-.account-window input {
+.account-window input,
+.double-container select,
+.account-window select {
     background-color: rgb(255, 253, 249);
     width: 347px;
     border: 2px solid rgba(88, 152, 186, 0.7);
     border-radius: 3px;
     padding: 14.5px 13px;
+    font-size: 15px;
+    transition: 0.01s;
+    color: rgb(39, 54, 63);
+}
+
+.double-container .errorInput,
+.account-window .errorInput,
+.double-container .errorInput,
+.account-window .errorInput {
+    background-color: rgb(255, 253, 249);
+    border: 2px solid rgba(255, 72, 72, 0.7);
+    border-radius: 3px;
     font-size: 15px;
     transition: 0.01s;
     color: rgb(39, 54, 63);
@@ -426,6 +440,9 @@ body {
     gap: 27px;
 }
 
+select:hover,
+select:focus,
+select:active,
 input:hover,
 input:focus,
 input:active {
@@ -433,15 +450,18 @@ input:active {
     outline-offset: 0;
 }
 
-.account-window input:hover {
+.account-window input:hover,
+.account-window select:hover {
     border: 2px solid rgba(63, 103, 124, 0.7);
 }
 
-.account-window input:focus {
+.account-window input:focus,
+.account-window select:focus {
     border: 2px dashed rgba(88, 152, 186, 0.7);
 }
 
-.account-window input {
+.account-window input,
+.account-window select {
     background-color: rgb(255, 253, 249);
 }
 
@@ -499,6 +519,22 @@ input:active {
     font-weight: 500;
     font-size: 13px;
     width: 100px;
+}
+
+.error {
+    color: rgb(255, 103, 103);
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.account-window .sign-link {
+    color: rgb(84, 84, 215);
+    cursor: pointer;
+}
+
+.account-window .sign-link:hover {
+    color: rgb(53, 53, 201);
+    text-decoration: underline;
 }
 
 .main-title {
