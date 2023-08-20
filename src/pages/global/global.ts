@@ -24,7 +24,6 @@ export function createHeader() {
     const headerLogoLangBlock = helpCreateEl('div', 'logo-container');
     headerContainer.append(headerLogoLangBlock);
     const logo = helpCreateEl('a', 'logo_link');
-    logo.setAttribute('href', '#home');
     const logoImg = helpCreateEl('img', 'logo_img') as HTMLImageElement;
     headerLogoLangBlock.append(logo);
     logoImg.setAttribute('alt', 'logo');
@@ -43,11 +42,8 @@ export function createHeader() {
 
     for (let i = 0; i < arrNav.length; i += 1) {
         const item = helpCreateEl('li', 'navigation-item');
-        const link = helpCreateEl('a', 'navigation-link');
         navigation.appendChild(item);
-        item.append(link);
-        link.textContent = arrNav[i];
-        link.setAttribute('href', `#${arrNav[i].toLowerCase()}`);
+        item.textContent = arrNav[i];
     }
 
     const mainTag = helpCreateEl('main', 'main');

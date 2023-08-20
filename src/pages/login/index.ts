@@ -32,7 +32,6 @@ export function createLoginWindow(): void {
     passwordLabel.textContent = 'Password:';
     singUpLink.textContent = "Don't have account? Register Here";
     loginExit.textContent = '×';
-    loginOpen.innerHTML = 'LOGIN';
     loginOpen.style.cursor = 'pointer';
 
     loginHeader.append(loginExit);
@@ -131,6 +130,13 @@ export function createLoginWindow(): void {
             addError(loginButton, '*Email or password is wrong');
             loginButton.style.marginBottom = '15px';
             loginButton.style.backgroundColor = 'rgba(255, 72, 72, 0.7)';
+        }
+
+        let submitLogin = false;
+        submitLogin = true;
+        if (submitLogin) {
+            window.location.hash = '/';
+            console.log('submit true');
         }
     });
     loginWindow.querySelectorAll('input').forEach((logInput) => {
