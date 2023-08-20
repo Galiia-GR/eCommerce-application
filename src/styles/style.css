@@ -430,6 +430,18 @@ body {
     color: rgb(39, 54, 63);
 }
 
+.double-container .errorInput:hover,
+.account-window .errorInput:hover {
+    border: 2px solid rgba(199, 58, 58, 0.7);
+}
+
+.double-container .errorInput:active,
+.account-window .errorInput:active,
+.double-container .errorInput:focus,
+.account-window .errorInput:focus {
+    border: 2px dashed rgba(223, 66, 66, 0.7);
+}
+
 .double-container input {
     width: 40%;
 }
@@ -524,7 +536,9 @@ input:active {
 .error {
     color: rgb(255, 103, 103);
     font-weight: 500;
-    font-size: 15px;
+    font-size: 13px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .account-window .sign-link {
