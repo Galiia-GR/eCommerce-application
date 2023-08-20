@@ -36,7 +36,7 @@ export function createRegisterWindow(): void {
     const passwordCheckbox2 = helpCreateEl('input', 'account-window__checkbox') as HTMLInputElement;
     const singInLink = helpCreateEl('h5', 'sign-link') as HTMLElement;
     const registerExit = helpCreateEl('div', 'account-window__exit') as HTMLElement;
-    const registerOpen = document.querySelector('.navigation-item:nth-child(7)') as HTMLElement;
+    const registerOpen = document.querySelector('.navigation-item:nth-child(6)') as HTMLElement;
 
     passwordCheckbox.type = 'checkbox';
     passwordCheckbox2.type = 'checkbox';
