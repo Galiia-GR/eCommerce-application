@@ -123,7 +123,7 @@ export function createRegisterWindow(): void {
         let onlyLetters = 1;
         let onlyLetters2 = 1;
         let onlyLettersCity = 1;
-        let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ';
         let numbers = '1234567890';
 
         letters.split('').forEach((step) => {
@@ -162,14 +162,30 @@ export function createRegisterWindow(): void {
             el.classList.remove('errorInput');
         });
 
-        if ((emailInput.value.endsWith('@gmail.com') || emailInput.value.endsWith('@email.com')) === false) {
+        if ((emailInput.value.startsWith(' ') || emailInput.value.endsWith(' ')) === true) {
             isCorrect = false;
-            addError(emailLabel, '*Email must end with @gmail.com or @email.com');
+            addError(emailLabel, '*Email address must not contain leading or trailing whitespace');
             emailInput.classList.add('errorInput');
         }
+        if (emailInput.value.endsWith('.com') === false) {
+            isCorrect = false;
+            addError(emailLabel, '*Email must end with .com');
+            emailInput.classList.add('errorInput');
+        }
+        if (emailInput.value.includes('@') === false) {
+            isCorrect = false;
+            addError(emailLabel, '*Email address must contain an "@" symbol separating local part and domain name');
+            emailInput.classList.add('errorInput');
+        }
+
         if (passwordInput.value.length < 8) {
             isCorrect = false;
             addError(passwordLabel, '*Password must contain at least 8 characters');
+            passwordInput.classList.add('errorInput');
+        }
+        if ((passwordInput.value.startsWith(' ') || passwordInput.value.endsWith(' ')) === true) {
+            isCorrect = false;
+            addError(passwordLabel, '*Password must not contain leading or trailing whitespace');
             passwordInput.classList.add('errorInput');
         }
         if (haveLover === false) {
@@ -209,12 +225,17 @@ export function createRegisterWindow(): void {
         }
         if (Number(dateInput.value.split('-')[0]) > 2010 || dateInput.value.length === 0) {
             isCorrect = false;
-            addError(dateLabel, '*Sorry but you must be over 13 years old');
+            addError(dateLabel, '*You must be over 13 years old');
             dateInput.classList.add('errorInput');
         }
         if (streetInput.value.length < 1) {
             isCorrect = false;
             addError(streetLabel, '*Your street must contain at least 1 character');
+            streetInput.classList.add('errorInput');
+        }
+        if ((streetInput.value.startsWith(' ') || streetInput.value.endsWith(' ')) === true) {
+            isCorrect = false;
+            addError(streetLabel, '*Street must not contain leading or trailing whitespace');
             streetInput.classList.add('errorInput');
         }
         if (onlyLettersCity === 0) {
@@ -261,13 +282,11 @@ export function createRegisterWindow(): void {
         }
 
         if (isCorrect === false) {
-            console.log('error');
             return;
         }
 
         const response: responseData = await postCustomer(emailInput.value, passwordInput.value);
         const userId = await response.customer.id;
-        console.log(dateInput.value);
         await updateCustomer(
             userId,
             firstNameInput.value,
@@ -281,6 +300,183 @@ export function createRegisterWindow(): void {
         );
         document.location.replace('index.html');
         closeWindow(registerBack, mainPage);
+    });
+    registerWindow.querySelectorAll('input').forEach((ligInput) => {
+        ligInput.addEventListener('input', () => {
+            let isCorrect = true;
+            let haveUpper = false;
+            let haveLover = false;
+            let haveNumber = false;
+            let postalCorrect = false;
+            let onlyLetters = 1;
+            let onlyLetters2 = 1;
+            let onlyLettersCity = 1;
+            let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ';
+            let numbers = '1234567890';
+
+            letters.split('').forEach((step) => {
+                if (passwordInput.value.includes(step)) {
+                    haveUpper = true;
+                }
+                if (passwordInput.value.includes(step.toLowerCase())) {
+                    haveLover = true;
+                }
+            });
+            numbers.split('').forEach((step) => {
+                if (passwordInput.value.includes(step)) {
+                    haveNumber = true;
+                }
+            });
+            firstNameInput.value.split('').forEach((step) => {
+                if (!letters.includes(step) && !letters.toLowerCase().includes(step)) {
+                    onlyLetters = 0;
+                }
+            });
+            secondNameInput.value.split('').forEach((step) => {
+                if (!letters.includes(step) && !letters.toLowerCase().includes(step)) {
+                    onlyLetters2 = 0;
+                }
+            });
+            cityInput.value.split('').forEach((step) => {
+                if (!letters.includes(step) && !letters.toLowerCase().includes(step)) {
+                    onlyLettersCity = 0;
+                }
+            });
+
+            registerWindow.querySelectorAll('span').forEach((el) => {
+                el.remove();
+            });
+            registerWindow.querySelectorAll('input').forEach((el) => {
+                el.classList.remove('errorInput');
+            });
+
+            if ((emailInput.value.startsWith(' ') || emailInput.value.endsWith(' ')) === true) {
+                isCorrect = false;
+                addError(emailLabel, '*Email address must not contain leading or trailing whitespace');
+                emailInput.classList.add('errorInput');
+            }
+            if (emailInput.value.endsWith('.com') === false) {
+                isCorrect = false;
+                addError(emailLabel, '*Email must end with .com');
+                emailInput.classList.add('errorInput');
+            }
+            if (emailInput.value.includes('@') === false) {
+                isCorrect = false;
+                addError(emailLabel, '*Email address must contain an "@" symbol separating local part and domain name');
+                emailInput.classList.add('errorInput');
+            }
+
+            if (passwordInput.value.length < 8) {
+                isCorrect = false;
+                addError(passwordLabel, '*Password must contain at least 8 characters');
+                passwordInput.classList.add('errorInput');
+            }
+            if ((passwordInput.value.startsWith(' ') || passwordInput.value.endsWith(' ')) === true) {
+                isCorrect = false;
+                addError(passwordLabel, '*Password must not contain leading or trailing whitespace');
+                passwordInput.classList.add('errorInput');
+            }
+            if (haveLover === false) {
+                isCorrect = false;
+                addError(passwordLabel, '*Password must contain at least 1 lowercase letter');
+                passwordInput.classList.add('errorInput');
+            }
+            if (haveUpper === false) {
+                isCorrect = false;
+                addError(passwordLabel, '*Password must contain at least 1 uppercase letter');
+                passwordInput.classList.add('errorInput');
+            }
+            if (haveNumber === false) {
+                isCorrect = false;
+                addError(passwordLabel, '*Password must contain at least 1 numder character');
+                passwordInput.classList.add('errorInput');
+            }
+            if (firstNameInput.value.length < 1) {
+                isCorrect = false;
+                addError(nameLabel, '*First name must contain at least 1 character');
+                firstNameInput.classList.add('errorInput');
+            }
+            if (secondNameInput.value.length < 1) {
+                isCorrect = false;
+                addError(nameLabel, '*Second name must contain at least 1 character');
+                secondNameInput.classList.add('errorInput');
+            }
+            if (onlyLetters === 0) {
+                isCorrect = false;
+                addError(nameLabel, '*Name must not contain numbers or special characters');
+                firstNameInput.classList.add('errorInput');
+            }
+            if (onlyLetters2 === 0) {
+                isCorrect = false;
+                addError(nameLabel, '*Name must not contain numbers or special characters');
+                secondNameInput.classList.add('errorInput');
+            }
+            if (Number(dateInput.value.split('-')[0]) > 2010 || dateInput.value.length === 0) {
+                isCorrect = false;
+                addError(dateLabel, '*You must be over 13 years old');
+                dateInput.classList.add('errorInput');
+            }
+            if (streetInput.value.length < 1) {
+                isCorrect = false;
+                addError(streetLabel, '*Your street must contain at least 1 character');
+                streetInput.classList.add('errorInput');
+            }
+            if ((streetInput.value.startsWith(' ') || streetInput.value.endsWith(' ')) === true) {
+                isCorrect = false;
+                addError(streetLabel, '*Street must not contain leading or trailing whitespace');
+                streetInput.classList.add('errorInput');
+            }
+            if (onlyLettersCity === 0) {
+                isCorrect = false;
+                addError(cityLabel, '*City must not contain numbers or special characters');
+                cityInput.classList.add('errorInput');
+            }
+            if (cityInput.value.length < 1) {
+                isCorrect = false;
+                addError(cityLabel, '*Your city must contain at least 1 character');
+                cityInput.classList.add('errorInput');
+            }
+            if (
+                countryInput.value === 'Poland - PL' &&
+                postalInput.value[2] === '-' &&
+                postalInput.value.length === 6
+            ) {
+                postalCorrect = true;
+            }
+            if (
+                countryInput.value === 'United States - US' &&
+                postalInput.value[5] === '-' &&
+                postalInput.value.length === 10
+            ) {
+                postalCorrect = true;
+            }
+            if (countryInput.value === 'Italy - IT' && postalInput.value.length === 5) {
+                postalCorrect = true;
+            }
+            if (countryInput.value === 'Kazakhstan - KZ' && postalInput.value.length === 7) {
+                postalCorrect = true;
+            }
+            if (countryInput.value === 'Russian Federation - RU' && postalInput.value.length === 6) {
+                postalCorrect = true;
+            }
+            if (countryInput.value === 'Germany - DE' && postalInput.value.length === 5) {
+                postalCorrect = true;
+            }
+            if (postalCorrect === false) {
+                isCorrect = false;
+                addError(postalLabel, "*Your country's postal code must be correct");
+                postalInput.classList.add('errorInput');
+            }
+            if (password2Input.value !== passwordInput.value) {
+                isCorrect = false;
+                addError(password2Label, '*Passwords must be the same');
+                password2Input.classList.add('errorInput');
+            }
+
+            if (isCorrect === false) {
+                return;
+            }
+        });
     });
     singInLink.addEventListener('click', () => {
         closeWindow(registerBack, mainPage);
@@ -306,7 +502,7 @@ function addCountry(box: HTMLSelectElement) {
     });
 }
 
-function addError(element: HTMLElement, error: string) {
+export function addError(element: HTMLElement, error: string) {
     let errorMessage = document.createElement('span');
     errorMessage.classList.add('error');
     errorMessage.textContent = error;
