@@ -48,83 +48,90 @@ export function createLoginWindow(): void {
         singUpLink
     );
     loginBack.append(loginWindow);
-    loginButton.addEventListener('click', () => {
-        let isCorrect = true;
-        let haveUpper = false;
-        let haveLover = false;
-        let haveNumber = false;
-        let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ';
-        let numbers = '1234567890';
+    loginButton.addEventListener('click', async () => {
+        try {
+            let isCorrect = true;
+            let haveUpper = false;
+            let haveLover = false;
+            let haveNumber = false;
+            let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ';
+            let numbers = '1234567890';
 
-        letters.split('').forEach((step) => {
-            if (passwordInput.value.includes(step)) {
-                haveUpper = true;
+            letters.split('').forEach((step) => {
+                if (passwordInput.value.includes(step)) {
+                    haveUpper = true;
+                }
+                if (passwordInput.value.includes(step.toLowerCase())) {
+                    haveLover = true;
+                }
+            });
+            numbers.split('').forEach((step) => {
+                if (passwordInput.value.includes(step)) {
+                    haveNumber = true;
+                }
+            });
+
+            loginWindow.querySelectorAll('span').forEach((el) => {
+                el.remove();
+            });
+            loginWindow.querySelectorAll('input').forEach((el) => {
+                el.classList.remove('errorInput');
+            });
+
+            if ((emailInput.value.startsWith(' ') || emailInput.value.endsWith(' ')) === true) {
+                isCorrect = false;
+                addError(emailLabel, '*Email address must not contain leading or trailing whitespace');
+                emailInput.classList.add('errorInput');
             }
-            if (passwordInput.value.includes(step.toLowerCase())) {
-                haveLover = true;
+            if (emailInput.value.endsWith('.com') === false) {
+                isCorrect = false;
+                addError(emailLabel, '*Email must end with .com');
+                emailInput.classList.add('errorInput');
             }
-        });
-        numbers.split('').forEach((step) => {
-            if (passwordInput.value.includes(step)) {
-                haveNumber = true;
+            if (emailInput.value.includes('@') === false) {
+                isCorrect = false;
+                addError(emailLabel, '*Email address must contain an "@" symbol separating local part and domain name');
+                emailInput.classList.add('errorInput');
             }
-        });
+            if (passwordInput.value.length < 8) {
+                isCorrect = false;
+                addError(passwordLabel, '*Password must contain at least 8 characters');
+                passwordInput.classList.add('errorInput');
+            }
+            if (haveLover === false) {
+                isCorrect = false;
+                addError(passwordLabel, '*Password must contain at least 1 lowercase letter');
+                passwordInput.classList.add('errorInput');
+            }
+            if (haveUpper === false) {
+                isCorrect = false;
+                addError(passwordLabel, '*Password must contain at least 1 uppercase letter');
+                passwordInput.classList.add('errorInput');
+            }
+            if (haveNumber === false) {
+                isCorrect = false;
+                addError(passwordLabel, '*Password must contain at least 1 numder character');
+                passwordInput.classList.add('errorInput');
+            }
+            if (
+                (passwordInput.value[0] === ' ' || passwordInput.value[passwordInput.value.length - 1] === ' ') === true
+            ) {
+                isCorrect = false;
+                addError(passwordLabel, 'Password must not contain leading or trailing whitespace');
+                passwordInput.classList.add('errorInput');
+            }
 
-        loginWindow.querySelectorAll('span').forEach((el) => {
-            el.remove();
-        });
-        loginWindow.querySelectorAll('input').forEach((el) => {
-            el.classList.remove('errorInput');
-        });
+            if (isCorrect === false) {
+                return;
+            }
 
-        if ((emailInput.value.startsWith(' ') || emailInput.value.endsWith(' ')) === true) {
-            isCorrect = false;
-            addError(emailLabel, '*Email address must not contain leading or trailing whitespace');
-            emailInput.classList.add('errorInput');
+            await signUpCustomer(emailInput.value, passwordInput.value);
+            await closeWindow(loginBack, mainPage);
+        } catch (err) {
+            addError(loginButton, '*Email or password is wrong');
+            loginButton.style.marginBottom = '15px';
+            loginButton.style.backgroundColor = 'rgba(255, 72, 72, 0.7)';
         }
-        if (emailInput.value.endsWith('.com') === false) {
-            isCorrect = false;
-            addError(emailLabel, '*Email must end with .com');
-            emailInput.classList.add('errorInput');
-        }
-        if (emailInput.value.includes('@') === false) {
-            isCorrect = false;
-            addError(emailLabel, '*Email address must contain an "@" symbol separating local part and domain name');
-            emailInput.classList.add('errorInput');
-        }
-        if (passwordInput.value.length < 8) {
-            isCorrect = false;
-            addError(passwordLabel, '*Password must contain at least 8 characters');
-            passwordInput.classList.add('errorInput');
-        }
-        if (haveLover === false) {
-            isCorrect = false;
-            addError(passwordLabel, '*Password must contain at least 1 lowercase letter');
-            passwordInput.classList.add('errorInput');
-        }
-        if (haveUpper === false) {
-            isCorrect = false;
-            addError(passwordLabel, '*Password must contain at least 1 uppercase letter');
-            passwordInput.classList.add('errorInput');
-        }
-        if (haveNumber === false) {
-            isCorrect = false;
-            addError(passwordLabel, '*Password must contain at least 1 numder character');
-            passwordInput.classList.add('errorInput');
-        }
-        if ((passwordInput.value[0] === ' ' || passwordInput.value[passwordInput.value.length - 1] === ' ') === true) {
-            isCorrect = false;
-            addError(passwordLabel, 'Password must not contain leading or trailing whitespace');
-            passwordInput.classList.add('errorInput');
-        }
-
-        if (isCorrect === false) {
-            return;
-        }
-
-        document.location.replace('index.html');
-        closeWindow(loginBack, mainPage);
-        signUpCustomer(emailInput.value, passwordInput.value);
     });
     loginWindow.querySelectorAll('input').forEach((logInput) => {
         logInput.addEventListener('input', () => {
