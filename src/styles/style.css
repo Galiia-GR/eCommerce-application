@@ -110,11 +110,11 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    max-width: 400px;
+    max-width: 500px;
     margin: 0 auto;
     border-radius: 2px;
-    top: 20%;
-    bottom: 25%;
+    top: 15%;
+    bottom: 20%;
     left: 32%;
     right: 32%;
     box-shadow: 0px 0px 90px 0px rgb(27, 44, 54);
@@ -158,7 +158,7 @@ body {
 
 .account-window button {
     background-color: rgba(88, 152, 186, 0.7);
-    padding: 20px 100px 20px 100px;
+    padding: 20px 23%;
     border: 0px;
     transform: translateY(20px);
     border-radius: 2px;
@@ -183,7 +183,7 @@ body {
 .double-container select,
 .account-window select {
     background-color: rgb(255, 253, 249);
-    width: 347px;
+    width: 85%;
     border: 2px solid rgba(88, 152, 186, 0.7);
     border-radius: 3px;
     padding: 14.5px 13px;
@@ -217,13 +217,15 @@ body {
 }
 
 .double-container input {
-    width: 40%;
+    width: 45%;
 }
 
-.double-container {
+.account-window .double-container {
     display: flex;
     flex-direction: row;
-    gap: 27px;
+    width: 85%;
+    justify-content: space-between;
+    margin: 0 auto;
 }
 
 select:hover,
@@ -270,19 +272,18 @@ input:active {
 .account-window__header {
     background-color: rgb(137, 179, 197);
     position: sticky;
-    height: 45px;
     width: 100%;
-    top: 0px;
     z-index: 3;
+    top: 0px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
 }
 
 .account-window__exit {
     font-size: 50px;
     color: rgb(255, 253, 249);
-    position: relative;
-    left: 357px;
-    top: -6px;
-    font-weight: 100;
+    margin-right: 15px;
     cursor: pointer;
 }
 
@@ -290,21 +291,22 @@ input:active {
 .account-window .account-window__checkbox:hover,
 .account-window .account-window__checkbox:active,
 .account-window .account-window__checkbox:focus {
+    position: sticky;
     width: 15px;
     height: 15px;
-    position: relative;
-    left: -156px;
+    right: 330px;
+    margin-left: 15px;
 }
 
 .account-window__checkbox::after {
+    position: relative;
     content: 'Show password';
-    position: absolute;
     left: 21px;
-    bottom: -1px;
     color: rgba(17, 32, 42, 0.7);
     font-weight: 500;
     font-size: 13px;
     width: 100px;
+    display: block;
 }
 
 .error {

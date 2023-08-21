@@ -12,7 +12,7 @@ export function createRegisterWindow(): void {
     const emailInput = document.createElement('input') as HTMLInputElement;
     const passwordInput = document.createElement('input') as HTMLInputElement;
     const password2Input = document.createElement('input') as HTMLInputElement;
-    const nameContainer = helpCreateEl('h4', 'double-container') as HTMLElement;
+    const nameContainer = helpCreateEl('div', 'double-container') as HTMLElement;
     const nameLabel = document.createElement('h4') as HTMLElement;
     const firstNameInput = document.createElement('input') as HTMLInputElement;
     const secondNameInput = document.createElement('input') as HTMLInputElement;
