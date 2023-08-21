@@ -184,7 +184,15 @@ input:active {
 .account-window .account-window__checkbox,
 .account-window .account-window__checkbox:hover,
 .account-window .account-window__checkbox:active,
-.account-window .account-window__checkbox:focus {
+.account-window .account-window__checkbox:focus,
+.account-window .account-window__checkbox-def,
+.account-window .account-window__checkbox-def:hover,
+.account-window .account-window__checkbox-def:active,
+.account-window .account-window__checkbox-def:focus,
+.account-window .account-window__checkbox-same,
+.account-window .account-window__checkbox-same:hover,
+.account-window .account-window__checkbox-same:active,
+.account-window .account-window__checkbox-same:focus {
     position: sticky;
     width: 15px;
     height: 15px;
@@ -219,6 +227,27 @@ input:active {
 .account-window .sign-link:hover {
     color: rgb(53, 53, 201);
     text-decoration: underline;
+}
+
+.account-window__checkbox-def::after {
+    position: relative;
+    content: 'Set as default address';
+    left: 21px;
+    color: rgba(17, 32, 42, 0.7);
+    font-weight: 500;
+    font-size: 13px;
+    width: 150px;
+    display: block;
+}
+.account-window__checkbox-same::after {
+    position: relative;
+    content: 'Also use as billing address';
+    left: 21px;
+    color: rgba(17, 32, 42, 0.7);
+    font-weight: 500;
+    font-size: 13px;
+    width: 170px;
+    display: block;
 }
 
 @media (max-width: 768px) {

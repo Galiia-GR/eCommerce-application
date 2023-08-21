@@ -32,8 +32,6 @@ export function createLoginWindow(): void {
     passwordLabel.textContent = 'Password:';
     singUpLink.textContent = "Don't have account? Register Here";
     loginExit.textContent = '×';
-    loginOpen.innerHTML = 'LOGIN';
-    loginOpen.style.cursor = 'pointer';
 
     loginHeader.append(loginExit);
     loginWindow.append(

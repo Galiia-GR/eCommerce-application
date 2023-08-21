@@ -10,6 +10,7 @@ import './pages/register/getInf';
 import './pages/register/createCustomer';
 import './pages/register/getCustomer';
 import './pages/register/updateCustomer';
+import './pages/register/setDefaultShipping';
 
 function test() {
     console.log('Asynchronous sloths test for test');
