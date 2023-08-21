@@ -105,14 +105,15 @@ body {
     background-color: $color-primary-orange;
 }
 
-.logo-currency_switch {
-    cursor: pointer;
-}
-
-.logo-currency_switch:hover {
+.logo-userName {
     color: $color-primary-sand;
     text-shadow: 1px 1px 1px #1f1f1f9c;
 }
+
+// .logo-currency_switch:hover {
+//     color: $color-primary-sand;
+//     text-shadow: 1px 1px 1px #1f1f1f9c;
+// }
 
 .navigation-cotainer {
     display: flex;

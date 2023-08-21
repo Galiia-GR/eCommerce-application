@@ -6,7 +6,7 @@ export const loginBack = helpCreateEl('div', 'account-background') as HTMLElemen
 
 export function createLoginWindow(): void {
     const mainPage = document.querySelector('.body-container') as HTMLElement;
-    const loginOpen = document.querySelector('.navigation-item:nth-child(5)') as HTMLElement;
+    const loginOpen = document.querySelector('.LOGIN') as HTMLElement;
 
     const loginWindow = helpCreateEl('div', 'account-window') as HTMLElement;
     const loginHeader = helpCreateEl('div', 'account-window__header') as HTMLElement;
@@ -17,7 +17,7 @@ export function createLoginWindow(): void {
     const emailLabel = document.createElement('h4') as HTMLElement;
     const passwordLabel = document.createElement('h4') as HTMLElement;
     const passwordCheckbox = helpCreateEl('input', 'account-window__checkbox') as HTMLInputElement;
-    const singUpLink = document.createElement('h5') as HTMLElement;
+    const singUpLink = helpCreateEl('h5', 'sign-link') as HTMLElement;
     const loginExit = helpCreateEl('div', 'account-window__exit') as HTMLElement;
 
     passwordCheckbox.type = 'checkbox';
@@ -128,14 +128,16 @@ export function createLoginWindow(): void {
                 return;
             }
 
-            await signUpCustomer(emailInput.value, passwordInput.value);
+            const customerData = await signUpCustomer(emailInput.value, passwordInput.value);
             await closeWindow(loginBack, mainPage);
 
             let submitLogin = false;
             submitLogin = true;
             if (submitLogin) {
                 window.location.hash = '/';
-                console.log('submit true');
+                const customerHeaderUserEl = document.querySelector('.logo-userName') as HTMLElement;
+                customerHeaderUserEl.textContent = `Home ${customerData}`;
+                console.log('submit true', customerData);
             }
         } catch (err) {
             addError(loginButton, '*Email or password is wrong');
@@ -238,6 +240,10 @@ export function createLoginWindow(): void {
         }
     });
     showPassword(passwordInput, passwordCheckbox);
+
+    singUpLink.addEventListener('click', () => {
+        window.location.hash = '/register';
+    });
 }
 
 export function openWindow(window: HTMLElement, container: HTMLElement): void {

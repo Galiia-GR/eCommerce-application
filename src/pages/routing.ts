@@ -70,14 +70,14 @@ export function renderPage(path: string) {
             return createContactsPage();
         }
         case '/login': {
-            const loginOpen = document.querySelector('.navigation-item:nth-child(5)') as HTMLElement;
+            const loginOpen = document.querySelector('.LOGIN') as HTMLElement;
             if (loginOpen.textContent === 'LOGIN') {
                 loginOpen.click();
             }
             return console.log('render login');
         }
         case '/register': {
-            const RegisterOpen = document.querySelector('.navigation-item:nth-child(6)') as HTMLElement;
+            const RegisterOpen = document.querySelector('.REGISTER') as HTMLElement;
             if (RegisterOpen.textContent === 'REGISTER') {
                 RegisterOpen.click();
             }

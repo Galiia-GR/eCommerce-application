@@ -127,11 +127,7 @@ body {
     background-color: rgb(235, 160, 62);
 }
 
-.logo-currency_switch {
-    cursor: pointer;
-}
-
-.logo-currency_switch:hover {
+.logo-userName {
     color: rgb(252, 240, 221);
     text-shadow: 1px 1px 1px rgba(31, 31, 31, 0.6117647059);
 }

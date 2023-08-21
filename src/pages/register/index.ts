@@ -1,7 +1,7 @@
 import { countryObject, responseData } from 'src/interfaces';
 import { postCustomer } from './createCustomer';
 import { updateCustomer } from './updateCustomer';
-import { openWindow, closeWindow, showPassword, loginBack } from '../login';
+import { openWindow, closeWindow, showPassword } from '../login';
 import { getCustomer } from './getCustomer';
 import { updateDefShippingCustomer } from './setDefaultShipping';
 import { helpCreateEl } from '../global/global';
@@ -55,7 +55,7 @@ export function createRegisterWindow(): void {
     const billingSameCheckbox = helpCreateEl('input', 'account-window__checkbox-same') as HTMLInputElement;
     const singInLink = helpCreateEl('h5', 'sign-link') as HTMLElement;
     const registerExit = helpCreateEl('div', 'account-window__exit') as HTMLElement;
-    const registerOpen = document.querySelector('.navigation-item:nth-child(6)') as HTMLElement;
+    const registerOpen = document.querySelector('.REGISTER') as HTMLElement;
 
     passwordCheckbox.type = 'checkbox';
     passwordCheckbox2.type = 'checkbox';
@@ -751,8 +751,9 @@ export function createRegisterWindow(): void {
         });
     });
     singInLink.addEventListener('click', () => {
-        closeWindow(registerBack, mainPage);
-        openWindow(loginBack, mainPage);
+        window.location.hash = '/login';
+        // closeWindow(registerBack, mainPage);
+        // openWindow(loginBack, mainPage);
     });
 }
 

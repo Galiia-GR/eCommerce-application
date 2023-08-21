@@ -29,9 +29,9 @@ export function createHeader() {
     logoImg.setAttribute('alt', 'logo');
     logoImg.src = footprintImg;
     logo.append(logoImg);
-    const logoLang = helpCreateEl('div', 'logo-currency_switch');
+    const logoLang = helpCreateEl('div', 'logo-userName');
     headerLogoLangBlock.append(logoLang);
-    logoLang.textContent = 'currency';
+    logoLang.textContent = 'Home';
 
     const navContainer = helpCreateEl('nav', 'navigation-cotainer');
     headerContainer.append(navContainer);
@@ -42,6 +42,7 @@ export function createHeader() {
 
     for (let i = 0; i < arrNav.length; i += 1) {
         const item = helpCreateEl('li', 'navigation-item');
+        item.classList.add(`${[arrNav[i]]}`);
         navigation.appendChild(item);
         item.textContent = arrNav[i];
     }

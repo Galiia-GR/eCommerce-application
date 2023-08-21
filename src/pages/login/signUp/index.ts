@@ -18,5 +18,6 @@ export async function signUpCustomer(userEmail: string, userPassword: string): P
         }
     );
     console.log(response.data);
-    return response.data;
+    const customerfirstName = response.data.customer.firstName;
+    return customerfirstName;
 }
