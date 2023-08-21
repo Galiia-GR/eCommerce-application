@@ -130,6 +130,13 @@ export function createLoginWindow(): void {
 
             await signUpCustomer(emailInput.value, passwordInput.value);
             await closeWindow(loginBack, mainPage);
+
+            let submitLogin = false;
+            submitLogin = true;
+            if (submitLogin) {
+                window.location.hash = '/';
+                console.log('submit true');
+            }
         } catch (err) {
             addError(loginButton, '*Email or password is wrong');
             loginButton.style.marginBottom = '15px';

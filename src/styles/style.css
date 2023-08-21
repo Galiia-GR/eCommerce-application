@@ -24,7 +24,7 @@ body {
     position: sticky;
     top: 0;
 }
-@media (min-width: 768px) and (max-width: 1080px) {
+@media (min-width: 768px) and (max-width: 1180px) {
     .header {
         padding: 0 25px;
     }
@@ -43,7 +43,7 @@ body {
     transition: background-image 1s ease-in-out;
     background-repeat: no-repeat;
 }
-@media (min-width: 768px) and (max-width: 1080px) {
+@media (min-width: 768px) and (max-width: 1180px) {
     .main {
         padding: 0 25px;
     }
@@ -58,7 +58,7 @@ body {
     padding: 0 50px;
     background-color: rgb(96, 86, 80);
 }
-@media (min-width: 768px) and (max-width: 1080px) {
+@media (min-width: 768px) and (max-width: 1180px) {
     .footer {
         padding: 0 25px;
     }
@@ -99,7 +99,7 @@ body {
     gap: 20px;
     align-items: center;
 }
-@media (min-width: 768px) and (max-width: 1080px) {
+@media (min-width: 768px) and (max-width: 1180px) {
     .logo-container {
         gap: 10px;
     }
@@ -151,7 +151,7 @@ body {
     display: flex;
     gap: 30px;
 }
-@media (min-width: 768px) and (max-width: 1080px) {
+@media (min-width: 768px) and (max-width: 1180px) {
     .navigation {
         gap: 20px;
     }
@@ -192,7 +192,7 @@ body {
     border-radius: 25px;
     border: solid 5px rgb(60, 82, 113);
 }
-@media (min-width: 768px) and (max-width: 1080px) {
+@media (min-width: 768px) and (max-width: 1180px) {
     .error-404-container {
         padding: 20px 20px 0 20px;
         margin: 100px 150px 100px 150px;
@@ -212,7 +212,7 @@ body {
     color: rgb(60, 82, 113);
     text-shadow: 1px 1px 1px rgba(31, 31, 31, 0.6117647059);
 }
-@media (min-width: 768px) and (max-width: 1080px) {
+@media (min-width: 768px) and (max-width: 1180px) {
     .title-404 {
         font-size: 30px;
     }
@@ -688,7 +688,7 @@ input:active {
     font-size: 72px;
     padding-top: 40px;
 }
-@media (min-width: 768px) and (max-width: 1080px) {
+@media (min-width: 768px) and (max-width: 1180px) {
     .main-title {
         font-size: 55px;
         padding-top: 20px;
@@ -707,7 +707,7 @@ input:active {
     flex-direction: column;
     gap: 10px;
 }
-@media (min-width: 768px) and (max-width: 1080px) {
+@media (min-width: 768px) and (max-width: 1180px) {
     .home-cat__container {
         gap: 5px;
     }
@@ -724,7 +724,7 @@ input:active {
     height: 60px;
     align-self: center;
 }
-@media (min-width: 768px) and (max-width: 1080px) {
+@media (min-width: 768px) and (max-width: 1180px) {
     .home-cat__img {
         margin-top: 20px;
         width: 70px;
@@ -749,7 +749,7 @@ input:active {
     flex-direction: column;
     align-self: center;
 }
-@media (min-width: 768px) and (max-width: 1080px) {
+@media (min-width: 768px) and (max-width: 1180px) {
     .home-cat__item {
         width: 100px;
         height: 100px;
@@ -769,7 +769,7 @@ input:active {
     font-weight: bold;
     align-self: center;
 }
-@media (min-width: 768px) and (max-width: 1080px) {
+@media (min-width: 768px) and (max-width: 1180px) {
     .home-cat__title {
         font-size: 18px;
     }
@@ -786,7 +786,7 @@ input:active {
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(4, 1fr);
 }
-@media (min-width: 768px) and (max-width: 1080px) {
+@media (min-width: 768px) and (max-width: 1180px) {
     .home-cats-container {
         padding-top: 30px;
         grid-template-columns: repeat(5, 1fr);
