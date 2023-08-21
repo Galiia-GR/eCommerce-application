@@ -331,18 +331,19 @@ body {
 }
 
 .account-window {
+    transition: 0.2s;
     position: fixed;
     background-color: rgb(255, 253, 249);
     display: flex;
     align-items: center;
     flex-direction: column;
-    max-width: 400px;
+    max-width: 500px;
     margin: 0 auto;
     border-radius: 2px;
-    top: 20%;
-    bottom: 25%;
-    left: 32%;
-    right: 32%;
+    top: 15%;
+    bottom: 20%;
+    left: 10%;
+    right: 10%;
     box-shadow: 0px 0px 90px 0px rgb(27, 44, 54);
     gap: 14px;
     overflow-x: scroll;
@@ -384,7 +385,7 @@ body {
 
 .account-window button {
     background-color: rgba(88, 152, 186, 0.7);
-    padding: 20px 100px 20px 100px;
+    padding: 20px 23%;
     border: 0px;
     transform: translateY(20px);
     border-radius: 2px;
@@ -409,7 +410,7 @@ body {
 .double-container select,
 .account-window select {
     background-color: rgb(255, 253, 249);
-    width: 347px;
+    width: 85%;
     border: 2px solid rgba(88, 152, 186, 0.7);
     border-radius: 3px;
     padding: 14.5px 13px;
@@ -425,7 +426,6 @@ body {
     background-color: rgb(255, 253, 249);
     border: 2px solid rgba(255, 72, 72, 0.7);
     border-radius: 3px;
-    font-size: 15px;
     transition: 0.01s;
     color: rgb(39, 54, 63);
 }
@@ -443,13 +443,15 @@ body {
 }
 
 .double-container input {
-    width: 40%;
+    width: 45%;
 }
 
-.double-container {
+.account-window .double-container {
     display: flex;
     flex-direction: row;
-    gap: 27px;
+    width: 85%;
+    justify-content: space-between;
+    margin: 0 auto;
 }
 
 select:hover,
@@ -496,41 +498,49 @@ input:active {
 .account-window__header {
     background-color: rgb(137, 179, 197);
     position: sticky;
-    height: 45px;
     width: 100%;
-    top: 0px;
     z-index: 3;
+    top: 0px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
 }
 
 .account-window__exit {
     font-size: 50px;
     color: rgb(255, 253, 249);
-    position: relative;
-    left: 357px;
-    top: -6px;
-    font-weight: 100;
+    margin-right: 15px;
     cursor: pointer;
 }
 
 .account-window .account-window__checkbox,
 .account-window .account-window__checkbox:hover,
 .account-window .account-window__checkbox:active,
-.account-window .account-window__checkbox:focus {
+.account-window .account-window__checkbox:focus,
+.account-window .account-window__checkbox-def,
+.account-window .account-window__checkbox-def:hover,
+.account-window .account-window__checkbox-def:active,
+.account-window .account-window__checkbox-def:focus,
+.account-window .account-window__checkbox-same,
+.account-window .account-window__checkbox-same:hover,
+.account-window .account-window__checkbox-same:active,
+.account-window .account-window__checkbox-same:focus {
+    position: sticky;
     width: 15px;
     height: 15px;
-    position: relative;
-    left: -156px;
+    right: 421px;
+    margin-left: 15px;
 }
 
 .account-window__checkbox::after {
+    position: relative;
     content: 'Show password';
-    position: absolute;
     left: 21px;
-    bottom: -1px;
     color: rgba(17, 32, 42, 0.7);
     font-weight: 500;
     font-size: 13px;
     width: 100px;
+    display: block;
 }
 
 .error {
@@ -551,6 +561,126 @@ input:active {
     text-decoration: underline;
 }
 
+.account-window__checkbox-def::after {
+    position: relative;
+    content: 'Set as default address';
+    left: 21px;
+    color: rgba(17, 32, 42, 0.7);
+    font-weight: 500;
+    font-size: 13px;
+    width: 150px;
+    display: block;
+}
+
+.account-window__checkbox-same::after {
+    position: relative;
+    content: 'Also use as billing address';
+    left: 21px;
+    color: rgba(17, 32, 42, 0.7);
+    font-weight: 500;
+    font-size: 13px;
+    width: 170px;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .account-window {
+        position: fixed;
+        background-color: rgb(255, 253, 249);
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        max-width: 500px;
+        margin: 0 auto;
+        border-radius: 2px;
+        left: 5%;
+        right: 5%;
+        box-shadow: 0px 0px 90px 0px rgb(27, 44, 54);
+        gap: 14px;
+        overflow-x: scroll;
+        overflow-x: hidden;
+    }
+    .account-window h2 {
+        font-size: 30px;
+        font-weight: 600;
+        color: rgba(27, 52, 67, 0.7);
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .double-container input,
+    .account-window input,
+    .double-container select,
+    .account-window select {
+        background-color: rgb(255, 253, 249);
+        width: 85%;
+        border: 2px solid rgba(88, 152, 186, 0.7);
+        border-radius: 3px;
+        padding: 15.5px 15px;
+        font-size: 12px;
+        transition: 0.01s;
+        color: rgb(39, 54, 63);
+    }
+    .account-window h4 {
+        width: 100%;
+        position: relative;
+        right: -24px;
+        color: rgba(17, 32, 42, 0.7);
+        font-size: 14px;
+    }
+    .double-container input {
+        width: 45%;
+    }
+}
+@media (max-width: 380px) {
+    .account-window {
+        position: fixed;
+        background-color: rgb(255, 253, 249);
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        max-width: 500px;
+        margin: 0 auto;
+        border-radius: 2px;
+        top: 0%;
+        bottom: 0%;
+        left: 0;
+        right: 0;
+        box-shadow: 0px 0px 90px 0px rgb(27, 44, 54);
+        gap: 14px;
+        overflow-x: scroll;
+        overflow-x: hidden;
+    }
+    .account-window h2 {
+        font-size: 23px;
+        font-weight: 600;
+        color: rgba(27, 52, 67, 0.7);
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .double-container input,
+    .account-window input,
+    .double-container select,
+    .account-window select {
+        background-color: rgb(255, 253, 249);
+        width: 85%;
+        border: 2px solid rgba(88, 152, 186, 0.7);
+        border-radius: 3px;
+        padding: 15.5px 15px;
+        font-size: 12px;
+        transition: 0.01s;
+        color: rgb(39, 54, 63);
+    }
+    .account-window h4 {
+        width: 100%;
+        position: relative;
+        right: -24px;
+        color: rgba(17, 32, 42, 0.7);
+        font-size: 14px;
+    }
+    .double-container input {
+        width: 45%;
+    }
+}
 .main-title {
     color: rgb(252, 240, 221);
     text-align: center;

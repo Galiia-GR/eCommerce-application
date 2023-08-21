@@ -32,8 +32,6 @@ export function createLoginWindow(): void {
     passwordLabel.textContent = 'Password:';
     singUpLink.textContent = "Don't have account? Register Here";
     loginExit.textContent = '×';
-    loginOpen.innerHTML = 'LOGIN';
-    loginOpen.style.cursor = 'pointer';
 
     loginHeader.append(loginExit);
     loginWindow.append(
@@ -91,6 +89,11 @@ export function createLoginWindow(): void {
             if (emailInput.value.includes('@') === false) {
                 isCorrect = false;
                 addError(emailLabel, '*Email address must contain an "@" symbol separating local part and domain name');
+                emailInput.classList.add('errorInput');
+            }
+            if (emailInput.value.split('@')[emailInput.value.split('@').length - 1].length < 5) {
+                isCorrect = false;
+                addError(emailLabel, '*Email address must contain domain name');
                 emailInput.classList.add('errorInput');
             }
             if (passwordInput.value.length < 8) {
@@ -176,6 +179,11 @@ export function createLoginWindow(): void {
             if (emailInput.value.includes('@') === false) {
                 isCorrect = false;
                 addError(emailLabel, '*Email address must contain an "@" symbol separating local part and domain name');
+                emailInput.classList.add('errorInput');
+            }
+            if (emailInput.value.split('@')[emailInput.value.split('@').length - 1].length < 5) {
+                isCorrect = false;
+                addError(emailLabel, '*Email address must contain domain name');
                 emailInput.classList.add('errorInput');
             }
             if (passwordInput.value.length < 8) {
