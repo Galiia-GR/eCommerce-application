@@ -93,6 +93,11 @@ export function createLoginWindow(): void {
                 addError(emailLabel, '*Email address must contain an "@" symbol separating local part and domain name');
                 emailInput.classList.add('errorInput');
             }
+            if (emailInput.value.split('@')[emailInput.value.split('@').length - 1].length < 5) {
+                isCorrect = false;
+                addError(emailLabel, '*Email address must contain domain name');
+                emailInput.classList.add('errorInput');
+            }
             if (passwordInput.value.length < 8) {
                 isCorrect = false;
                 addError(passwordLabel, '*Password must contain at least 8 characters');
@@ -176,6 +181,11 @@ export function createLoginWindow(): void {
             if (emailInput.value.includes('@') === false) {
                 isCorrect = false;
                 addError(emailLabel, '*Email address must contain an "@" symbol separating local part and domain name');
+                emailInput.classList.add('errorInput');
+            }
+            if (emailInput.value.split('@')[emailInput.value.split('@').length - 1].length < 5) {
+                isCorrect = false;
+                addError(emailLabel, '*Email address must contain domain name');
                 emailInput.classList.add('errorInput');
             }
             if (passwordInput.value.length < 8) {
