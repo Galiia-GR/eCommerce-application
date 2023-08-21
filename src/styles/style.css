@@ -105,6 +105,7 @@ body {
 }
 
 .account-window {
+    transition: 0.2s;
     position: fixed;
     background-color: rgb(255, 253, 249);
     display: flex;
@@ -115,8 +116,8 @@ body {
     border-radius: 2px;
     top: 15%;
     bottom: 20%;
-    left: 32%;
-    right: 32%;
+    left: 10%;
+    right: 10%;
     box-shadow: 0px 0px 90px 0px rgb(27, 44, 54);
     gap: 14px;
     overflow-x: scroll;
@@ -199,7 +200,6 @@ body {
     background-color: rgb(255, 253, 249);
     border: 2px solid rgba(255, 72, 72, 0.7);
     border-radius: 3px;
-    font-size: 15px;
     transition: 0.01s;
     color: rgb(39, 54, 63);
 }
@@ -294,7 +294,7 @@ input:active {
     position: sticky;
     width: 15px;
     height: 15px;
-    right: 330px;
+    right: 421px;
     margin-left: 15px;
 }
 
@@ -327,6 +327,104 @@ input:active {
     text-decoration: underline;
 }
 
+@media (max-width: 768px) {
+    .account-window {
+        position: fixed;
+        background-color: rgb(255, 253, 249);
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        max-width: 500px;
+        margin: 0 auto;
+        border-radius: 2px;
+        left: 5%;
+        right: 5%;
+        box-shadow: 0px 0px 90px 0px rgb(27, 44, 54);
+        gap: 14px;
+        overflow-x: scroll;
+        overflow-x: hidden;
+    }
+    .account-window h2 {
+        font-size: 30px;
+        font-weight: 600;
+        color: rgba(27, 52, 67, 0.7);
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .double-container input,
+    .account-window input,
+    .double-container select,
+    .account-window select {
+        background-color: rgb(255, 253, 249);
+        width: 85%;
+        border: 2px solid rgba(88, 152, 186, 0.7);
+        border-radius: 3px;
+        padding: 15.5px 15px;
+        font-size: 12px;
+        transition: 0.01s;
+        color: rgb(39, 54, 63);
+    }
+    .account-window h4 {
+        width: 100%;
+        position: relative;
+        right: -24px;
+        color: rgba(17, 32, 42, 0.7);
+        font-size: 14px;
+    }
+    .double-container input {
+        width: 45%;
+    }
+}
+@media (max-width: 380px) {
+    .account-window {
+        position: fixed;
+        background-color: rgb(255, 253, 249);
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        max-width: 500px;
+        margin: 0 auto;
+        border-radius: 2px;
+        top: 0%;
+        bottom: 0%;
+        left: 0;
+        right: 0;
+        box-shadow: 0px 0px 90px 0px rgb(27, 44, 54);
+        gap: 14px;
+        overflow-x: scroll;
+        overflow-x: hidden;
+    }
+    .account-window h2 {
+        font-size: 23px;
+        font-weight: 600;
+        color: rgba(27, 52, 67, 0.7);
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .double-container input,
+    .account-window input,
+    .double-container select,
+    .account-window select {
+        background-color: rgb(255, 253, 249);
+        width: 85%;
+        border: 2px solid rgba(88, 152, 186, 0.7);
+        border-radius: 3px;
+        padding: 15.5px 15px;
+        font-size: 12px;
+        transition: 0.01s;
+        color: rgb(39, 54, 63);
+    }
+    .account-window h4 {
+        width: 100%;
+        position: relative;
+        right: -24px;
+        color: rgba(17, 32, 42, 0.7);
+        font-size: 14px;
+    }
+    .double-container input {
+        width: 45%;
+    }
+}
 .main-title {
     color: rgb(252, 240, 221);
     text-align: center;
