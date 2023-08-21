@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getToken } from '../getBearerToken';
 
-export async function getCustomer(id: string): Promise<object> {
+export async function getCustomer(id: string, num: number): Promise<string> {
     const token = (await getToken()).toString();
 
     const response = await axios({
@@ -12,6 +12,5 @@ export async function getCustomer(id: string): Promise<object> {
         },
     });
 
-    console.log(response);
-    return response;
+    return response.data.addresses[num].id;
 }

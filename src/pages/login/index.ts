@@ -32,7 +32,6 @@ export function createLoginWindow(): void {
     passwordLabel.textContent = 'Password:';
     singUpLink.textContent = "Don't have account? Register Here";
     loginExit.textContent = '×';
-    loginOpen.style.cursor = 'pointer';
 
     loginHeader.append(loginExit);
     loginWindow.append(
@@ -92,6 +91,11 @@ export function createLoginWindow(): void {
                 addError(emailLabel, '*Email address must contain an "@" symbol separating local part and domain name');
                 emailInput.classList.add('errorInput');
             }
+            if (emailInput.value.split('@')[emailInput.value.split('@').length - 1].length < 5) {
+                isCorrect = false;
+                addError(emailLabel, '*Email address must contain domain name');
+                emailInput.classList.add('errorInput');
+            }
             if (passwordInput.value.length < 8) {
                 isCorrect = false;
                 addError(passwordLabel, '*Password must contain at least 8 characters');
@@ -126,17 +130,17 @@ export function createLoginWindow(): void {
 
             await signUpCustomer(emailInput.value, passwordInput.value);
             await closeWindow(loginBack, mainPage);
+
+            let submitLogin = false;
+            submitLogin = true;
+            if (submitLogin) {
+                window.location.hash = '/';
+                console.log('submit true');
+            }
         } catch (err) {
             addError(loginButton, '*Email or password is wrong');
             loginButton.style.marginBottom = '15px';
             loginButton.style.backgroundColor = 'rgba(255, 72, 72, 0.7)';
-        }
-
-        let submitLogin = false;
-        submitLogin = true;
-        if (submitLogin) {
-            window.location.hash = '/';
-            console.log('submit true');
         }
     });
     loginWindow.querySelectorAll('input').forEach((logInput) => {
@@ -182,6 +186,11 @@ export function createLoginWindow(): void {
             if (emailInput.value.includes('@') === false) {
                 isCorrect = false;
                 addError(emailLabel, '*Email address must contain an "@" symbol separating local part and domain name');
+                emailInput.classList.add('errorInput');
+            }
+            if (emailInput.value.split('@')[emailInput.value.split('@').length - 1].length < 5) {
+                isCorrect = false;
+                addError(emailLabel, '*Email address must contain domain name');
                 emailInput.classList.add('errorInput');
             }
             if (passwordInput.value.length < 8) {

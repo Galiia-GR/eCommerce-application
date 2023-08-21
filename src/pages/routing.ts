@@ -36,8 +36,7 @@ function menuItemClick(event: Event) {
         console.log('Text content is null');
     }
 }
-
-export function routeChange() {
+function routeChange() {
     window.addEventListener('hashchange', () => {
         const hash = window.location.hash.slice(1);
         console.log('хэш', hash);
@@ -45,7 +44,6 @@ export function routeChange() {
     });
 }
 
-menuNavClick();
 routeChange();
 
 export function renderPage(path: string) {
@@ -77,7 +75,6 @@ export function renderPage(path: string) {
             console.log('render contact');
             return createContactsPage();
         }
-
         case '/login': {
             window.location.hash = '/login';
             const loginOpen = document.querySelector('.navigation-item:nth-child(5)') as HTMLElement;

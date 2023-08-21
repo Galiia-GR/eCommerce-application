@@ -2,7 +2,13 @@ import { countryObject, responseData } from 'src/interfaces';
 import { postCustomer } from './createCustomer';
 import { updateCustomer } from './updateCustomer';
 import { openWindow, closeWindow, showPassword, loginBack } from '../login';
+import { getCustomer } from './getCustomer';
+import { updateDefShippingCustomer } from './setDefaultShipping';
 import { helpCreateEl } from '../global/global';
+import { updateShippingCustomer } from './setShipping';
+import { updateBillingCustomer } from './setBilling';
+import { updateDefBillingCustomer } from './setDefaultBilling';
+import { addSecondAddress } from './addAddress';
 
 export function createRegisterWindow(): void {
     const mainPage = document.querySelector('.body-container') as HTMLElement;
@@ -12,34 +18,50 @@ export function createRegisterWindow(): void {
     const emailInput = document.createElement('input') as HTMLInputElement;
     const passwordInput = document.createElement('input') as HTMLInputElement;
     const password2Input = document.createElement('input') as HTMLInputElement;
-    const nameContainer = helpCreateEl('h4', 'double-container') as HTMLElement;
+    const nameContainer = helpCreateEl('div', 'double-container') as HTMLElement;
     const nameLabel = document.createElement('h4') as HTMLElement;
     const firstNameInput = document.createElement('input') as HTMLInputElement;
     const secondNameInput = document.createElement('input') as HTMLInputElement;
     const registerButton = document.createElement('button') as HTMLButtonElement;
     const registerLabel = document.createElement('h2') as HTMLElement;
+    const shipingAdressLabel = document.createElement('h2') as HTMLElement;
+    const billingAdressLabel = document.createElement('h2') as HTMLElement;
     const emailLabel = document.createElement('h4') as HTMLElement;
     const dateLabel = document.createElement('h4') as HTMLElement;
     const dateInput = document.createElement('input') as HTMLInputElement;
     const streetLabel = document.createElement('h4') as HTMLElement;
     const streetInput = document.createElement('input') as HTMLInputElement;
+    const billingStreetLabel = document.createElement('h4') as HTMLElement;
+    const billingStreetInput = document.createElement('input') as HTMLInputElement;
     const cityLabel = document.createElement('h4') as HTMLElement;
     const cityInput = document.createElement('input') as HTMLInputElement;
+    const billingCityLabel = document.createElement('h4') as HTMLElement;
+    const billingCityInput = document.createElement('input') as HTMLInputElement;
     const postalLabel = document.createElement('h4') as HTMLElement;
     const postalInput = document.createElement('input') as HTMLInputElement;
+    const billingPostalLabel = document.createElement('h4') as HTMLElement;
+    const billingPostalInput = document.createElement('input') as HTMLInputElement;
     const countryLabel = document.createElement('h4') as HTMLElement;
     const countryInput = document.createElement('select') as HTMLSelectElement;
+    const billingCountryLabel = document.createElement('h4') as HTMLElement;
+    const billingCountryInput = document.createElement('select') as HTMLSelectElement;
     dateInput.style.padding = '24px';
     const passwordLabel = document.createElement('h4') as HTMLElement;
     const password2Label = document.createElement('h4') as HTMLElement;
     const passwordCheckbox = helpCreateEl('input', 'account-window__checkbox') as HTMLInputElement;
     const passwordCheckbox2 = helpCreateEl('input', 'account-window__checkbox') as HTMLInputElement;
+    const billingDefCheckbox = helpCreateEl('input', 'account-window__checkbox-def') as HTMLInputElement;
+    const billingDefCheckbox2 = helpCreateEl('input', 'account-window__checkbox-def') as HTMLInputElement;
+    const billingSameCheckbox = helpCreateEl('input', 'account-window__checkbox-same') as HTMLInputElement;
     const singInLink = helpCreateEl('h5', 'sign-link') as HTMLElement;
     const registerExit = helpCreateEl('div', 'account-window__exit') as HTMLElement;
     const registerOpen = document.querySelector('.navigation-item:nth-child(6)') as HTMLElement;
 
     passwordCheckbox.type = 'checkbox';
     passwordCheckbox2.type = 'checkbox';
+    billingDefCheckbox.type = 'checkbox';
+    billingDefCheckbox2.type = 'checkbox';
+    billingSameCheckbox.type = 'checkbox';
     passwordInput.type = 'password';
     password2Input.type = 'password';
     dateInput.type = 'date';
@@ -50,8 +72,11 @@ export function createRegisterWindow(): void {
     secondNameInput.placeholder = 'Last name';
     password2Input.placeholder = 'Type here';
     streetInput.placeholder = 'Type here';
+    billingStreetInput.placeholder = 'Type here';
     cityInput.placeholder = 'Type here';
+    billingCityInput.placeholder = 'Type here';
     postalInput.placeholder = 'Type here';
+    billingPostalInput.placeholder = 'Type here';
 
     registerButton.textContent = 'Sign up';
     registerLabel.textContent = 'Register';
@@ -60,14 +85,18 @@ export function createRegisterWindow(): void {
     password2Label.textContent = 'Confirm your password:';
     singInLink.textContent = 'Already have an account? Login Here';
     registerExit.textContent = '×';
-    registerOpen.innerHTML = 'REGISTER';
-    registerOpen.style.cursor = 'pointer';
     nameLabel.textContent = 'Type your name:';
     dateLabel.textContent = 'Choose your birthday:';
     streetLabel.textContent = 'Type your street:';
+    billingStreetLabel.textContent = 'Type your street:';
     cityLabel.textContent = 'Type your city:';
+    billingCityLabel.textContent = 'Type your city:';
     postalLabel.textContent = 'Type your postal code:';
+    billingPostalLabel.textContent = 'Type your postal code:';
     countryLabel.textContent = 'Choose your country:';
+    billingCountryLabel.textContent = 'Choose your country:';
+    shipingAdressLabel.textContent = 'Shipping adress';
+    billingAdressLabel.textContent = 'Billing adress';
 
     registerHeader.append(registerExit);
     nameContainer.append(firstNameInput, secondNameInput);
@@ -78,14 +107,6 @@ export function createRegisterWindow(): void {
         nameContainer,
         dateLabel,
         dateInput,
-        streetLabel,
-        streetInput,
-        cityLabel,
-        cityInput,
-        countryLabel,
-        countryInput,
-        postalLabel,
-        postalInput,
         emailLabel,
         emailInput,
         passwordLabel,
@@ -94,10 +115,58 @@ export function createRegisterWindow(): void {
         password2Label,
         password2Input,
         passwordCheckbox2,
+        shipingAdressLabel,
+        streetLabel,
+        streetInput,
+        cityLabel,
+        cityInput,
+        countryLabel,
+        countryInput,
+        postalLabel,
+        postalInput,
+        billingDefCheckbox,
+        billingSameCheckbox,
+        billingAdressLabel,
+        billingStreetLabel,
+        billingStreetInput,
+        billingCityLabel,
+        billingCityInput,
+        billingCountryLabel,
+        billingCountryInput,
+        billingPostalLabel,
+        billingPostalInput,
+        billingDefCheckbox2,
         registerButton,
         singInLink
     );
     registerBack.append(registerWindow);
+    billingSameCheckbox.addEventListener('input', () => {
+        if (billingSameCheckbox.checked === true) {
+            registerWindow.removeChild(billingAdressLabel);
+            registerWindow.removeChild(billingStreetLabel);
+            registerWindow.removeChild(billingStreetInput);
+            registerWindow.removeChild(billingCityLabel);
+            registerWindow.removeChild(billingCityInput);
+            registerWindow.removeChild(billingCountryLabel);
+            registerWindow.removeChild(billingCountryInput);
+            registerWindow.removeChild(billingPostalLabel);
+            registerWindow.removeChild(billingPostalInput);
+            registerWindow.removeChild(billingDefCheckbox2);
+        } else {
+            billingSameCheckbox.after(
+                billingAdressLabel,
+                billingStreetLabel,
+                billingStreetInput,
+                billingCityLabel,
+                billingCityInput,
+                billingCountryLabel,
+                billingCountryInput,
+                billingPostalLabel,
+                billingPostalInput,
+                billingDefCheckbox2
+            );
+        }
+    });
     registerOpen.addEventListener('click', () => {
         openWindow(registerBack, mainPage);
     });
@@ -113,6 +182,7 @@ export function createRegisterWindow(): void {
     showPassword(passwordInput, passwordCheckbox);
     showPassword(password2Input, passwordCheckbox2);
     addCountry(countryInput);
+    addCountry(billingCountryInput);
 
     registerButton.addEventListener('click', async () => {
         try {
@@ -121,9 +191,11 @@ export function createRegisterWindow(): void {
             let haveLover = false;
             let haveNumber = false;
             let postalCorrect = false;
+            let billingPostalCorrect = false;
             let onlyLetters = 1;
             let onlyLetters2 = 1;
             let onlyLettersCity = 1;
+            let onlyLettersBillingCity = 1;
             let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ';
             let numbers = '1234567890';
 
@@ -155,6 +227,13 @@ export function createRegisterWindow(): void {
                     onlyLettersCity = 0;
                 }
             });
+            if (registerWindow.contains(billingCityInput)) {
+                billingCityInput.value.split('').forEach((step) => {
+                    if (!letters.includes(step) && !letters.toLowerCase().includes(step)) {
+                        onlyLettersBillingCity = 0;
+                    }
+                });
+            }
 
             registerWindow.querySelectorAll('span').forEach((el) => {
                 el.remove();
@@ -176,6 +255,11 @@ export function createRegisterWindow(): void {
             if (emailInput.value.includes('@') === false) {
                 isCorrect = false;
                 addError(emailLabel, '*Email address must contain an "@" symbol separating local part and domain name');
+                emailInput.classList.add('errorInput');
+            }
+            if (emailInput.value.split('@')[emailInput.value.split('@').length - 1].length < 5) {
+                isCorrect = false;
+                addError(emailLabel, '*Email address must contain domain name');
                 emailInput.classList.add('errorInput');
             }
 
@@ -234,6 +318,20 @@ export function createRegisterWindow(): void {
                 addError(streetLabel, '*Your street must contain at least 1 character');
                 streetInput.classList.add('errorInput');
             }
+            if (registerWindow.contains(billingStreetInput)) {
+                if (billingStreetInput.value.length < 1) {
+                    isCorrect = false;
+                    addError(billingStreetLabel, '*Your street must contain at least 1 character');
+                    billingStreetInput.classList.add('errorInput');
+                }
+            }
+            if (registerWindow.contains(billingStreetInput)) {
+                if ((billingStreetInput.value.startsWith(' ') || billingStreetInput.value.endsWith(' ')) === true) {
+                    isCorrect = false;
+                    addError(billingStreetLabel, '*Street must not contain leading or trailing whitespace');
+                    billingStreetInput.classList.add('errorInput');
+                }
+            }
             if ((streetInput.value.startsWith(' ') || streetInput.value.endsWith(' ')) === true) {
                 isCorrect = false;
                 addError(streetLabel, '*Street must not contain leading or trailing whitespace');
@@ -248,6 +346,18 @@ export function createRegisterWindow(): void {
                 isCorrect = false;
                 addError(cityLabel, '*Your city must contain at least 1 character');
                 cityInput.classList.add('errorInput');
+            }
+            if (registerWindow.contains(billingCityInput)) {
+                if (onlyLettersBillingCity === 0) {
+                    isCorrect = false;
+                    addError(billingCityLabel, '*City must not contain numbers or special characters');
+                    billingCityInput.classList.add('errorInput');
+                }
+                if (billingCityInput.value.length < 1) {
+                    isCorrect = false;
+                    addError(billingCityLabel, '*Your city must contain at least 1 character');
+                    billingCityInput.classList.add('errorInput');
+                }
             }
             if (
                 countryInput.value === 'Poland - PL' &&
@@ -284,6 +394,40 @@ export function createRegisterWindow(): void {
                 isCorrect = false;
                 addError(password2Label, '*Passwords must be the same');
                 password2Input.classList.add('errorInput');
+            }
+
+            if (registerWindow.contains(billingPostalInput)) {
+                if (
+                    billingCountryInput.value === 'Poland - PL' &&
+                    billingPostalInput.value[2] === '-' &&
+                    billingPostalInput.value.length === 6
+                ) {
+                    billingPostalCorrect = true;
+                }
+                if (
+                    billingCountryInput.value === 'United States - US' &&
+                    billingPostalInput.value[5] === '-' &&
+                    billingPostalInput.value.length === 10
+                ) {
+                    billingPostalCorrect = true;
+                }
+                if (billingCountryInput.value === 'Italy - IT' && billingPostalInput.value.length === 5) {
+                    billingPostalCorrect = true;
+                }
+                if (billingCountryInput.value === 'Kazakhstan - KZ' && billingPostalInput.value.length === 7) {
+                    billingPostalCorrect = true;
+                }
+                if (billingCountryInput.value === 'Russian Federation - RU' && billingPostalInput.value.length === 6) {
+                    billingPostalCorrect = true;
+                }
+                if (billingCountryInput.value === 'Germany - DE' && billingPostalInput.value.length === 5) {
+                    billingPostalCorrect = true;
+                }
+                if (billingPostalCorrect === false) {
+                    isCorrect = false;
+                    addError(billingPostalLabel, "*Your country's postal code must be correct");
+                    billingPostalInput.classList.add('errorInput');
+                }
             }
 
             if (isCorrect === false) {
@@ -303,6 +447,51 @@ export function createRegisterWindow(): void {
                 emailInput.value,
                 dateInput.value
             );
+
+            let addressData = await getCustomer(userId, 0);
+
+            if (billingSameCheckbox.checked === true) {
+                if (billingDefCheckbox.checked === true) {
+                    await updateDefShippingCustomer(userId, addressData);
+                } else if (billingDefCheckbox.checked === false) {
+                    await updateShippingCustomer(userId, addressData);
+                }
+
+                if (billingDefCheckbox2.checked === false) {
+                    if (billingDefCheckbox2.checked === false) {
+                        await updateBillingCustomer(userId, addressData);
+                    } else {
+                        await updateDefBillingCustomer(userId, addressData);
+                    }
+                }
+            } else {
+                if (billingDefCheckbox.checked === true) {
+                    await updateDefShippingCustomer(userId, addressData);
+                } else if (billingDefCheckbox.checked === false) {
+                    await updateShippingCustomer(userId, addressData);
+                }
+
+                if (billingDefCheckbox2.checked === false) {
+                    await addSecondAddress(
+                        userId,
+                        addressData,
+                        firstNameInput.value,
+                        secondNameInput.value,
+                        billingStreetInput.value,
+                        billingPostalInput.value,
+                        billingCityInput.value,
+                        billingCountryInput.value,
+                        emailInput.value
+                    );
+                    let addressData2 = await getCustomer(userId, 0);
+                    if (billingDefCheckbox2.checked === false) {
+                        await updateBillingCustomer(userId, addressData2);
+                    } else {
+                        await updateDefBillingCustomer(userId, addressData2);
+                    }
+                }
+            }
+
             await closeWindow(registerBack, mainPage);
         } catch (err) {
             addError(registerButton, '*This email address already registered');
@@ -317,9 +506,11 @@ export function createRegisterWindow(): void {
             let haveLover = false;
             let haveNumber = false;
             let postalCorrect = false;
+            let billingPostalCorrect = false;
             let onlyLetters = 1;
             let onlyLetters2 = 1;
             let onlyLettersCity = 1;
+            let onlyLettersBillingCity = 1;
             let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ';
             let numbers = '1234567890';
 
@@ -351,6 +542,13 @@ export function createRegisterWindow(): void {
                     onlyLettersCity = 0;
                 }
             });
+            if (registerWindow.contains(billingCityInput)) {
+                billingCityInput.value.split('').forEach((step) => {
+                    if (!letters.includes(step) && !letters.toLowerCase().includes(step)) {
+                        onlyLettersBillingCity = 0;
+                    }
+                });
+            }
 
             registerWindow.querySelectorAll('span').forEach((el) => {
                 el.remove();
@@ -372,6 +570,11 @@ export function createRegisterWindow(): void {
             if (emailInput.value.includes('@') === false) {
                 isCorrect = false;
                 addError(emailLabel, '*Email address must contain an "@" symbol separating local part and domain name');
+                emailInput.classList.add('errorInput');
+            }
+            if (emailInput.value.split('@')[emailInput.value.split('@').length - 1].length < 5) {
+                isCorrect = false;
+                addError(emailLabel, '*Email address must contain domain name');
                 emailInput.classList.add('errorInput');
             }
 
@@ -430,6 +633,20 @@ export function createRegisterWindow(): void {
                 addError(streetLabel, '*Your street must contain at least 1 character');
                 streetInput.classList.add('errorInput');
             }
+            if (registerWindow.contains(billingStreetInput)) {
+                if (billingStreetInput.value.length < 1) {
+                    isCorrect = false;
+                    addError(billingStreetLabel, '*Your street must contain at least 1 character');
+                    billingStreetInput.classList.add('errorInput');
+                }
+            }
+            if (registerWindow.contains(billingStreetInput)) {
+                if ((billingStreetInput.value.startsWith(' ') || billingStreetInput.value.endsWith(' ')) === true) {
+                    isCorrect = false;
+                    addError(billingStreetLabel, '*Street must not contain leading or trailing whitespace');
+                    billingStreetInput.classList.add('errorInput');
+                }
+            }
             if ((streetInput.value.startsWith(' ') || streetInput.value.endsWith(' ')) === true) {
                 isCorrect = false;
                 addError(streetLabel, '*Street must not contain leading or trailing whitespace');
@@ -444,6 +661,18 @@ export function createRegisterWindow(): void {
                 isCorrect = false;
                 addError(cityLabel, '*Your city must contain at least 1 character');
                 cityInput.classList.add('errorInput');
+            }
+            if (registerWindow.contains(billingCityInput)) {
+                if (onlyLettersBillingCity === 0) {
+                    isCorrect = false;
+                    addError(billingCityLabel, '*City must not contain numbers or special characters');
+                    billingCityInput.classList.add('errorInput');
+                }
+                if (billingCityInput.value.length < 1) {
+                    isCorrect = false;
+                    addError(billingCityLabel, '*Your city must contain at least 1 character');
+                    billingCityInput.classList.add('errorInput');
+                }
             }
             if (
                 countryInput.value === 'Poland - PL' &&
@@ -480,6 +709,40 @@ export function createRegisterWindow(): void {
                 isCorrect = false;
                 addError(password2Label, '*Passwords must be the same');
                 password2Input.classList.add('errorInput');
+            }
+
+            if (registerWindow.contains(billingPostalInput)) {
+                if (
+                    billingCountryInput.value === 'Poland - PL' &&
+                    billingPostalInput.value[2] === '-' &&
+                    billingPostalInput.value.length === 6
+                ) {
+                    billingPostalCorrect = true;
+                }
+                if (
+                    billingCountryInput.value === 'United States - US' &&
+                    billingPostalInput.value[5] === '-' &&
+                    billingPostalInput.value.length === 10
+                ) {
+                    billingPostalCorrect = true;
+                }
+                if (billingCountryInput.value === 'Italy - IT' && billingPostalInput.value.length === 5) {
+                    billingPostalCorrect = true;
+                }
+                if (billingCountryInput.value === 'Kazakhstan - KZ' && billingPostalInput.value.length === 7) {
+                    billingPostalCorrect = true;
+                }
+                if (billingCountryInput.value === 'Russian Federation - RU' && billingPostalInput.value.length === 6) {
+                    billingPostalCorrect = true;
+                }
+                if (billingCountryInput.value === 'Germany - DE' && billingPostalInput.value.length === 5) {
+                    billingPostalCorrect = true;
+                }
+                if (billingPostalCorrect === false) {
+                    isCorrect = false;
+                    addError(billingPostalLabel, "*Your country's postal code must be correct");
+                    billingPostalInput.classList.add('errorInput');
+                }
             }
 
             if (isCorrect === false) {
