@@ -6,7 +6,7 @@ export async function updateDefShippingCustomer(id: string, dataId: string): Pro
     const response = await axios.post(
         `https://api.us-central1.gcp.commercetools.com/ecommercerszxc22845345034582/customers/${id}`,
         {
-            version: 5,
+            version: 6,
             actions: [
                 {
                     action: 'setDefaultShippingAddress',
