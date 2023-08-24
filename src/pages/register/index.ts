@@ -560,11 +560,6 @@ export function createRegisterWindow(): void {
                 addError(emailLabel, '*Email address must not contain leading or trailing whitespace');
                 emailInput.classList.add('errorInput');
             }
-            if (emailInput.value.endsWith('.com') === false) {
-                isCorrect = false;
-                addError(emailLabel, '*Email must end with .com');
-                emailInput.classList.add('errorInput');
-            }
             if (emailInput.value.includes('@') === false) {
                 isCorrect = false;
                 addError(emailLabel, '*Email address must contain an "@" symbol separating local part and domain name');
