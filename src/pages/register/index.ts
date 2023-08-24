@@ -247,11 +247,6 @@ export function createRegisterWindow(): void {
                 addError(emailLabel, '*Email address must not contain leading or trailing whitespace');
                 emailInput.classList.add('errorInput');
             }
-            if (emailInput.value.endsWith('.com') === false) {
-                isCorrect = false;
-                addError(emailLabel, '*Email must end with .com');
-                emailInput.classList.add('errorInput');
-            }
             if (emailInput.value.includes('@') === false) {
                 isCorrect = false;
                 addError(emailLabel, '*Email address must contain an "@" symbol separating local part and domain name');
@@ -308,7 +303,10 @@ export function createRegisterWindow(): void {
                 addError(nameLabel, '*Name must not contain numbers or special characters');
                 secondNameInput.classList.add('errorInput');
             }
-            if (Number(dateInput.value.split('-')[0]) > 2010 || dateInput.value.length === 0) {
+            if (
+                (Number(dateInput.value.split('-')[0]) > 2010 && Number(dateInput.value.split('-')[2]) >= 8) ||
+                dateInput.value.length === 0
+            ) {
                 isCorrect = false;
                 addError(dateLabel, '*You must be over 13 years old');
                 dateInput.classList.add('errorInput');
