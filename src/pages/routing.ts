@@ -5,6 +5,15 @@ import { createContactsPage } from './contacts/contacts';
 import { createMain } from './home/home';
 import { createError } from './error/error';
 
+let submitLogin = false;
+const customerHeaderUserEl = document.querySelector('.logo-userName') as HTMLElement;
+const elLoginUser = customerHeaderUserEl.textContent;
+const arrElLoginUser = elLoginUser?.split(' ');
+if (arrElLoginUser !== undefined && arrElLoginUser?.length >= 2) {
+    submitLogin = true;
+    console.log(submitLogin);
+}
+
 export function menuNavClick() {
     const home = document.querySelector('.logo_link');
     const menuHeaderItems = document.querySelectorAll('.navigation-item');
@@ -30,9 +39,18 @@ function menuItemClickHandle(event: Event) {
     } else if (navClikedEl === 'CONTACTS') {
         window.location.hash = '/contacts';
     } else if (navClikedEl === 'LOGIN') {
+        if (submitLogin) {
+            window.location.hash = '/';
+        } else {
+            window.location.hash = '/login';
+        }
         window.location.hash = '/login';
     } else if (navClikedEl === 'REGISTER') {
-        window.location.hash = '/register';
+        if (submitLogin) {
+            window.location.hash = '/';
+        } else {
+            window.location.hash = '/register';
+        }
     } else {
         console.log('Text content is null');
     }
@@ -71,14 +89,18 @@ export function renderPage(path: string) {
         }
         case '/login': {
             const loginOpen = document.querySelector('.LOGIN') as HTMLElement;
-            if (loginOpen.textContent === 'LOGIN') {
+            if (submitLogin === true) {
+                window.location.hash = '/';
+            } else if (loginOpen.textContent === 'LOGIN' && !submitLogin) {
                 loginOpen.click();
             }
             return console.log('render login');
         }
         case '/register': {
             const RegisterOpen = document.querySelector('.REGISTER') as HTMLElement;
-            if (RegisterOpen.textContent === 'REGISTER') {
+            if (submitLogin === true) {
+                window.location.hash = '/';
+            } else if (RegisterOpen.textContent === 'REGISTER' && !submitLogin) {
                 RegisterOpen.click();
             }
             return console.log('render register');
