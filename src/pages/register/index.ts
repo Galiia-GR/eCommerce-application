@@ -626,6 +626,13 @@ export function createRegisterWindow(): void {
                 addError(dateLabel, '*You must be over 13 years old');
                 dateInput.classList.add('errorInput');
             }
+            if (Number(dateInput.value.split('-')[0]) === 2010) {
+                if (Number(dateInput.value.split('-')[2]) <= 7) {
+                    isCorrect = false;
+                    addError(dateLabel, '*You must be over 13 years old');
+                    dateInput.classList.add('errorInput');
+                }
+            }
             if (streetInput.value.length < 1) {
                 isCorrect = false;
                 addError(streetLabel, '*Your street must contain at least 1 character');
