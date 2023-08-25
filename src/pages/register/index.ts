@@ -303,13 +303,17 @@ export function createRegisterWindow(): void {
                 addError(nameLabel, '*Name must not contain numbers or special characters');
                 secondNameInput.classList.add('errorInput');
             }
-            if (
-                (Number(dateInput.value.split('-')[0]) > 2010 && Number(dateInput.value.split('-')[2]) >= 8) ||
-                dateInput.value.length === 0
-            ) {
+            if (Number(dateInput.value.split('-')[0]) > 2010 || dateInput.value.length === 0) {
                 isCorrect = false;
                 addError(dateLabel, '*You must be over 13 years old');
                 dateInput.classList.add('errorInput');
+            }
+            if (Number(dateInput.value.split('-')[0]) === 2010) {
+                if (Number(dateInput.value.split('-')[2]) > 8) {
+                    isCorrect = false;
+                    addError(dateLabel, '*You must be over 13 years old');
+                    dateInput.classList.add('errorInput');
+                }
             }
             if (streetInput.value.length < 1) {
                 isCorrect = false;
@@ -622,7 +626,7 @@ export function createRegisterWindow(): void {
                 dateInput.classList.add('errorInput');
             }
             if (Number(dateInput.value.split('-')[0]) === 2010) {
-                if (Number(dateInput.value.split('-')[2]) <= 7) {
+                if (Number(dateInput.value.split('-')[2]) > 8) {
                     isCorrect = false;
                     addError(dateLabel, '*You must be over 13 years old');
                     dateInput.classList.add('errorInput');
