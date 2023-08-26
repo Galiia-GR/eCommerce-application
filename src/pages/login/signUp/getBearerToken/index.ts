@@ -1,18 +1,24 @@
 import axios from 'axios';
+import { responseData } from 'src/interfaces';
 
-export async function getToken(): Promise<string> {
-    const access = await axios({
-        url: 'https://ZRQmbO9VlpcxkW02x53wkkKs:92GxY9MdGYusDRy-h9d6rtXKxtE7cm8Y@auth.us-central1.gcp.commercetools.com/oauth/token',
+let clientId = 'ZRQmbO9VlpcxkW02x53wkkKs';
+let clientSecret = '92GxY9MdGYusDRy-h9d6rtXKxtE7cm8Y';
+
+export async function getCustomerToken(userEmail: string, userPassword: string): Promise<responseData> {
+    const response = await axios({
+        url: 'https://auth.us-central1.gcp.commercetools.com/oauth/ecommercerszxc22845345034582/customers/token',
         method: 'post',
         params: {
-            grant_type: 'client_credentials',
+            grant_type: 'password',
+            username: userEmail,
+            password: userPassword,
             scope: 'manage_project:ecommercerszxc22845345034582',
         },
-        auth: {
-            username: 'ZRQmbO9VlpcxkW02x53wkkKs',
-            password: '92GxY9MdGYusDRy-h9d6rtXKxtE7cm8Y',
+        headers: {
+            Authorization: `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
+            'Content-Type': 'application/x-www-form-urlencoded',
         },
     });
-
-    return access.data.access_token;
+    console.log(response.data.refresh_token);
+    return response.data.access_token;
 }
