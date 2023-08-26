@@ -1,4 +1,6 @@
 import footprintImg from '../../assets/images/footprintImg.png';
+import git from '../../assets/images/gitSvg.svg';
+import rss from '../../assets/images/rss.svg';
 
 export function helpCreateEl(tagName: string, className: string) {
     const el = document.createElement(tagName);
@@ -19,40 +21,58 @@ export function createHeader() {
     bodyContainer?.append(headerTag);
     headerTag.append(headerContainer);
 
-    const headerLogoLangBlock = helpCreateEl('div', 'logo-lang-container');
+    const headerLogoLangBlock = helpCreateEl('div', 'logo-container');
     headerContainer.append(headerLogoLangBlock);
     const logo = helpCreateEl('a', 'logo_link');
-    logo.setAttribute('href', 'index.html');
     const logoImg = helpCreateEl('img', 'logo_img') as HTMLImageElement;
     headerLogoLangBlock.append(logo);
     logoImg.setAttribute('alt', 'logo');
     logoImg.src = footprintImg;
     logo.append(logoImg);
-    const logoLang = helpCreateEl('div', 'logo-lang_switch');
+    const logoLang = helpCreateEl('div', 'logo-userName');
     headerLogoLangBlock.append(logoLang);
-    logoLang.textContent = 'SWITCH LANG';
+    logoLang.textContent = 'Home';
 
     const navContainer = helpCreateEl('nav', 'navigation-cotainer');
     headerContainer.append(navContainer);
 
     const navigation = helpCreateEl('ul', 'navigation');
     navContainer.append(navigation);
-    const arrNav = ['SHOP', 'SPIPPING', 'ABOUT US', 'CONTACTS', 'LOG IN', 'REGISTER'];
+    const arrNav = ['SHOP', 'SHIPPING', 'ABOUT', 'CONTACTS', 'LOGIN', 'REGISTER'];
 
     for (let i = 0; i < arrNav.length; i += 1) {
         const item = helpCreateEl('li', 'navigation-item');
-        const link = helpCreateEl('a', 'navigation__link');
-        navContainer.appendChild(item);
-        link.textContent = arrNav[i];
-        link.setAttribute('href', `'./index.html#${arrNav[i]}`);
-        item.append(link);
+        item.classList.add(`${[arrNav[i]]}`);
+        navigation.appendChild(item);
+        item.textContent = arrNav[i];
     }
+
+    const mainTag = helpCreateEl('main', 'main');
+    bodyContainer?.append(mainTag);
 }
 
-export function createFooret() {
+export function createFooter() {
     const bodyContainer = document.querySelector('.body-container');
     const footerTag = helpCreateEl('footer', 'footer');
     const footerContainer = helpCreateEl('div', 'footer-container');
     bodyContainer?.append(footerTag);
     footerTag.append(footerContainer);
+    const temp = `
+      <a class="RSS" href="https://rs.school/js/" target="_blank">
+          <img src="${rss}" width="102" height="30" alt="RS School" />
+      </a>
+      <p>
+          2023 by
+          <a href="https://github.com/Galiia-GR" target="_blank">
+              <img src="${git}" width="25" height="25" alt="github"
+          /></a>
+          <a href="https://github.com/vlad-shkv" target="_blank">
+              <img src="${git}" width="25" height="25" alt="github"
+          /></a>
+          <a href="https://github.com/gregoryrubies" target="_blank">
+              <img src="${git}" width="25" height="25" alt="github"
+          /></a>
+      </p>
+    `;
+    footerContainer.innerHTML = temp;
 }

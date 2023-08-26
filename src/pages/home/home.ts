@@ -1,4 +1,4 @@
-import { helpCreateEl, createHeader, createFooret } from '../global/global';
+import { helpCreateEl, createHeader, createFooter } from '../global/global';
 import greenBgImg from '../../assets/images/home/greenBgImg.jpg';
 import img1 from '../../assets/images/home/img1.png';
 import img2 from '../../assets/images/home/img2.png';
@@ -17,13 +17,11 @@ import img14 from '../../assets/images/home/img14.png';
 import img15 from '../../assets/images/home/img15.png';
 import img16 from '../../assets/images/home/img16.png';
 
-export function createHome() {
-    const bodyContainer = document.querySelector('.body-container');
+export function createMain() {
+    const mainTag = document.querySelector('main') as HTMLElement;
     const mainContainer = helpCreateEl('div', 'main-container');
-    const mainTag = helpCreateEl('main', 'main');
     const mainTitle = helpCreateEl('h1', 'main-title');
 
-    bodyContainer?.append(mainTag);
     mainTag.append(mainContainer);
     mainContainer?.append(mainTitle);
 
@@ -70,6 +68,10 @@ export function createHome() {
     }
 }
 
-createHeader();
-createHome();
-createFooret();
+export function createHomePage() {
+    createHeader();
+    createMain();
+    createFooter();
+}
+
+createHomePage();
