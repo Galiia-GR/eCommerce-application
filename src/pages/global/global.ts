@@ -27,6 +27,7 @@ export function createHeader() {
     const logoImg = helpCreateEl('img', 'logo_img') as HTMLImageElement;
     headerLogoLangBlock.append(logo);
     logoImg.setAttribute('alt', 'logo');
+
     logoImg.src = footprintImg;
     logo.append(logoImg);
     const logoLang = helpCreateEl('div', 'logo-userName');
