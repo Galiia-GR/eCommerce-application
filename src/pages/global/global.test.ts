@@ -1,6 +1,6 @@
 import { helpCreateEl, createHeader, createFooter } from './global';
 
-jest.mock('../../assets/images/footprintImg.png', () => 'fake-foot-image');
+jest.mock('../../assets/images/fish.svg', () => 'fake-fish-image');
 jest.mock('../../assets/images/gitSvg.svg', () => 'fake-git-image');
 jest.mock('../../assets/images/rss.svg', () => 'fake-rss-image');
 

@@ -1,6 +1,6 @@
 import { createMain } from './home';
 
-jest.mock('../../assets/images/home/greenBgImg.jpg', () => 'fake-green-bg-image');
+jest.mock('../../assets/images/home/bg1.jpg', () => 'bg-image');
 jest.mock('../../assets/images/home/img1.png', () => 'fake-image-1');
 jest.mock('../../assets/images/home/img2.png', () => 'fake-image-2');
 jest.mock('../../assets/images/home/img3.png', () => 'fake-image-3');
@@ -17,9 +17,11 @@ jest.mock('../../assets/images/home/img13.png', () => 'fake-image-13');
 jest.mock('../../assets/images/home/img14.png', () => 'fake-image-14');
 jest.mock('../../assets/images/home/img15.png', () => 'fake-image-15');
 jest.mock('../../assets/images/home/img16.png', () => 'fake-image-16');
+jest.mock('../../assets/images/home/img17.png', () => 'fake-image-17');
+jest.mock('../../assets/images/home/img18.png', () => 'fake-image-18');
 
 describe('createMain', () => {
-    it('should create main content with cats', () => {
+    it('should create main content with fist', () => {
         // Act
         createMain();
         // Assert
@@ -29,12 +31,12 @@ describe('createMain', () => {
         expect(mainContainer).not.toBeNull();
 
         const mainTitle = mainContainer?.querySelector('.main-title');
-        expect(mainTitle?.textContent).toBe('What is your favorite cat?');
+        expect(mainTitle?.textContent).toBe('MARINE FISH');
 
-        const homeCatsContainer = mainContainer?.querySelector('.home-cats-container');
-        expect(homeCatsContainer).not.toBeNull();
+        const homeFishContainer = mainContainer?.querySelector('.home-fish-container');
+        expect(homeFishContainer).not.toBeNull();
 
-        const catContainers = homeCatsContainer?.querySelectorAll('.home-cat__container');
-        expect(catContainers?.length).toBe(16);
+        const fishContainers = homeFishContainer?.querySelectorAll('.home-fish__container');
+        expect(fishContainers?.length).toBe(18);
     });
 });

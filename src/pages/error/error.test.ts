@@ -1,6 +1,6 @@
 import { createError } from './error';
 
-jest.mock('../../assets/images/404_1.png', () => 'fake-404-image');
+jest.mock('../../assets/images/error.png', () => 'fake-404-image');
 
 describe('createError', () => {
     let mainTag: HTMLElement;

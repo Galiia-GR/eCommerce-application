@@ -1,5 +1,5 @@
 import { helpCreateEl, createHeader, createFooter } from '../global/global';
-import greenBgImg from '../../assets/images/home/greenBgImg.jpg';
+import greenBgImg from '../../assets/images/home/bg1.jpg';
 import img1 from '../../assets/images/home/img1.png';
 import img2 from '../../assets/images/home/img2.png';
 import img3 from '../../assets/images/home/img3.png';
@@ -16,6 +16,8 @@ import img13 from '../../assets/images/home/img13.png';
 import img14 from '../../assets/images/home/img14.png';
 import img15 from '../../assets/images/home/img15.png';
 import img16 from '../../assets/images/home/img16.png';
+import img17 from '../../assets/images/home/img17.png';
+import img18 from '../../assets/images/home/img18.png';
 
 export function createMain() {
     const mainTag = document.querySelector('main') as HTMLElement;
@@ -25,13 +27,13 @@ export function createMain() {
     mainTag.append(mainContainer);
     mainContainer?.append(mainTitle);
 
-    mainTitle.textContent = 'What is your favorite cat?';
+    mainTitle.textContent = 'MARINE FISH';
 
-    const homeCatsContainer = helpCreateEl('div', 'home-cats-container');
-    mainContainer?.appendChild(homeCatsContainer);
+    const homeFishContainer = helpCreateEl('div', 'home-fish-container');
+    mainContainer?.appendChild(homeFishContainer);
 
     mainTag.style.background = `URL('${greenBgImg}') center/cover, rgba(0, 0, 0, 0.2)`;
-    const arrHomeCats = [
+    const arrHomeFish = [
         img1,
         img2,
         img3,
@@ -48,22 +50,45 @@ export function createMain() {
         img14,
         img15,
         img16,
+        img17,
+        img18,
     ];
 
-    for (let i = 0; i < arrHomeCats.length; i += 1) {
-        const container = helpCreateEl('div', 'home-cat__container');
-        const item = helpCreateEl('div', 'home-cat__item');
-        const itemEmpty = helpCreateEl('div', 'home-cat__empty');
-        const img = helpCreateEl('img', 'home-cat__img') as HTMLImageElement;
-        const title = helpCreateEl('h3', 'home-cat__title');
-        homeCatsContainer.append(container);
-        homeCatsContainer.appendChild(itemEmpty);
+    const arrHomeFishNames = [
+        'Copperband butterfly',
+        'Royal angelfish',
+        'Palete surgeonfish',
+        'Mandarinfish',
+        'Lined surgeonfish',
+        'Purple tang',
+        'Freshwater angelfish',
+        'Ocellaris clownfish',
+        "Clark's anemonefish",
+        'Clarion angelfish',
+        'Orangespine unicornfish',
+        'Golden angelfish',
+        'Scribbled angelfish',
+        'Clown loach',
+        'Threadfin butterflyfish',
+        'Clown triggerfish',
+        'Emperor juvenile fish',
+        'Emperor angelfish',
+    ];
+
+    for (let i = 0; i < arrHomeFish.length; i += 1) {
+        const container = helpCreateEl('div', 'home-fish__container');
+        const item = helpCreateEl('div', 'home-fish__item');
+        const itemEmpty = helpCreateEl('div', 'home-fish__empty');
+        const img = helpCreateEl('img', 'home-fish__img') as HTMLImageElement;
+        const title = helpCreateEl('h3', 'home-fish__title');
+        homeFishContainer.append(container);
+        homeFishContainer.appendChild(itemEmpty);
         container.append(item);
         item.append(img);
         container.appendChild(title);
 
-        title.textContent = `arrHomeCats${i}`;
-        img.src = arrHomeCats[i];
+        title.textContent = `${arrHomeFishNames[i]}`;
+        img.src = arrHomeFish[i];
         item.setAttribute('id', `${i}`);
     }
 }

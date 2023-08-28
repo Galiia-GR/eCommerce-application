@@ -1,4 +1,4 @@
-import footprintImg from '../../assets/images/footprintImg.png';
+import fishHome from '../../assets/images/fishHome.png';
 import git from '../../assets/images/gitSvg.svg';
 import rss from '../../assets/images/rss.svg';
 
@@ -28,7 +28,7 @@ export function createHeader() {
     headerLogoLangBlock.append(logo);
     logoImg.setAttribute('alt', 'logo');
 
-    logoImg.src = footprintImg;
+    logoImg.src = fishHome;
     logo.append(logoImg);
     const logoLang = helpCreateEl('div', 'logo-userName');
     headerLogoLangBlock.append(logoLang);
