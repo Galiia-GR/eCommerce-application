@@ -12,6 +12,9 @@ import './pages/register/getCustomer';
 import './pages/register/updateCustomer';
 import './pages/register/setDefaultShipping';
 import './pages/global/hamburger.ts';
+import './pages/login/signUp/autoSignUp';
+
+window.location.hash = '/';
 
 function test() {
     console.log('Asynchronous sloths test for test');

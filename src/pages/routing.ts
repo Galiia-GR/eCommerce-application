@@ -4,6 +4,7 @@ import { createShopPage } from './shop/shop';
 import { createContactsPage } from './contacts/contacts';
 import { createMain } from './home/home';
 import { createError } from './error/error';
+import { createProfilePage } from './profile';
 
 let submitLogin = false;
 const customerHeaderUserEl = document.querySelector('.logo-userName') as HTMLElement;
@@ -32,6 +33,8 @@ function menuItemClickHandle(event: Event) {
         window.location.hash = '/';
     } else if (navClikedEl === 'SHOP') {
         window.location.hash = '/shop';
+    } else if (navClikedEl === 'PROFILE') {
+        window.location.hash = '/profile';
     } else if (navClikedEl === 'SHIPPING') {
         window.location.hash = '/shipping';
     } else if (navClikedEl === 'ABOUT') {
@@ -74,6 +77,10 @@ export function renderPage(path: string) {
         case '/shop': {
             console.log('render shop');
             return createShopPage();
+        }
+        case '/profile': {
+            console.log('render profile');
+            return createProfilePage();
         }
         case '/shipping': {
             console.log('render shipping');

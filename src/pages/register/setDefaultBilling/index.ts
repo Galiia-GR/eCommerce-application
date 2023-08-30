@@ -6,7 +6,7 @@ export async function updateDefBillingCustomer(id: string, dataId: string): Prom
     const response = await axios.post(
         `https://api.us-central1.gcp.commercetools.com/ecommercerszxc22845345034582/customers/${id}`,
         {
-            version: 6,
+            version: 8,
             actions: [
                 {
                     action: 'setDefaultBillingAddress',

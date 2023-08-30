@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getToken } from '../getBearerToken';
 
-export async function addSecondAddress(
+export async function addSecondAddressDef(
     id: string,
     userFirstName: string,
     userLastName: string,
@@ -24,7 +24,7 @@ export async function addSecondAddress(
     const response = await axios.post(
         `https://api.us-central1.gcp.commercetools.com/ecommercerszxc22845345034582/customers/${id}`,
         {
-            version: 6,
+            version: 7,
             actions: [
                 {
                     action: 'addAddress',

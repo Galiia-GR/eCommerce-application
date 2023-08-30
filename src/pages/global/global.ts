@@ -39,7 +39,7 @@ export function createHeader() {
 
     const navigation = helpCreateEl('ul', 'navigation');
     navContainer.append(navigation);
-    const arrNav = ['SHOP', 'SHIPPING', 'ABOUT', 'CONTACTS', 'LOGIN', 'REGISTER'];
+    const arrNav = ['SHOP', 'SHIPPING', 'ABOUT', 'CONTACTS', 'LOGIN', 'REGISTER', 'PROFILE'];
 
     for (let i = 0; i < arrNav.length; i += 1) {
         const item = helpCreateEl('li', 'navigation-item');

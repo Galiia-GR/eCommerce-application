@@ -31,7 +31,7 @@ export function createLoginWindow(): void {
     emailLabel.textContent = 'Email:';
     passwordLabel.textContent = 'Password:';
     singUpLink.textContent = "Don't have account? Register Here";
-    loginExit.textContent = 'x';
+    loginExit.textContent = '×';
 
     loginHeader.append(loginExit);
     loginWindow.append(
@@ -132,6 +132,7 @@ export function createLoginWindow(): void {
                 window.location.hash = '/';
                 const customerHeaderUserEl = document.querySelector('.logo-userName') as HTMLElement;
                 customerHeaderUserEl.textContent = `Home ${customerData}`;
+                loginOpen.textContent = 'LOG OUT';
                 console.log('submit true', customerData);
             }
         } catch (err) {
@@ -219,13 +220,22 @@ export function createLoginWindow(): void {
         });
     });
     loginOpen.addEventListener('click', () => {
-        openWindow(loginBack, mainPage);
+        if (localStorage.getItem('accessToken')) {
+            localStorage.clear();
+            loginOpen.textContent = 'LOGIN';
+            const customerHeaderUserEl = document.querySelector('.logo-userName') as HTMLElement;
+            customerHeaderUserEl.textContent = `Home`;
+        } else {
+            openWindow(loginBack, mainPage);
+        }
     });
     loginExit.addEventListener('click', () => {
+        window.location.hash = '/';
         closeWindow(loginBack, mainPage);
     });
     loginBack.addEventListener('click', (target) => {
         if (target.target === loginBack) {
+            window.location.hash = '/';
             closeWindow(loginBack, mainPage);
         }
     });
