@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getToken } from '../getBearerToken';
+import { acessToken } from '../getBearerToken';
 
 export async function updateCustomer(
     id: string,
@@ -12,7 +12,7 @@ export async function updateCustomer(
     userEmail: string,
     userDate: string
 ): Promise<object> {
-    const token = (await getToken()).toString();
+    const token = acessToken.toString();
     const streetCode: string[] = [];
     const streetName: string[] = [];
     await userStreetName.split('').forEach((step) => {

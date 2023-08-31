@@ -7,7 +7,8 @@ export interface responseData {
     customer: responseCustomer;
 }
 
-interface responseAdress {
+export interface responseAdress {
+    id: string;
     city: string;
     country: string;
     postalCode: string;
@@ -23,4 +24,6 @@ export interface responseCustomer {
     dateOfBirth: string;
     addresses: responseAdress[];
     email: string;
+    billingAddressIds: string[];
+    shippingAddressIds: string[];
 }

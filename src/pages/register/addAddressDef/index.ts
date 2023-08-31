@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getToken } from '../getBearerToken';
+import { acessToken } from '../getBearerToken';
 
 export async function addSecondAddressDef(
     id: string,
@@ -11,7 +11,7 @@ export async function addSecondAddressDef(
     userCountry: string,
     userEmail: string
 ): Promise<object> {
-    const token = (await getToken()).toString();
+    const token = acessToken.toString();
     const streetCode: string[] = [];
     const streetName: string[] = [];
     await userStreetName.split('').forEach((step) => {

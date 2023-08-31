@@ -1,3 +1,4 @@
+import { responseAdress } from 'src/interfaces';
 import { helpCreateEl } from '../global/global';
 import { getProfileInf } from './getInfProfile';
 
@@ -27,28 +28,65 @@ export async function createProfilePage() {
     let adressContainer = helpCreateEl('div', 'profile-adress');
     let editButton = helpCreateEl('button', 'profile-button');
     let passwordButton = helpCreateEl('button', 'profile-button');
+    let errorTitle = helpCreateEl('h1', 'error-title');
 
-    shippingTitle.textContent = 'Shipping adress';
-    shippingCity.textContent = `City: ${(await info).addresses[0].city}`;
-    shippingCountry.textContent = `Country: ${(await info).addresses[0].country}`;
-    shippingStreet.textContent = `Street: ${(await info).addresses[0].streetName} ${
-        (await info).addresses[0].streetNumber
-    }`;
-    shippingPostal.textContent = `Postal code: ${(await info).addresses[0].postalCode}`;
-    billingTitle.textContent = 'BIlling adress';
-    billingCity.textContent = `City: ${(await info).addresses[0].city}`;
-    billingCountry.textContent = `Country: ${(await info).addresses[0].country}`;
-    billingStreet.textContent = `Street: ${(await info).addresses[0].streetName} ${
-        (await info).addresses[0].streetNumber
-    }`;
-    billingPostal.textContent = `Postal code: ${(await info).addresses[0].postalCode}`;
-    editButton.textContent = 'Edit profile';
-    passwordButton.textContent = 'Change password';
-    birth.textContent = `Birth: ${(await info).dateOfBirth}`;
-    email.textContent = `Email: ${(await info).email}`;
-    name.textContent = `${(await info).firstName} ${(await info).lastName}`;
-    shippingContainer.append(shippingTitle, shippingCountry, shippingPostal, shippingCity, shippingStreet);
-    billingContainer.append(billingTitle, billingCountry, billingPostal, billingCity, billingStreet);
-    adressContainer.append(shippingContainer, billingContainer);
-    sectionProfile.append(avatar, name, email, birth, adressContainer, editButton, passwordButton);
+    async function yourBilling(): Promise<responseAdress | undefined> {
+        let curId = (await info).billingAddressIds[0];
+        let adressessData: responseAdress[] = [...(await info).addresses];
+        for (let i = 0; i < adressessData.length; i++) {
+            if (adressessData[i].id === curId) {
+                return adressessData[i];
+            }
+        }
+        return undefined;
+    }
+
+    async function yourShipping(): Promise<responseAdress | undefined> {
+        let curId = (await info).shippingAddressIds[0];
+        let adressessData: responseAdress[] = [...(await info).addresses];
+        for (let i = 0; i < adressessData.length; i++) {
+            if (adressessData[i].id === curId) {
+                return adressessData[i];
+            }
+        }
+        return undefined;
+    }
+
+    try {
+        let billingAdressObject: responseAdress | undefined = await yourBilling();
+        console.log('billing');
+        console.log(billingAdressObject);
+        let shippingAdressObject: responseAdress | undefined = await yourShipping();
+        console.log('shipping');
+        console.log(shippingAdressObject);
+
+        if (shippingAdressObject !== undefined) {
+            shippingTitle.textContent = 'Shipping adress';
+            shippingCity.textContent = `City: ${shippingAdressObject.city}`;
+            shippingCountry.textContent = `Country: ${shippingAdressObject.country}`;
+            shippingStreet.textContent = `Street: ${shippingAdressObject.streetName} ${shippingAdressObject.streetNumber}`;
+            shippingPostal.textContent = `Postal code: ${shippingAdressObject.postalCode}`;
+        }
+
+        if (billingAdressObject !== undefined) {
+            billingTitle.textContent = 'BIlling adress';
+            billingCity.textContent = `City: ${billingAdressObject.city}`;
+            billingCountry.textContent = `Country: ${billingAdressObject.country}`;
+            billingStreet.textContent = `Street: ${billingAdressObject.streetName} ${billingAdressObject.streetNumber}`;
+            billingPostal.textContent = `Postal code: ${billingAdressObject.postalCode}`;
+        }
+
+        editButton.textContent = 'Edit profile';
+        passwordButton.textContent = 'Change password';
+        birth.textContent = `Birth: ${(await info).dateOfBirth}`;
+        email.textContent = `Email: ${(await info).email}`;
+        name.textContent = `${(await info).firstName} ${(await info).lastName}`;
+        shippingContainer.append(shippingTitle, shippingCountry, shippingPostal, shippingCity, shippingStreet);
+        billingContainer.append(billingTitle, billingCountry, billingPostal, billingCity, billingStreet);
+        adressContainer.append(shippingContainer, billingContainer);
+        sectionProfile.append(avatar, name, email, birth, adressContainer, editButton, passwordButton);
+    } catch {
+        errorTitle.textContent = 'Please, sign in for load that page';
+        sectionProfile.append(errorTitle);
+    }
 }

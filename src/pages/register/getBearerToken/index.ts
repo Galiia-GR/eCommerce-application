@@ -16,3 +16,5 @@ export async function getToken(): Promise<string> {
 
     return access.data.access_token;
 }
+
+export const acessToken = await getToken();

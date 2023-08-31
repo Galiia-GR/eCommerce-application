@@ -10,6 +10,9 @@ import { updateBillingCustomer } from './setBilling';
 import { updateDefBillingCustomer } from './setDefaultBilling';
 import { addSecondAddress } from './addAddress';
 import { addSecondAddressDef } from './addAddressDef';
+import { updateBillingCustomerFix } from './setBilling8';
+import { updateBillingCustomerFix2 } from './setBilling6';
+import { updateDefBillingCustomerFix } from './setDefaultBilling7';
 
 export function createRegisterWindow(): void {
     const mainPage = document.querySelector('.body-container') as HTMLElement;
@@ -463,10 +466,10 @@ export function createRegisterWindow(): void {
                 }
 
                 if (billingDefCheckbox2.checked === false) {
-                    if (billingDefCheckbox2.checked === false) {
-                        await updateBillingCustomer(userId, addressData);
+                    if (billingDefCheckbox2.checked || billingDefCheckbox.checked === false) {
+                        await updateBillingCustomerFix2(userId, addressData);
                     } else {
-                        await updateDefBillingCustomer(userId, addressData);
+                        await updateDefBillingCustomerFix(userId, addressData);
                     }
                 }
             } else {
@@ -477,31 +480,61 @@ export function createRegisterWindow(): void {
                 }
 
                 if (billingDefCheckbox2.checked === false) {
-                    await addSecondAddress(
-                        userId,
-                        firstNameInput.value,
-                        secondNameInput.value,
-                        billingStreetInput.value,
-                        billingPostalInput.value,
-                        billingCityInput.value,
-                        billingCountryInput.value,
-                        emailInput.value
-                    );
-                    let addressData2 = await getCustomer(userId, 1);
-                    await updateBillingCustomer(userId, addressData2);
-                } else {
-                    await addSecondAddressDef(
-                        userId,
-                        firstNameInput.value,
-                        secondNameInput.value,
-                        billingStreetInput.value,
-                        billingPostalInput.value,
-                        billingCityInput.value,
-                        billingCountryInput.value,
-                        emailInput.value
-                    );
-                    let addressData2 = await getCustomer(userId, 1);
-                    await updateDefBillingCustomer(userId, addressData2);
+                    if (billingDefCheckbox.checked === true) {
+                        await addSecondAddressDef(
+                            userId,
+                            firstNameInput.value,
+                            secondNameInput.value,
+                            billingStreetInput.value,
+                            billingPostalInput.value,
+                            billingCityInput.value,
+                            billingCountryInput.value,
+                            emailInput.value
+                        );
+                        let addressData2 = await getCustomer(userId, 1);
+                        await updateBillingCustomerFix(userId, addressData2);
+                    } else if (billingDefCheckbox.checked === false) {
+                        await addSecondAddress(
+                            userId,
+                            firstNameInput.value,
+                            secondNameInput.value,
+                            billingStreetInput.value,
+                            billingPostalInput.value,
+                            billingCityInput.value,
+                            billingCountryInput.value,
+                            emailInput.value
+                        );
+                        let addressData2 = await getCustomer(userId, 1);
+                        await updateBillingCustomer(userId, addressData2);
+                    }
+                } else if (billingDefCheckbox2.checked === true) {
+                    if (billingDefCheckbox.checked === false) {
+                        await addSecondAddress(
+                            userId,
+                            firstNameInput.value,
+                            secondNameInput.value,
+                            billingStreetInput.value,
+                            billingPostalInput.value,
+                            billingCityInput.value,
+                            billingCountryInput.value,
+                            emailInput.value
+                        );
+                        let addressData2 = await getCustomer(userId, 1);
+                        await updateBillingCustomer(userId, addressData2);
+                    } else {
+                        await addSecondAddressDef(
+                            userId,
+                            firstNameInput.value,
+                            secondNameInput.value,
+                            billingStreetInput.value,
+                            billingPostalInput.value,
+                            billingCityInput.value,
+                            billingCountryInput.value,
+                            emailInput.value
+                        );
+                        let addressData2 = await getCustomer(userId, 1);
+                        await updateDefBillingCustomer(userId, addressData2);
+                    }
                 }
             }
 
