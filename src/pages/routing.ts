@@ -1,6 +1,6 @@
 import { createAboutUsPage } from './about/about';
 import { createShippingPage } from './shipping/shipping';
-import { createShopPage } from './shop/shop';
+import { createShopPage } from './shop/createShopPage';
 import { createContactsPage } from './contacts/contacts';
 import { createMain } from './home/home';
 import { createError } from './error/error';
