@@ -1,0 +1,129 @@
+.shop-container {
+    display: grid;
+    gap: 30px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    grid-template-columns: repeat(3, 1fr);
+    @include media-tablet-shop {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    @include media-mobile {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+    }
+}
+.shop-fish__container {
+    padding: 10px;
+    background-color: rgba(115, 174, 210, 0.6);
+    border-radius: 20px;
+    border: 3px solid rgba(59, 134, 182, 0.1);
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    align-self: center;
+    @include media-tablet {
+    }
+    @include media-mobile {
+        padding: 5px;
+    }
+}
+
+.shop-fish__container:hover {
+    box-shadow: 4px 4px 4px 4px rgba(28, 28, 28, 0.438);
+    cursor: pointer;
+}
+
+.shop-fish__img {
+    width: 405px;
+    height: 275px;
+    border-radius: 20px;
+    align-self: center;
+    @include media-tablet-shop {
+        width: 335px;
+        height: 205px;
+    }
+
+    @include media-mobile {
+        width: 305px;
+        height: 175px;
+    }
+}
+
+.shop-fish__item {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    @include media-tablet {
+    }
+    @include media-mobile {
+    }
+}
+
+.shop-fish__title {
+    color: $color-primary-sand;
+    text-align: center;
+    text-shadow: 1px 1px 1px #1f1f1f9c;
+    font-size: 24px;
+    font-weight: bold;
+    align-self: center;
+    text-align: center;
+    @include media-tablet-shop {
+        font-size: 20px;
+    }
+    @include media-mobile {
+        font-size: 18px;
+    }
+}
+
+.shop-fish__description {
+    color: white;
+    font-size: 20px;
+    align-self: center;
+    line-height: 1.2;
+    text-align: justify;
+    @include media-tablet-shop {
+        font-size: 18px;
+    }
+    @include media-mobile {
+        font-size: 12px;
+    }
+}
+
+.shop-fish__cost-container {
+    display: flex;
+    gap: 5px;
+    color: $color-primary-sand;
+    font-size: 22px;
+    font-weight: bold;
+    align-self: flex-end;
+    text-align: center;
+    @include media-tablet {
+        font-size: 20px;
+    }
+    @include media-mobile {
+        font-size: 18px;
+    }
+}
+
+.shop-fish__button {
+    background-color: rgb(137 179 197);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    border: 2px solid rgba(239, 237, 237, 0.5);
+    border: 1px 1px 1px #1f1f1f9c;
+    cursor: pointer;
+    width: 250px;
+    height: 50px;
+    border-radius: 20px;
+    font-size: 20px;
+    color: white;
+}
+
+.shop-fish__button:hover {
+    color: $color-primary-sand;
+    text-shadow: 1px 1px 1px #1f1f1f9c;
+    box-shadow: 4px 4px 4px rgba(28, 28, 28, 0.438);
+}
