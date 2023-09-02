@@ -10,6 +10,11 @@
     }
 }
 
+@mixin media-tablet-shop {
+    @media (min-width: $tablet-width) and (max-width: $tablet-width-shop) {
+        @content;
+    }
+}
 @mixin media-mobile {
     @media (min-width: $mobile-width) and (max-width: $mobile-big-width) {
         @content;

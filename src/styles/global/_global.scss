@@ -228,7 +228,7 @@ body {
 }
 
 .profile::before {
-    content: "";
+    content: '';
     height: 100em;
     width: 10px;
     position: fixed;
@@ -237,14 +237,13 @@ body {
 }
 
 .profile::after {
-    content: "";
+    content: '';
     height: 100em;
     width: 10px;
     position: fixed;
     right: 12%;
     animation: borderGradient1 infinite 3s linear;
 }
-
 
 .profile-avatar {
     background-image: url(/src/assets/images/124069.png);
@@ -303,5 +302,5 @@ body {
 
 .profile-button:active {
     background-color: rgba(38, 89, 121, 0.7);
-    cursor:pointer;
+    cursor: pointer;
 }
