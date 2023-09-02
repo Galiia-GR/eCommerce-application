@@ -8,6 +8,5 @@ export async function getProfileInf(): Promise<responseCustomer> {
             'Content-Type': 'application/json',
         },
     });
-    console.log(response.data);
     return response.data;
 }
