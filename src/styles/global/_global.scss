@@ -208,13 +208,17 @@ body {
     color: $color-primary-dark-sand;
 }
 
-.profile {
+.profile-scroll {
     position: fixed;
-    background-color: rgba($color: #ffffff, $alpha: 0.9);
     left: 7%;
     right: 7%;
-    top: 0px;
-    bottom: 0px;
+    overflow-x: hidden;
+    bottom: 50px;
+    top: 60px;
+}
+
+.profile {
+    background-color: rgba($color: #ffffff, $alpha: 0.9);
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -225,6 +229,7 @@ body {
     color: rgba(27, 52, 67, 0.7);
     font-weight: 500;
     gap: 4px;
+    width: 100%;
 }
 
 .profile input {
@@ -238,7 +243,7 @@ body {
     border-right: solid rgba(59, 135, 182, 0) 2px;
     padding: 5px;
     border-radius: 2px;
-    width: 240px;
+    width: 355px;
 }
 
 .profile::before {
@@ -278,10 +283,11 @@ body {
 .profile-container {
     display: flex;
     flex-direction: column;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
     justify-content: center;
     align-items: center;
     gap: 9px;
+    margin-top: 20px;
 }
 
 @keyframes borderGradient1 {
@@ -303,20 +309,20 @@ body {
 }
 
 .profile-button {
-    margin-top: 10px;
-    font-size: 20px;
+    margin-top: 25px;
+    font-size: 19px;
     background-color: rgba(59, 134, 182, 0.7);
-    height: 40px;
-    width: 35%;
+    width: 280px;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.931);
     border: 0px;
+    padding: 7px;
 }
 
 .input-title {
     font-size: 15px;
     font-weight: bold;
-    transform: translateX(-117px);
+    transform: translateX(-165px);
 }
 
 .profile-button:hover {
@@ -327,4 +333,17 @@ body {
 .profile-button:active {
     background-color: rgba(38, 89, 121, 0.7);
     cursor:pointer;
+}
+
+.profile-scroll::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background: rgba(88, 152, 186, 0.4);
+}
+
+.profile-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.profile-scroll::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.164);
 }

@@ -7,7 +7,9 @@ export async function createProfilePage() {
     const mainTag = document.querySelector('.main') as HTMLElement;
     mainTag.innerHTML = '';
     const sectionProfile = helpCreateEl('section', 'profile');
-    mainTag.append(sectionProfile);
+    const sectionProfileContainer = helpCreateEl('section', 'profile-scroll');
+    mainTag.append(sectionProfileContainer);
+    sectionProfileContainer.append(sectionProfile);
 
     let info = getProfileInf();
     let avatar = helpCreateEl('div', 'profile-avatar');
@@ -17,107 +19,156 @@ export async function createProfilePage() {
     birth.readOnly = true;
     let email = helpCreateEl('input', 'profile-email') as HTMLInputElement;
     email.readOnly = true;
-    let shippingContainer = helpCreateEl('div', 'profile-container');
-    let shippingTitle = helpCreateEl('h4', 'profile-title');
-    let shippingCity = helpCreateEl('input', '') as HTMLInputElement;
-    shippingCity.readOnly = true;
-    let shippingCountry = helpCreateEl('input', '') as HTMLInputElement;
-    shippingCountry.readOnly = true;
-    let shippingStreet = helpCreateEl('input', '') as HTMLInputElement;
-    shippingStreet.readOnly = true;
-    let shippingPostal = helpCreateEl('input', '') as HTMLInputElement;
-    shippingPostal.readOnly = true;
-    let billingContainer = helpCreateEl('div', 'profile-container');
-    let billingTitle = helpCreateEl('h4', 'profile-title');
-    let billingCity = helpCreateEl('input', '') as HTMLInputElement;
-    billingCity.readOnly = true;
-    let billingCountry = helpCreateEl('input', '') as HTMLInputElement;
-    billingCountry.readOnly = true;
-    let billingStreet = helpCreateEl('input', '') as HTMLInputElement;
-    billingStreet.readOnly = true;
-    let billingPostal = helpCreateEl('input', '') as HTMLInputElement;
-    billingPostal.readOnly = true;
-    let adressContainer = helpCreateEl('div', 'profile-adress');
     let editButton = helpCreateEl('button', 'profile-button');
     let passwordButton = helpCreateEl('button', 'profile-button');
     let errorTitle = helpCreateEl('h1', 'error-title');
     birth.type = 'date';
 
-    async function yourBilling(): Promise<responseAdress | undefined> {
-        let curId = (await info).billingAddressIds[0];
+    async function yourBilling(): Promise<responseAdress[] | undefined> {
+        let curIdArray = (await info).billingAddressIds;
         let adressessData: responseAdress[] = [...(await info).addresses];
-        for (let i = 0; i < adressessData.length; i++) {
-            if (adressessData[i].id === curId) {
-                return adressessData[i];
+        let resultArray = [];
+        for (let j = 0; j < curIdArray.length; j++) {
+            for (let i = 0; i < adressessData.length; i++) {
+                if (adressessData[i].id === curIdArray[j]) {
+                    resultArray.push(adressessData[i]);
+                }
             }
         }
-        return undefined;
+        return resultArray;
     }
 
-    async function yourShipping(): Promise<responseAdress | undefined> {
-        let curId = (await info).shippingAddressIds[0];
+    async function yourShipping(): Promise<responseAdress[] | undefined> {
+        let curIdArray = (await info).shippingAddressIds;
         let adressessData: responseAdress[] = [...(await info).addresses];
-        for (let i = 0; i < adressessData.length; i++) {
-            if (adressessData[i].id === curId) {
-                return adressessData[i];
+        let resultArray = [];
+        for (let j = 0; j < curIdArray.length; j++) {
+            for (let i = 0; i < adressessData.length; i++) {
+                if (adressessData[i].id === curIdArray[j]) {
+                    resultArray.push(adressessData[i]);
+                }
             }
         }
-        return undefined;
+        return resultArray;
     }
 
     try {
-        let billingAdressObject: responseAdress | undefined = await yourBilling();
-        let shippingAdressObject: responseAdress | undefined = await yourShipping();
-
-        if (shippingAdressObject !== undefined) {
-            shippingTitle.textContent = 'Shipping adress';
-            shippingCity.value = `${shippingAdressObject.city}`;
-            shippingCountry.value = `${shippingAdressObject.country}`;
-            shippingStreet.value = `${shippingAdressObject.streetName} ${shippingAdressObject.streetNumber}`;
-            shippingPostal.value = `${shippingAdressObject.postalCode}`;
-        }
-
-        if (billingAdressObject !== undefined) {
-            billingTitle.textContent = 'BIlling adress';
-            billingCity.value = `${billingAdressObject.city}`;
-            billingCountry.value = `${billingAdressObject.country}`;
-            billingStreet.value = `${billingAdressObject.streetName} ${billingAdressObject.streetNumber}`;
-            billingPostal.value = `${billingAdressObject.postalCode}`;
-        }
+        let billingAdressObjectArray: responseAdress[] | undefined = await yourBilling();
+        let shippingAdressObjectArray: responseAdress[] | undefined = await yourShipping();
 
         editButton.textContent = 'Edit profile';
         passwordButton.textContent = 'Change password';
         birth.value = `${(await info).dateOfBirth}`;
         email.value = `${(await info).email}`;
         name.value = `${(await info).firstName} ${(await info).lastName}`;
-        shippingContainer.append(shippingTitle, shippingCountry, shippingPostal, shippingCity, shippingStreet);
-        billingContainer.append(billingTitle, billingCountry, billingPostal, billingCity, billingStreet);
-        adressContainer.append(shippingContainer, billingContainer);
-        sectionProfile.append(avatar, name, email, birth, adressContainer, editButton, passwordButton);
+        sectionProfile.append(avatar, name, email, birth, passwordButton);
         addTitle(name, 'Name:');
         addTitle(email, 'Email:');
         addTitle(birth, 'Birth:');
-        addTitle(billingCity, 'City:');
-        addTitle(billingCountry, 'Country:');
-        addTitle(billingStreet, 'Street:');
-        addTitle(billingPostal, 'Postal:');
-        addTitle(shippingCity, 'City:');
-        addTitle(shippingCountry, 'Country:');
-        addTitle(shippingStreet, 'Street:');
-        addTitle(shippingPostal, 'Postal:');
-        let inputsArr = [
-            name,
-            birth,
-            email,
-            shippingCity,
-            shippingCountry,
-            shippingStreet,
-            shippingPostal,
-            billingCity,
-            billingCountry,
-            billingStreet,
-            billingPostal,
-        ];
+        let inputsArr = [name, birth, email];
+
+        if (shippingAdressObjectArray !== undefined) {
+            let cur = 0;
+            shippingAdressObjectArray.forEach(async (el) => {
+                cur += 1;
+                let shippingContainer = helpCreateEl('div', 'profile-container');
+                let shippingTitle = helpCreateEl('h4', 'profile-title');
+                let shippingCity = helpCreateEl('input', '') as HTMLInputElement;
+                shippingCity.readOnly = true;
+                let shippingCountry = helpCreateEl('input', '') as HTMLInputElement;
+                shippingCountry.readOnly = true;
+                let shippingStreet = helpCreateEl('input', '') as HTMLInputElement;
+                shippingStreet.readOnly = true;
+                let shippingPostal = helpCreateEl('input', '') as HTMLInputElement;
+                shippingPostal.readOnly = true;
+                shippingContainer.append(shippingTitle, shippingCountry, shippingPostal, shippingCity, shippingStreet);
+                sectionProfile.append(shippingContainer);
+                if ((await info).defaultShippingAddressId === el.id) {
+                    let defTitle = helpCreateEl('h5', 'profile-title');
+                    defTitle.textContent = '*Current default shipping address*';
+                    defTitle.style.marginTop = '20px';
+                    shippingContainer.append(defTitle);
+                } else {
+                    let defButton = helpCreateEl('button', 'profile-button');
+                    defButton.textContent = 'Set as default shipping address';
+                    shippingContainer.append(defButton);
+                }
+
+                shippingTitle.textContent = `Shipping address ${cur}`;
+                shippingCity.value = `${el.city}`;
+                shippingCountry.value = `${el.country}`;
+                shippingStreet.value = `${el.streetName} ${el.streetNumber}`;
+                shippingPostal.value = `${el.postalCode}`;
+
+                inputsArr.push(shippingCity);
+                inputsArr.push(shippingCountry);
+                inputsArr.push(shippingStreet);
+                inputsArr.push(shippingPostal);
+
+                addTitle(shippingCity, 'City:');
+                addTitle(shippingCountry, 'Country:');
+                addTitle(shippingStreet, 'Street:');
+                addTitle(shippingPostal, 'Postal:');
+            });
+        }
+
+        let addShippingButton = helpCreateEl('button', 'profile-button');
+        addShippingButton.textContent = 'Add shipping address';
+        addShippingButton.style.marginTop = '10px';
+        sectionProfile.append(addShippingButton);
+
+        if (billingAdressObjectArray !== undefined) {
+            let cur = 0;
+            billingAdressObjectArray.forEach(async (el) => {
+                cur += 1;
+                let billingContainer = helpCreateEl('div', 'profile-container');
+                let billingTitle = helpCreateEl('h4', 'profile-title');
+                let billingCity = helpCreateEl('input', '') as HTMLInputElement;
+                billingCity.readOnly = true;
+                let billingCountry = helpCreateEl('input', '') as HTMLInputElement;
+                billingCountry.readOnly = true;
+                let billingStreet = helpCreateEl('input', '') as HTMLInputElement;
+                billingStreet.readOnly = true;
+                let billingPostal = helpCreateEl('input', '') as HTMLInputElement;
+                billingPostal.readOnly = true;
+
+                billingContainer.append(billingTitle, billingCountry, billingPostal, billingCity, billingStreet);
+                sectionProfile.append(billingContainer);
+
+                if ((await info).defaultBillingAddressId === el.id) {
+                    let defTitle = helpCreateEl('h5', 'profile-title');
+                    defTitle.textContent = '*Current default billing address*';
+                    defTitle.style.marginTop = '20px';
+                    billingContainer.append(defTitle);
+                } else {
+                    let defButton = helpCreateEl('button', 'profile-button');
+                    defButton.textContent = 'Set as default billing address';
+                    billingContainer.append(defButton);
+                }
+
+                billingTitle.textContent = `BIlling address ${cur}`;
+                billingCity.value = `${el.city}`;
+                billingCountry.value = `${el.country}`;
+                billingStreet.value = `${el.streetName} ${el.streetNumber}`;
+                billingPostal.value = `${el.postalCode}`;
+
+                inputsArr.push(billingCity);
+                inputsArr.push(billingCountry);
+                inputsArr.push(billingStreet);
+                inputsArr.push(billingPostal);
+
+                addTitle(billingCity, 'City:');
+                addTitle(billingCountry, 'Country:');
+                addTitle(billingStreet, 'Street:');
+                addTitle(billingPostal, 'Postal:');
+            });
+        }
+
+        let addBillingButton = helpCreateEl('button', 'profile-button');
+        addBillingButton.textContent = 'Add billing address';
+        sectionProfile.append(addBillingButton);
+
+        sectionProfile.append(editButton);
 
         let currStage = 1;
         editButton.addEventListener('click', () => {

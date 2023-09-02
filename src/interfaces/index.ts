@@ -26,4 +26,6 @@ export interface responseCustomer {
     email: string;
     billingAddressIds: string[];
     shippingAddressIds: string[];
+    defaultShippingAddressId: string;
+    defaultBillingAddressId: string;
 }
