@@ -346,3 +346,110 @@ body {
 .profile-scroll::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.164);
 }
+
+.card-fish__background {
+    position: absolute;
+    background-color: rgba(123, 123, 123, 0.484);
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    opacity: 0;
+    transition: 0.2s;
+    position: fixed;
+    z-index: 999;
+}
+
+.card-fish__container {
+    transition: 0.2s;
+    position: fixed;
+    background-color: rgb(234, 237, 240);
+    color: rgb(135 165 194);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 10px;
+    top: 15%;
+    bottom: 20%;
+    left: 10%;
+    right: 10%;
+    box-shadow: 0px 0px 90px 0px rgb(27, 44, 54);
+    gap: 14px;
+    overflow-x: scroll;
+    overflow-x: hidden;
+}
+
+.card-fish__img {
+    width: 450px;
+    height: 250px;
+    transition: 0.1s ease-in;
+}
+
+.card-fish__img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-fish__arrow_left {
+    position: absolute;
+    height: 250px;
+    width: calc((100% - 450px) / 2);
+    z-index: 4;
+    left: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(143, 180, 214);
+    font-size: 80px;
+    color: rgb(227, 252, 255);
+    transform: rotate(180deg);
+    cursor: pointer;
+    user-select: none;
+    text-shadow: 0px 0px 14px rgb(91 147 180);
+}
+
+.card-fish__arrow_right {
+    position: absolute;
+    height: 250px;
+    width: calc((100% - 450px) / 2);
+    z-index: 4;
+    right: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(143, 180, 214);
+    font-size: 80px;
+    color: rgb(227, 252, 255);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    line-height: 70px;
+    text-shadow: 0px 0px 14px rgb(91 147 180);
+    cursor: pointer;
+    user-select: none;
+}
+
+.card-fish__title {
+    margin-top: 12px;
+    font-size: 30px;
+}
+
+.card-fish__description {
+    height: 181px;
+    margin-top: 10px;
+    width: 97%;
+    background-color: rgb(143, 180, 214);
+    color: white;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 7px;
+    font-size: 20px;
+}
+
+.card-fish__price {
+    transform: translateX(295px);
+    font-size: 40px;
+    color: rgb(143, 180, 214);
+    padding: 10px;
+}
