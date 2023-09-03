@@ -43,16 +43,37 @@ export async function createShopPage() {
         containerItem.append(costContainer);
 
         const cost = helpCreateEl('p', 'shop-fish__cost');
+        const discount = helpCreateEl('p', 'shop-second__cost');
         const currency = helpCreateEl('p', 'shop-fish__currency');
         costContainer.append(cost);
+        costContainer.append(discount);
         costContainer.append(currency);
 
         const getSum = `${data.masterVariant.prices[0].value.centAmount}`;
-        const valuePartFirst = getSum.slice(0, -2);
-        const valuePartSecond = getSum.slice(getSum.length - 2);
 
-        cost.innerText = `${valuePartFirst},${valuePartSecond}`;
-        currency.innerText = data.masterVariant.prices[0].value.currencyCode;
+        if (data.masterVariant.prices[0].discounted) {
+            const discountSum = `${data.masterVariant.prices[0].discounted.value.centAmount}`;
+            const discountPartFirst = discountSum.slice(0, -2);
+            const discountPartSecond = discountSum.slice(discountSum.length - 2);
+            discount.innerText = `${discountPartFirst},${discountPartSecond}`;
+            currency.innerText = data.masterVariant.prices[0].value.currencyCode;
+
+            const valuePartFirst = getSum.slice(0, -2);
+            const valuePartSecond = getSum.slice(getSum.length - 2);
+
+            cost.innerText = `${valuePartFirst},${valuePartSecond}`;
+            currency.innerText = data.masterVariant.prices[0].value.currencyCode;
+            cost.style.textDecoration = 'line-through';
+            cost.style.fontSize = '16px';
+        }
+
+        if (!data.masterVariant.prices[0].discounted) {
+            const valuePartFirst = getSum.slice(0, -2);
+            const valuePartSecond = getSum.slice(getSum.length - 2);
+
+            cost.innerText = `${valuePartFirst},${valuePartSecond}`;
+            currency.innerText = data.masterVariant.prices[0].value.currencyCode;
+        }
 
         const button = helpCreateEl('button', 'shop-fish__button');
         containerItem.append(button);
@@ -66,12 +87,23 @@ export async function createShopPage() {
             let cardImgsContainer = helpCreateEl('div', 'card-fish__img-container');
             let cardDescribe = helpCreateEl('div', 'card-fish__description');
             let cardPrice = helpCreateEl('div', 'card-fish__price');
+            let cardDiscount = helpCreateEl('div', 'card-fish__discount');
 
             data.masterVariant.images.forEach((el) => {
                 let cardImg = helpCreateEl('img', 'card-fish__img') as HTMLImageElement;
                 cardImg.src = `${el.url}`;
                 cardImgsContainer.append(cardImg);
             });
+
+            if (data.masterVariant.prices[0].discounted) {
+                const discountSum = `${data.masterVariant.prices[0].discounted.value.centAmount}`;
+                const discountPartFirst = discountSum.slice(0, -2);
+                const discountPartSecond = discountSum.slice(discountSum.length - 2);
+                cardDiscount.innerText = `${discountPartFirst},${discountPartSecond} USD`;
+
+                cardPrice.style.textDecoration = 'line-through';
+                cardPrice.style.fontSize = '16px';
+            }
 
             const getCost = `${data.masterVariant.prices[0].value.centAmount}`;
             const costPartFirst = getCost.slice(0, -2);
@@ -80,7 +112,7 @@ export async function createShopPage() {
             cardPrice.innerText = `${costPartFirst},${costPartSecond} USD`;
 
             background.append(card);
-            card.append(cardTitle, cardImgsContainer, cardDescribe, cardPrice);
+            card.append(cardTitle, cardImgsContainer, cardDescribe, cardPrice, cardDiscount);
 
             let leftButton = helpCreateEl('div', 'card-fish__arrow_left');
             cardImgsContainer.append(leftButton);
