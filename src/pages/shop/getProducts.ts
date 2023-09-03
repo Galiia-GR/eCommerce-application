@@ -1,16 +1,8 @@
 import axios from 'axios';
 import { acessToken } from '../register/getBearerToken';
+import { ProductList } from './types';
 
-export async function getProducts(): Promise<
-    Array<{
-        name: { en: string };
-        masterVariant: {
-            images: Array<{ url: string }>;
-            prices: Array<{ value: { centAmount: number; currencyCode: string } }>;
-        };
-        description: { en: string };
-    }>
-> {
+export async function getProducts(): Promise<ProductList> {
     const token = acessToken.toString();
 
     const response = await axios({
