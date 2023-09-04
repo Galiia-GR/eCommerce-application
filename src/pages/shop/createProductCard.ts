@@ -144,3 +144,4 @@ export function createProductCard(data: Product, i: number): HTMLElement {
 
     return containerItem;
 }
+
