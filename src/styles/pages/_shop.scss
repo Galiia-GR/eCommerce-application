@@ -91,6 +91,12 @@
     }
 }
 
+.shop-second__cost,
+.card-fish__discount {
+    color: $color-primary-orange;
+    text-shadow: 1px 1px 1px #1f1f1f9c;
+}
+
 .shop-fish__cost-container {
     display: flex;
     gap: 5px;
@@ -105,10 +111,6 @@
     @include media-mobile {
         font-size: 18px;
     }
-}
-.shop-second__cost {
-    color: $color-primary-orange;
-    text-shadow: 1px 1px 1px #1f1f1f9c;
 }
 
 .shop-fish__button {
