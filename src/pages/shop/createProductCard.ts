@@ -53,6 +53,11 @@ export function createProductCard(data: Product, i: number): HTMLElement {
         let cardImgsContainer = helpCreateEl('div', 'card-fish__img-container');
         let cardDescribe = helpCreateEl('div', 'card-fish__description');
         let cardPrice = helpCreateEl('div', 'card-fish__price');
+        let cardAddButton = helpCreateEl('button', 'card-fish__button');
+        let cardExit = helpCreateEl('button', 'card-fish__exit');
+
+        cardAddButton.textContent = 'Add to cart';
+        cardExit.textContent = '×';
 
         data.masterVariant.images.forEach((el) => {
             let cardImg = helpCreateEl('img', 'card-fish__img') as HTMLImageElement;
@@ -67,7 +72,7 @@ export function createProductCard(data: Product, i: number): HTMLElement {
         cardPrice.innerText = `${costPartFirst},${costPartSecond} USD`;
 
         background.append(card);
-        card.append(cardTitle, cardImgsContainer, cardDescribe, cardPrice);
+        card.append(cardTitle, cardImgsContainer, cardDescribe, cardAddButton, cardPrice, cardExit);
 
         let leftButton = helpCreateEl('div', 'card-fish__arrow_left');
         cardImgsContainer.append(leftButton);
@@ -100,12 +105,16 @@ export function createProductCard(data: Product, i: number): HTMLElement {
         cardTitle.textContent = `${data.name.en}`;
 
         cardDescribe.textContent = `${data.description.en.split('   ')[1]}`;
-
         if (target.target !== button) {
             openWindow(background, mainPage);
         }
         background.addEventListener('click', (target2) => {
             if (target2.target === background) {
+                closeWindow(background, mainPage);
+            }
+        });
+        cardExit.addEventListener('click', (target3) => {
+            if (target3.target === cardExit) {
                 closeWindow(background, mainPage);
             }
         });
