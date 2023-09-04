@@ -5,7 +5,6 @@ import { Product } from './types';
 export function createProductCard(data: Product, i: number): HTMLElement {
     const containerItem = helpCreateEl('div', 'shop-fish__container');
 
-    //    sectionShopContainer.append(containerItem);
     containerItem.setAttribute('id', `${i}`);
 
     const title = helpCreateEl('h3', 'shop-fish__title');
@@ -30,16 +29,37 @@ export function createProductCard(data: Product, i: number): HTMLElement {
     containerItem.append(costContainer);
 
     const cost = helpCreateEl('p', 'shop-fish__cost');
+    const discount = helpCreateEl('p', 'shop-second__cost');
     const currency = helpCreateEl('p', 'shop-fish__currency');
     costContainer.append(cost);
+    costContainer.append(discount);
     costContainer.append(currency);
 
     const getSum = `${data.masterVariant.prices[0].value.centAmount}`;
-    const valuePartFirst = getSum.slice(0, -2);
-    const valuePartSecond = getSum.slice(getSum.length - 2);
 
-    cost.innerText = `${valuePartFirst},${valuePartSecond}`;
-    currency.innerText = data.masterVariant.prices[0].value.currencyCode;
+    if (data.masterVariant.prices[0].discounted) {
+        const discountSum = `${data.masterVariant.prices[0].discounted.value.centAmount}`;
+        const discountPartFirst = discountSum.slice(0, -2);
+        const discountPartSecond = discountSum.slice(discountSum.length - 2);
+        discount.innerText = `${discountPartFirst},${discountPartSecond}`;
+        currency.innerText = data.masterVariant.prices[0].value.currencyCode;
+
+        const valuePartFirst = getSum.slice(0, -2);
+        const valuePartSecond = getSum.slice(getSum.length - 2);
+
+        cost.innerText = `${valuePartFirst},${valuePartSecond}`;
+        currency.innerText = data.masterVariant.prices[0].value.currencyCode;
+        cost.style.textDecoration = 'line-through';
+        cost.style.fontSize = '16px';
+    }
+
+    if (!data.masterVariant.prices[0].discounted) {
+        const valuePartFirst = getSum.slice(0, -2);
+        const valuePartSecond = getSum.slice(getSum.length - 2);
+
+        cost.innerText = `${valuePartFirst},${valuePartSecond}`;
+        currency.innerText = data.masterVariant.prices[0].value.currencyCode;
+    }
 
     const button = helpCreateEl('button', 'shop-fish__button');
     containerItem.append(button);
@@ -55,6 +75,7 @@ export function createProductCard(data: Product, i: number): HTMLElement {
         let cardPrice = helpCreateEl('div', 'card-fish__price');
         let cardAddButton = helpCreateEl('button', 'card-fish__button');
         let cardExit = helpCreateEl('button', 'card-fish__exit');
+        let cardDiscount = helpCreateEl('div', 'card-fish__discount');
 
         cardAddButton.textContent = 'Add to cart';
         cardExit.textContent = '×';
@@ -64,7 +85,15 @@ export function createProductCard(data: Product, i: number): HTMLElement {
             cardImg.src = `${el.url}`;
             cardImgsContainer.append(cardImg);
         });
+        if (data.masterVariant.prices[0].discounted) {
+            const discountSum = `${data.masterVariant.prices[0].discounted.value.centAmount}`;
+            const discountPartFirst = discountSum.slice(0, -2);
+            const discountPartSecond = discountSum.slice(discountSum.length - 2);
+            cardDiscount.innerText = `${discountPartFirst},${discountPartSecond} USD`;
 
+            cardPrice.style.textDecoration = 'line-through';
+            cardPrice.style.fontSize = '16px';
+        }
         const getCost = `${data.masterVariant.prices[0].value.centAmount}`;
         const costPartFirst = getCost.slice(0, -2);
         const costPartSecond = getCost.slice(getSum.length - 2);
@@ -72,7 +101,7 @@ export function createProductCard(data: Product, i: number): HTMLElement {
         cardPrice.innerText = `${costPartFirst},${costPartSecond} USD`;
 
         background.append(card);
-        card.append(cardTitle, cardImgsContainer, cardDescribe, cardAddButton, cardPrice, cardExit);
+        card.append(cardTitle, cardImgsContainer, cardDescribe, cardAddButton, cardPrice, cardDiscount, cardExit);
 
         let leftButton = helpCreateEl('div', 'card-fish__arrow_left');
         cardImgsContainer.append(leftButton);
