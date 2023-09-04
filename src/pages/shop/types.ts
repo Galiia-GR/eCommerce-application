@@ -1,4 +1,5 @@
 export type Product = {
+    id: string;
     name: { en: string };
     masterVariant: {
         images: Array<{ url: string }>;

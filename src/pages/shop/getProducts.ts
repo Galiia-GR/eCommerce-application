@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { acessToken } from '../register/getBearerToken';
-import { ProductList } from './types';
+import { ProductList, Product, ProductAndElement, ProductComplianceList } from './types';
+import { createProductCard } from './createProductCard';
 
-export async function getProducts(): Promise<ProductList> {
+async function getProducts(): Promise<ProductList> {
     const token = acessToken.toString();
 
     const response = await axios({
@@ -19,3 +20,18 @@ export async function getProducts(): Promise<ProductList> {
     const productsArrEcom = response.data.results;
     return productsArrEcom;
 }
+
+async function getProductList(productsArrEcom: ProductList): Promise<ProductComplianceList> {
+    console.log(productsArrEcom);
+
+    const productComplianceList: ProductComplianceList = productsArrEcom.map(
+        (e: Product, i: number): ProductAndElement => {
+            const r: ProductAndElement = [e, createProductCard(e, i)];
+            return r;
+        }
+    );
+
+    return productComplianceList;
+}
+
+export const productList = await getProductList(await getProducts());
