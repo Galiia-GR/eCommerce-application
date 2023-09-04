@@ -5,6 +5,10 @@
     scroll-behavior: smooth;
 }
 
+::-webkit-scrollbar {
+    width: 0px;
+}
+
 html,
 body {
     height: 100%;
@@ -430,14 +434,22 @@ body {
     user-select: none;
 }
 
+.card-fish__arrow_right:hover, .card-fish__arrow_left:hover {
+    background-color: rgb(125, 159, 191);
+} 
+
+.card-fish__arrow_right:active, .card-fish__arrow_left:active {
+    background-color: rgb(109, 140, 170);
+}
+
 .card-fish__title {
     margin-top: 12px;
-    font-size: 30px;
+    font-size: 40px;
 }
 
 .card-fish__description {
     height: 181px;
-    margin-top: 10px;
+    margin-top: 5px;
     width: 97%;
     background-color: rgb(143, 180, 214);
     color: white;
@@ -445,11 +457,65 @@ body {
     box-sizing: border-box;
     border-radius: 7px;
     font-size: 20px;
+    overflow-y: scroll;
 }
 
 .card-fish__price {
-    transform: translateX(295px);
     font-size: 40px;
     color: rgb(143, 180, 214);
-    padding: 10px;
+    position: absolute;
+    bottom: 30px;
+    right: 28px;
+    text-decoration:underline;
+}
+
+.card-fish__description::-webkit-scrollbar {
+    width: 6px;
+}
+.card-fish__description::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background: rgba(88, 152, 186, 0.4);
+}
+
+.card-fish__description::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.164);
+}
+
+.card-fish__button {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    height: 70px;
+    width: 250px;
+    font-size: 30px;
+    background-color: rgb(143, 180, 214);
+    color: white;
+    border: 0px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.card-fish__exit {
+    position: absolute;
+    top: 15px;
+    right: 18px;
+    height: 40px;
+    width: 40px;
+    font-size: 50px;
+    background-color: rgb(143, 180, 214);
+    color: white;
+    border-radius: 10px;
+    border: 0px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-fish__button:hover, .card-fish__exit:hover {
+    background-color: rgb(139, 174, 207);
+}
+
+.card-fish__button:active, .card-fish__exit:active {
+    background-color: rgb(103, 134, 163);
 }
