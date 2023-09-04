@@ -2,6 +2,8 @@ import { responseAdress } from 'src/interfaces';
 import { helpCreateEl } from '../global/global';
 import { getProfileInf } from './getInfProfile';
 import { addError } from '../register';
+import { updatePassword } from './changePassword';
+import { updateName } from './changeName';
 
 export async function createProfilePage() {
     const mainTag = document.querySelector('.main') as HTMLElement;
@@ -23,6 +25,36 @@ export async function createProfilePage() {
     let passwordButton = helpCreateEl('button', 'profile-button');
     let errorTitle = helpCreateEl('h1', 'error-title');
     birth.type = 'date';
+
+    passwordButton.addEventListener('click', () => {
+        if (!document.querySelector('.profile-password')) {
+            let passwordUpdateButton = helpCreateEl('button', 'profile-button');
+            passwordButton.after(passwordUpdateButton);
+            passwordUpdateButton.textContent = 'Update';
+
+            let password2Input = helpCreateEl('input', 'profile-password') as HTMLInputElement;
+            passwordButton.after(password2Input);
+            addTitle(password2Input, 'New password:');
+
+            let passwordInput = helpCreateEl('input', 'profile-password') as HTMLInputElement;
+            passwordButton.after(passwordInput);
+            addTitle(passwordInput, 'Current password:');
+
+            passwordUpdateButton.addEventListener('click', async () => {
+                try {
+                    await updatePassword((await info).id, passwordInput.value, password2Input.value);
+                    await localStorage.setItem('version', String(Number(localStorage.getItem('version')) + 1));
+                    await localStorage.clear();
+                    await location.reload();
+                } catch (err) {
+                    sectionProfile.querySelectorAll('.error').forEach((spanEl) => {
+                        spanEl.remove();
+                    });
+                    addError(passwordUpdateButton, 'Invalid information');
+                }
+            });
+        }
+    });
 
     async function yourBilling(): Promise<responseAdress[] | undefined> {
         let curIdArray = (await info).billingAddressIds;
@@ -171,7 +203,7 @@ export async function createProfilePage() {
         sectionProfile.append(editButton);
 
         let currStage = 1;
-        editButton.addEventListener('click', () => {
+        editButton.addEventListener('click', async () => {
             if (currStage === 1) {
                 currStage += 1;
                 editButton.textContent = 'Update';
@@ -256,6 +288,8 @@ export async function createProfilePage() {
                     el.readOnly = true;
                     el.style.border = '';
                 });
+                await updateName((await info).id, name.value);
+                await localStorage.setItem('version', String(Number(localStorage.getItem('version')) + 1));
             }
         });
     } catch {
