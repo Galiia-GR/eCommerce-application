@@ -32,6 +32,7 @@
 .shop-fish__container:hover {
     box-shadow: 4px 4px 4px 4px rgba(28, 28, 28, 0.438);
     cursor: pointer;
+    background-color: rgba(59, 134, 182, 0.4);
 }
 
 .shop-fish__img {
@@ -126,4 +127,15 @@
     color: $color-primary-sand;
     text-shadow: 1px 1px 1px #1f1f1f9c;
     box-shadow: 4px 4px 4px rgba(28, 28, 28, 0.438);
+}
+
+.shop-second__cost {
+    color: $color-primary-orange;
+    text-shadow: 1px 1px 1px #1f1f1f9c;
+}
+
+.card-fish__discount {
+    color: $color-primary-orange;
+    text-shadow: 1px 1px 1px #1f1f1f9c;
+    font-size: 22px;
 }
