@@ -3,7 +3,7 @@ import { acessToken } from '../register/getBearerToken';
 import { ProductList, Product, ProductAndElement, ProductComplianceList } from './types';
 import { createProductCard } from './createProductCard';
 
-async function getProducts(): Promise<ProductList> {
+export async function getProducts(): Promise<ProductList> {
     const token = acessToken.toString();
 
     const response = await axios({
