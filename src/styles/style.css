@@ -460,6 +460,12 @@ body {
     user-select: none;
 }
 
+.card-fish__discount {
+    position: absolute;
+    bottom: 55px;
+    right: 28px;
+}
+
 .card-fish__arrow_right:hover,
 .card-fish__arrow_left:hover {
     background-color: rgb(125, 159, 191);
@@ -561,6 +567,11 @@ body {
         bottom: 0px;
         left: 0px;
         right: 0px;
+    }
+    .card-fish__discount {
+        position: static;
+        bottom: 55px;
+        right: 28px;
     }
     .card-fish__button {
         position: static;
