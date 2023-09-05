@@ -1,7 +1,15 @@
 import axios from 'axios';
 import { acessToken } from '../getBearerToken';
 
-export async function updateName(id: string, userName: string, userEmail: string, userDate: string): Promise<object> {
+export async function updateAddress(
+    id: string,
+    adressId: string,
+    street: string,
+    streetNum: string,
+    postal: string,
+    city: string,
+    country: string
+): Promise<object> {
     const token = acessToken.toString();
     const response = await axios.post(
         `https://api.us-central1.gcp.commercetools.com/ecommercerszxc22845345034582/customers/${id}`,
@@ -9,20 +17,15 @@ export async function updateName(id: string, userName: string, userEmail: string
             version: Number(localStorage.getItem('version')),
             actions: [
                 {
-                    action: 'setFirstName',
-                    firstName: userName.split(' ')[0],
-                },
-                {
-                    action: 'setLastName',
-                    lastName: userName.split(' ')[1],
-                },
-                {
-                    action: 'changeEmail',
-                    email: userEmail,
-                },
-                {
-                    action: 'setDateOfBirth',
-                    dateOfBirth: userDate,
+                    action: 'changeAddress',
+                    addressId: adressId,
+                    address: {
+                        streetName: street,
+                        streetNumber: streetNum,
+                        postalCode: postal,
+                        city: city,
+                        country: country,
+                    },
                 },
             ],
         },

@@ -4,6 +4,9 @@ import { getProfileInf } from './getInfProfile';
 import { addError } from '../register';
 import { updatePassword } from './changePassword';
 import { updateName } from './changeName';
+import { updateAddress } from './changeAddress';
+import { updateAddressBillingDef } from './changeDefBilling';
+import { updateAddressShippingDef } from './changeDefShipping';
 
 export async function createProfilePage() {
     const mainTag = document.querySelector('.main') as HTMLElement;
@@ -33,10 +36,12 @@ export async function createProfilePage() {
             passwordUpdateButton.textContent = 'Update';
 
             let password2Input = helpCreateEl('input', 'profile-password') as HTMLInputElement;
+            password2Input.placeholder = 'Type here';
             passwordButton.after(password2Input);
             addTitle(password2Input, 'New password:');
 
             let passwordInput = helpCreateEl('input', 'profile-password') as HTMLInputElement;
+            passwordInput.placeholder = 'Type here';
             passwordButton.after(passwordInput);
             addTitle(passwordInput, 'Current password:');
 
@@ -123,6 +128,14 @@ export async function createProfilePage() {
                 } else {
                     let defButton = helpCreateEl('button', 'profile-button');
                     defButton.textContent = 'Set as default shipping address';
+                    defButton.addEventListener('click', async () => {
+                        await updateAddressShippingDef((await info).id, el.id);
+                        await shippingContainer.removeChild(defButton);
+                        let defTitle = await helpCreateEl('h5', 'profile-title');
+                        defTitle.textContent = await '*Current default shipping address*';
+                        defTitle.style.marginTop = await '20px';
+                        await shippingContainer.append(defTitle);
+                    });
                     shippingContainer.append(defButton);
                 }
 
@@ -141,6 +154,22 @@ export async function createProfilePage() {
                 addTitle(shippingCountry, 'Country:');
                 addTitle(shippingStreet, 'Street:');
                 addTitle(shippingPostal, 'Postal:');
+
+                await editButton.addEventListener('click', async () => {
+                    if (shippingCity.readOnly === true) {
+                        await updateAddress(
+                            (
+                                await info
+                            ).id,
+                            el.id,
+                            shippingStreet.value.split('')[0],
+                            shippingStreet.value.split('')[1],
+                            shippingPostal.value,
+                            shippingCity.value,
+                            shippingCountry.value
+                        );
+                    }
+                });
             });
         }
 
@@ -175,6 +204,15 @@ export async function createProfilePage() {
                 } else {
                     let defButton = helpCreateEl('button', 'profile-button');
                     defButton.textContent = 'Set as default billing address';
+                    defButton.addEventListener('click', async () => {
+                        await updateAddressBillingDef((await info).id, el.id);
+                        await billingContainer.removeChild(defButton);
+
+                        let defTitle = await helpCreateEl('h5', 'profile-title');
+                        defTitle.textContent = await '*Current default billing address*';
+                        defTitle.style.marginTop = await '20px';
+                        await billingContainer.append(defTitle);
+                    });
                     billingContainer.append(defButton);
                 }
 
@@ -193,6 +231,22 @@ export async function createProfilePage() {
                 addTitle(billingCountry, 'Country:');
                 addTitle(billingStreet, 'Street:');
                 addTitle(billingPostal, 'Postal:');
+
+                await editButton.addEventListener('click', async () => {
+                    if (billingCity.readOnly === true) {
+                        await updateAddress(
+                            (
+                                await info
+                            ).id,
+                            el.id,
+                            billingStreet.value.split('')[0],
+                            billingStreet.value.split('')[1],
+                            billingPostal.value,
+                            billingCity.value,
+                            billingCountry.value
+                        );
+                    }
+                });
             });
         }
 
@@ -203,7 +257,7 @@ export async function createProfilePage() {
         sectionProfile.append(editButton);
 
         let currStage = 1;
-        editButton.addEventListener('click', async () => {
+        await editButton.addEventListener('click', async () => {
             if (currStage === 1) {
                 currStage += 1;
                 editButton.textContent = 'Update';
@@ -288,8 +342,7 @@ export async function createProfilePage() {
                     el.readOnly = true;
                     el.style.border = '';
                 });
-                await updateName((await info).id, name.value);
-                await localStorage.setItem('version', String(Number(localStorage.getItem('version')) + 1));
+                await updateName((await info).id, name.value, email.value, birth.value);
             }
         });
     } catch {
