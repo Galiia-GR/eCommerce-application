@@ -45,6 +45,71 @@ export async function createProfilePage() {
             passwordButton.after(passwordInput);
             addTitle(passwordInput, 'Current password:');
 
+            passwordInput.addEventListener('input', () => {
+                let isCorrect = true;
+                let haveUpper = false;
+                let haveLover = false;
+                let haveNumber = false;
+                let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ';
+                let numbers = '1234567890';
+
+                sectionProfile.querySelectorAll('.error').forEach((spanEl) => {
+                    spanEl.remove();
+                });
+
+                letters.split('').forEach((step) => {
+                    if (passwordInput.value.includes(step)) {
+                        haveUpper = true;
+                    }
+                    if (passwordInput.value.includes(step.toLowerCase())) {
+                        haveLover = true;
+                    }
+                });
+                numbers.split('').forEach((step) => {
+                    if (passwordInput.value.includes(step)) {
+                        haveNumber = true;
+                    }
+                });
+
+                if (passwordInput.value.length < 8) {
+                    isCorrect = false;
+                    addError(passwordInput, '*Password must contain at least 8 characters');
+                }
+                if ((passwordInput.value.startsWith(' ') || passwordInput.value.endsWith(' ')) === true) {
+                    isCorrect = false;
+                    addError(passwordInput, '*Password must not contain leading or trailing whitespace');
+                }
+                if (haveLover === false) {
+                    isCorrect = false;
+                    addError(passwordInput, '*Password must contain at least 1 lowercase letter');
+                }
+                if (haveUpper === false) {
+                    isCorrect = false;
+                    addError(passwordInput, '*Password must contain at least 1 uppercase letter');
+                }
+                if (haveNumber === false) {
+                    isCorrect = false;
+                    addError(passwordInput, '*Password must contain at least 1 numder character');
+                }
+
+                if (password2Input.value !== passwordInput.value) {
+                    addError(password2Input, '*Passwords must be same');
+                }
+
+                if (isCorrect === false) {
+                    return;
+                }
+            });
+
+            password2Input.addEventListener('input', () => {
+                sectionProfile.querySelectorAll('.error').forEach((spanEl) => {
+                    spanEl.remove();
+                });
+                if (password2Input.value !== passwordInput.value) {
+                    addError(password2Input, '*Passwords must be same');
+                }
+            });
+
             passwordUpdateButton.addEventListener('click', async () => {
                 try {
                     await updatePassword((await info).id, passwordInput.value, password2Input.value);
@@ -145,6 +210,84 @@ export async function createProfilePage() {
                 shippingStreet.value = `${el.streetName} ${el.streetNumber}`;
                 shippingPostal.value = `${el.postalCode}`;
 
+                shippingContainer.querySelectorAll('input').forEach((inp) => {
+                    inp.addEventListener('input', () => {
+                        let postalCorrect = false;
+                        let onlyLettersCity = 1;
+                        let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ';
+
+                        sectionProfile.querySelectorAll('.error1').forEach((spanEl) => {
+                            spanEl.remove();
+                        });
+
+                        inp.style.border = '';
+
+                        shippingCity.value.split('').forEach((step) => {
+                            if (!letters.includes(step) && !letters.toLowerCase().includes(step)) {
+                                onlyLettersCity = 0;
+                            }
+                        });
+
+                        shippingContainer.querySelectorAll('input').forEach((err) => {
+                            err.classList.remove('errorInput');
+                        });
+
+                        if (shippingStreet.value.length < 1) {
+                            addError2(shippingStreet, '*Your street must contain at least 1 character');
+                        }
+                        if (
+                            !(
+                                shippingCountry.value === 'PL' ||
+                                shippingCountry.value === 'US' ||
+                                shippingCountry.value === 'IT' ||
+                                shippingCountry.value === 'KZ' ||
+                                shippingCountry.value === 'RU' ||
+                                shippingCountry.value === 'DE'
+                            )
+                        ) {
+                            addError2(shippingCountry, '*Your country must be valid: PL, US, IT, KZ, RU, DE');
+                        }
+                        if ((shippingStreet.value.startsWith(' ') || shippingStreet.value.endsWith(' ')) === true) {
+                            addError2(shippingStreet, '*Street must not contain leading or trailing whitespace');
+                        }
+                        if (onlyLettersCity === 0) {
+                            addError2(shippingCity, '*City must not contain numbers or special characters');
+                        }
+                        if (shippingCity.value.length < 1) {
+                            addError2(shippingCity, '*Your city must contain at least 1 character');
+                        }
+                        if (
+                            shippingCountry.value === 'PL' &&
+                            shippingPostal.value[2] === '-' &&
+                            shippingPostal.value.length === 6
+                        ) {
+                            postalCorrect = true;
+                        }
+                        if (
+                            shippingCountry.value === 'US' &&
+                            shippingPostal.value[5] === '-' &&
+                            shippingPostal.value.length === 10
+                        ) {
+                            postalCorrect = true;
+                        }
+                        if (shippingCountry.value === 'IT' && shippingPostal.value.length === 5) {
+                            postalCorrect = true;
+                        }
+                        if (shippingCountry.value === 'KZ' && shippingPostal.value.length === 7) {
+                            postalCorrect = true;
+                        }
+                        if (shippingCountry.value === 'RU' && shippingPostal.value.length === 6) {
+                            postalCorrect = true;
+                        }
+                        if (shippingCountry.value === 'DE' && shippingPostal.value.length === 5) {
+                            postalCorrect = true;
+                        }
+                        if (postalCorrect === false) {
+                            addError2(shippingPostal, "*Your country's postal code must be correct");
+                        }
+                    });
+                });
+
                 inputsArr.push(shippingCity);
                 inputsArr.push(shippingCountry);
                 inputsArr.push(shippingStreet);
@@ -157,17 +300,31 @@ export async function createProfilePage() {
 
                 await editButton.addEventListener('click', async () => {
                     if (shippingCity.readOnly === true) {
-                        await updateAddress(
-                            (
-                                await info
-                            ).id,
-                            el.id,
-                            shippingStreet.value.split('')[0],
-                            shippingStreet.value.split('')[1],
-                            shippingPostal.value,
-                            shippingCity.value,
-                            shippingCountry.value
-                        );
+                        try {
+                            await updateAddress(
+                                (
+                                    await info
+                                ).id,
+                                el.id,
+                                shippingStreet.value.split('')[0],
+                                shippingStreet.value.split('')[1],
+                                shippingPostal.value,
+                                shippingCity.value,
+                                shippingCountry.value
+                            );
+                        } catch {
+                            await updateAddress(
+                                (
+                                    await info
+                                ).id,
+                                el.id,
+                                shippingStreet.value.split('')[0],
+                                shippingStreet.value.split('')[1],
+                                shippingPostal.value,
+                                shippingCity.value,
+                                shippingCountry.value
+                            );
+                        }
                     }
                 });
             });
@@ -222,6 +379,84 @@ export async function createProfilePage() {
                 billingStreet.value = `${el.streetName} ${el.streetNumber}`;
                 billingPostal.value = `${el.postalCode}`;
 
+                billingContainer.querySelectorAll('input').forEach((inp) => {
+                    inp.addEventListener('input', () => {
+                        let postalCorrect = false;
+                        let onlyLettersCity = 1;
+                        let letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZЁЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ';
+
+                        sectionProfile.querySelectorAll('.error1').forEach((spanEl) => {
+                            spanEl.remove();
+                        });
+
+                        inp.style.border = '';
+
+                        billingCity.value.split('').forEach((step) => {
+                            if (!letters.includes(step) && !letters.toLowerCase().includes(step)) {
+                                onlyLettersCity = 0;
+                            }
+                        });
+
+                        billingContainer.querySelectorAll('input').forEach((err) => {
+                            err.classList.remove('errorInput');
+                        });
+
+                        if (billingStreet.value.length < 1) {
+                            addError2(billingStreet, '*Your street must contain at least 1 character');
+                        }
+                        if (
+                            !(
+                                billingCountry.value === 'PL' ||
+                                billingCountry.value === 'US' ||
+                                billingCountry.value === 'IT' ||
+                                billingCountry.value === 'KZ' ||
+                                billingCountry.value === 'RU' ||
+                                billingCountry.value === 'DE'
+                            )
+                        ) {
+                            addError2(billingCountry, '*Your country must be valid: PL, US, IT, KZ, RU, DE');
+                        }
+                        if ((billingStreet.value.startsWith(' ') || billingStreet.value.endsWith(' ')) === true) {
+                            addError2(billingStreet, '*Street must not contain leading or trailing whitespace');
+                        }
+                        if (onlyLettersCity === 0) {
+                            addError2(billingCity, '*City must not contain numbers or special characters');
+                        }
+                        if (billingCity.value.length < 1) {
+                            addError2(billingCity, '*Your city must contain at least 1 character');
+                        }
+                        if (
+                            billingCountry.value === 'PL' &&
+                            billingPostal.value[2] === '-' &&
+                            billingPostal.value.length === 6
+                        ) {
+                            postalCorrect = true;
+                        }
+                        if (
+                            billingCountry.value === 'US' &&
+                            billingPostal.value[5] === '-' &&
+                            billingPostal.value.length === 10
+                        ) {
+                            postalCorrect = true;
+                        }
+                        if (billingCountry.value === 'IT' && billingPostal.value.length === 5) {
+                            postalCorrect = true;
+                        }
+                        if (billingCountry.value === 'KZ' && billingPostal.value.length === 7) {
+                            postalCorrect = true;
+                        }
+                        if (billingCountry.value === 'RU' && billingPostal.value.length === 6) {
+                            postalCorrect = true;
+                        }
+                        if (billingCountry.value === 'DE' && billingPostal.value.length === 5) {
+                            postalCorrect = true;
+                        }
+                        if (postalCorrect === false) {
+                            addError2(billingPostal, "*Your country's postal code must be correct");
+                        }
+                    });
+                });
+
                 inputsArr.push(billingCity);
                 inputsArr.push(billingCountry);
                 inputsArr.push(billingStreet);
@@ -234,17 +469,31 @@ export async function createProfilePage() {
 
                 await editButton.addEventListener('click', async () => {
                     if (billingCity.readOnly === true) {
-                        await updateAddress(
-                            (
-                                await info
-                            ).id,
-                            el.id,
-                            billingStreet.value.split('')[0],
-                            billingStreet.value.split('')[1],
-                            billingPostal.value,
-                            billingCity.value,
-                            billingCountry.value
-                        );
+                        try {
+                            await updateAddress(
+                                (
+                                    await info
+                                ).id,
+                                el.id,
+                                billingStreet.value.split('')[0],
+                                billingStreet.value.split('')[1],
+                                billingPostal.value,
+                                billingCity.value,
+                                billingCountry.value
+                            );
+                        } catch {
+                            await updateAddress(
+                                (
+                                    await info
+                                ).id,
+                                el.id,
+                                billingStreet.value.split('')[0],
+                                billingStreet.value.split('')[1],
+                                billingPostal.value,
+                                billingCity.value,
+                                billingCountry.value
+                            );
+                        }
                     }
                 });
             });
@@ -263,7 +512,7 @@ export async function createProfilePage() {
                 editButton.textContent = 'Update';
                 inputsArr.forEach((el) => {
                     el.readOnly = false;
-                    el.style.border = 'solid 2px rgba(59, 134, 182, 0.9)';
+                    el.classList.add('fullBorder');
                 });
                 inputsArr.forEach((el) => {
                     el.addEventListener('input', () => {
@@ -326,7 +575,7 @@ export async function createProfilePage() {
                             }
                         }
 
-                        if (el.classList.contains('errorInput')) {
+                        if (el.classList.contains('errorInput') || el.classList.contains('errorInput1')) {
                             el.style.border = '2px solid rgba(255, 72, 72, 0.7)';
                         }
 
@@ -356,4 +605,11 @@ function addTitle(element: HTMLElement, titleSpan: string) {
     spanName.classList.add('input-title');
     spanName.textContent = titleSpan;
     element.before(spanName);
+}
+
+function addError2(element: HTMLElement, error: string) {
+    let errorMessage = document.createElement('span');
+    errorMessage.classList.add('error1');
+    errorMessage.textContent = error;
+    element.after(errorMessage);
 }

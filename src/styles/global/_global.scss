@@ -638,3 +638,15 @@ body {
         right: 0px;
     }
 }
+
+.errorInput {
+    border: 2px solid red;
+}
+
+.profile .fullBorder {
+    border: solid 2px rgba(52, 121, 163, 0.7);
+}
+
+.profile .errorInput {
+    border: solid 2px rgba(216, 78, 78, 0.7);
+}
