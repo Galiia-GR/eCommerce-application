@@ -3,6 +3,8 @@ import { openWindow, closeWindow } from '../login';
 import { Product } from './types';
 
 export function createProductCard(data: Product, i: number): HTMLElement {
+    let cardFishOpen = false;
+
     const containerItem = helpCreateEl('div', 'shop-fish__container');
 
     containerItem.setAttribute('id', `${i}`);
@@ -145,8 +147,17 @@ export function createProductCard(data: Product, i: number): HTMLElement {
         cardExit.addEventListener('click', (target3) => {
             if (target3.target === cardExit) {
                 closeWindow(background, mainPage);
+                window.location.hash = `/shop`;
             }
         });
+
+        cardFishOpen = true;
+        if (cardFishOpen) {
+            const getUrl = data.slug.en;
+            console.log(getUrl);
+
+            window.location.hash = `/shop/${getUrl}`;
+        }
     });
 
     return containerItem;

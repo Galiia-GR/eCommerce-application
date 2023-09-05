@@ -8,6 +8,7 @@ export type Product = {
             discounted: { value: { centAmount: number; currencyCode: string } };
         }>;
     };
+    slug: { en: string };
     description: { en: string };
 };
 export type ProductList = Array<Product>;
