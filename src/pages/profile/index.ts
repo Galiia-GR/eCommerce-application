@@ -536,7 +536,6 @@ export async function createProfilePage() {
                         if ((email.value.startsWith(' ') || email.value.endsWith(' ')) === true) {
                             isCorrect = false;
                             addError(email, '*Email address must not contain leading or trailing whitespace');
-                            email.classList.add('errorInput');
                         }
                         if (email.value.includes('@') === false) {
                             isCorrect = false;
@@ -544,34 +543,28 @@ export async function createProfilePage() {
                                 email,
                                 '*Email address must contain an "@" symbol separating local part and domain name'
                             );
-                            email.classList.add('errorInput');
                         }
                         if (email.value.split('@')[email.value.split('@').length - 1].length < 5) {
                             isCorrect = false;
                             addError(email, '*Email address must contain domain name');
-                            email.classList.add('errorInput');
                         }
 
                         if (name.value.split(' ').length < 2 || name.value.split(' ').includes('')) {
                             isCorrect = false;
                             addError(name, '*Name must contain first name and last name with 1 character at least');
-                            name.classList.add('errorInput');
                         }
                         if (onlyLetters === 0) {
                             isCorrect = false;
                             addError(name, '*Name must not contain numbers or special characters');
-                            name.classList.add('errorInput');
                         }
                         if (Number(birth.value.split('-')[0]) > 2010 || birth.value.length === 0) {
                             isCorrect = false;
                             addError(birth, '*You must be over 13 years old');
-                            birth.classList.add('errorInput');
                         }
                         if (Number(birth.value.split('-')[0]) === 2010) {
                             if (Number(birth.value.split('-')[2]) > 8) {
                                 isCorrect = false;
                                 addError(birth, '*You must be over 13 years old');
-                                birth.classList.add('errorInput');
                             }
                         }
 
