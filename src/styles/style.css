@@ -401,14 +401,15 @@ body {
     max-width: 900px;
     margin: 0 auto;
     border-radius: 10px;
-    top: 15%;
-    bottom: 20%;
     left: 10%;
     right: 10%;
     box-shadow: 0px 0px 90px 0px rgb(27, 44, 54);
     gap: 14px;
     overflow-x: scroll;
     overflow-x: hidden;
+    height: 620px;
+    top: 15%;
+    bottom: 25%;
 }
 
 .card-fish__img {
@@ -454,10 +455,15 @@ body {
     font-size: 80px;
     color: rgb(227, 252, 255);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    line-height: 70px;
     text-shadow: 0px 0px 14px rgb(91, 147, 180);
     cursor: pointer;
     user-select: none;
+}
+
+.card-fish__discount {
+    position: absolute;
+    bottom: 55px;
+    right: 28px;
 }
 
 .card-fish__arrow_right:hover,
@@ -541,6 +547,84 @@ body {
     align-items: center;
 }
 
+@media (max-width: 768px) {
+    .card-fish__container {
+        transition: 0.2s;
+        position: fixed;
+        background-color: rgb(234, 237, 240);
+        color: rgb(135, 165, 194);
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        max-width: 450px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 90px 0px rgb(27, 44, 54);
+        gap: 14px;
+        overflow-x: scroll;
+        overflow-x: hidden;
+        height: 100%;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+    }
+    .card-fish__discount {
+        position: static;
+        bottom: 55px;
+        right: 28px;
+    }
+    .card-fish__button {
+        position: static;
+    }
+    .card-fish__price {
+        position: static;
+    }
+    .card-fish__description {
+        height: 290px;
+    }
+    .card-fish__arrow_right {
+        position: absolute;
+        height: 35px;
+        width: 50%;
+        right: 0px;
+        font-size: 80px;
+        font-size: 20px;
+        line-height: 10px;
+        transform: translateY(110px);
+    }
+    .card-fish__arrow_left {
+        position: absolute;
+        height: 35px;
+        width: 50%;
+        z-index: 4;
+        left: 0px;
+        font-size: 80px;
+        font-size: 20px;
+        line-height: 10px;
+        transform: rotate(180deg) translateY(-110px);
+    }
+    .profile-scroll {
+        bottom: 38px;
+        top: 51px;
+    }
+    .profile::before {
+        content: '';
+        animation: none;
+    }
+    .profile::after {
+        content: '';
+        animation: none;
+    }
+    .profile input {
+        font-size: 15px;
+        width: 255px;
+    }
+    .input-title {
+        font-size: 15px;
+        font-weight: bold;
+        transform: translateX(-118px);
+    }
+}
 .card-fish__button:hover,
 .card-fish__exit:hover {
     background-color: rgb(139, 174, 207);
@@ -549,6 +633,64 @@ body {
 .card-fish__button:active,
 .card-fish__exit:active {
     background-color: rgb(103, 134, 163);
+}
+
+@media (max-width: 380px) {
+    .card-fish__button {
+        height: 50px;
+        width: 180px;
+        font-size: 30px;
+        background-color: rgb(143, 180, 214);
+        color: white;
+        border: 0px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 20px;
+    }
+    .card-fish__title {
+        margin-top: 12px;
+        font-size: 20px;
+    }
+    .card-fish__price {
+        font-size: 20px;
+    }
+    .card-fish__description {
+        height: auto;
+        font-size: 15px;
+    }
+    .profile-scroll {
+        bottom: 38px;
+        top: 51px;
+        left: 0px;
+        right: 0px;
+    }
+    .card-fish__exit {
+        position: absolute;
+        top: 15px;
+        right: 18px;
+        height: 20px;
+        width: 20px;
+        font-size: 25px;
+        background-color: rgb(143, 180, 214);
+        color: white;
+        border-radius: 10px;
+        border: 0px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+.errorInput {
+    border: 2px solid red;
+}
+
+.profile .fullBorder {
+    border: solid 2px rgba(52, 121, 163, 0.7);
+}
+
+.profile .errorInput {
+    border: solid 2px rgba(216, 78, 78, 0.7);
 }
 
 .hamburger__line::after,
@@ -855,7 +997,8 @@ input:active {
     display: block;
 }
 
-.error {
+.error,
+.error1 {
     color: rgb(255, 103, 103);
     font-weight: 500;
     font-size: 13px;

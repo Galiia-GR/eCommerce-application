@@ -14,6 +14,7 @@ export async function autoSignUpCustomer(): Promise<void> {
         );
         const customerfirstName = response.data.firstName;
         const customerHeaderUserEl = document.querySelector('.logo-userName') as HTMLElement;
+        localStorage.setItem('version', response.data.version);
         customerHeaderUserEl.textContent = `Home ${customerfirstName}`;
         loginOpen.textContent = 'LOG OUT';
     }

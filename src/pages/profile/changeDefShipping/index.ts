@@ -1,20 +1,22 @@
 import axios from 'axios';
 import { acessToken } from '../getBearerToken';
 
-export async function updatePassword(id1: string, currentPassword1: string, newPassword1: string): Promise<object> {
+export async function updateAddressShippingDef(id: string, adressId: string): Promise<object> {
     const token = acessToken.toString();
     const response = await axios.post(
-        `https://api.us-central1.gcp.commercetools.com/ecommercerszxc22845345034582/customers/password`,
+        `https://api.us-central1.gcp.commercetools.com/ecommercerszxc22845345034582/customers/${id}`,
         {
-            id: id1,
             version: Number(localStorage.getItem('version')),
-            currentPassword: currentPassword1,
-            newPassword: newPassword1,
+            actions: [
+                {
+                    action: 'setDefaultShippingAddress',
+                    addressId: adressId,
+                },
+            ],
         },
         {
             headers: {
                 Authorization: `Bearer ${token}`,
-                'Content-Type': 'application/json',
             },
         }
     );
