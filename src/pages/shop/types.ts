@@ -3,7 +3,10 @@ export type Product = {
     name: { en: string };
     masterVariant: {
         images: Array<{ url: string }>;
-        prices: Array<{ value: { centAmount: number; currencyCode: string } }>;
+        prices: Array<{
+            value: { centAmount: number; currencyCode: string };
+            discounted: { value: { centAmount: number; currencyCode: string } };
+        }>;
     };
     description: { en: string };
 };
