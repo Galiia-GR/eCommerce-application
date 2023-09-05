@@ -7,8 +7,8 @@ export async function updateAddress(
     street: string,
     streetNum: string,
     postal: string,
-    city: string,
-    country: string
+    userCity: string,
+    userCountry: string
 ): Promise<object> {
     const token = acessToken.toString();
     const response = await axios.post(
@@ -23,8 +23,8 @@ export async function updateAddress(
                         streetName: street,
                         streetNumber: streetNum,
                         postalCode: postal,
-                        city: city,
-                        country: country,
+                        city: userCity,
+                        country: userCountry,
                     },
                 },
             ],
