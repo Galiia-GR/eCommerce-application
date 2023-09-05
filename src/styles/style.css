@@ -592,6 +592,27 @@ body {
         line-height: 10px;
         transform: rotate(180deg) translateY(-110px);
     }
+    .profile-scroll {
+        bottom: 38px;
+        top: 51px;
+    }
+    .profile::before {
+        content: '';
+        animation: none;
+    }
+    .profile::after {
+        content: '';
+        animation: none;
+    }
+    .profile input {
+        font-size: 15px;
+        width: 255px;
+    }
+    .input-title {
+        font-size: 15px;
+        font-weight: bold;
+        transform: translateX(-118px);
+    }
 }
 .card-fish__button:hover,
 .card-fish__exit:hover {
@@ -625,6 +646,12 @@ body {
     .card-fish__description {
         height: auto;
         font-size: 15px;
+    }
+    .profile-scroll {
+        bottom: 38px;
+        top: 51px;
+        left: 0px;
+        right: 0px;
     }
 }
 .hamburger__line::after,
