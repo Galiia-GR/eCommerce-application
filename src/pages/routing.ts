@@ -6,6 +6,7 @@ import { createMain } from './home/home';
 import { createError } from './error/error';
 import { createProfilePage } from './profile';
 import { productList } from './shop/getProducts';
+import { ProductAndElement } from './shop/types';
 
 let submitLogin = false;
 const customerHeaderUserEl = document.querySelector('.logo-userName') as HTMLElement;
@@ -117,8 +118,17 @@ export function renderPage(path: string) {
             }
             return console.log('render register');
         }
-        default:
-            return createError();
+        default: {
+            const res: ProductAndElement | undefined = productList.find(
+                (e) => `#/shop/${e[0].slug.en}` === window.location.hash
+            );
+            if (res) {
+                res[1].click();
+            } else {
+                return createError();
+            }
+            return undefined;
+        }
     }
 }
 
