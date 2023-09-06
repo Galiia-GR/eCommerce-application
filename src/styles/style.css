@@ -416,6 +416,7 @@ body {
     width: 450px;
     height: 250px;
     transition: 0.1s ease-in;
+    cursor: pointer;
 }
 
 .card-fish__img-container {

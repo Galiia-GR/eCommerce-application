@@ -15,6 +15,7 @@ import './pages/global/hamburger';
 import './pages/login/signUp/autoSignUp';
 
 window.location.hash = '/';
+sessionStorage.setItem('width', '0');
 
 function test() {
     console.log('Asynchronous sloths test for test');

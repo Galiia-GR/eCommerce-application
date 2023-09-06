@@ -85,6 +85,30 @@ export function createProductCard(data: Product, i: number): HTMLElement {
         data.masterVariant.images.forEach((el) => {
             let cardImg = helpCreateEl('img', 'card-fish__img') as HTMLImageElement;
             cardImg.src = `${el.url}`;
+            let large = false;
+            cardImg.addEventListener('click', () => {
+                if (large === false) {
+                    large = true;
+                    cardImg.style.transition = '0s';
+                    cardImg.style.position = 'absolute';
+                    cardImg.style.zIndex = '100';
+                    cardImg.style.height = '100%';
+                    cardImg.style.width = '100%';
+                    cardImg.style.bottom = '0px';
+                    cardImg.style.transform = 'translateX(0px)';
+                } else {
+                    large = false;
+                    cardImg.style.height = '250px';
+                    cardImg.style.width = '450px';
+                    cardImg.style.zIndex = '';
+                    cardImg.style.position = '';
+                    cardImg.style.bottom = '';
+                    cardImg.style.transform = `translateX(${Number(sessionStorage.getItem('width'))}px)`;
+                    setTimeout(() => {
+                        cardImg.style.transition = '';
+                    }, 100);
+                }
+            });
             cardImgsContainer.append(cardImg);
         });
         if (data.masterVariant.prices[0].discounted) {
@@ -117,6 +141,7 @@ export function createProductCard(data: Product, i: number): HTMLElement {
         leftButton.addEventListener('click', () => {
             if (trans !== 450) {
                 trans += 450;
+                sessionStorage.setItem('width', `${trans}`);
             }
             document.querySelectorAll('.card-fish__img').forEach((curImg) => {
                 let curImg1 = curImg as HTMLElement;
@@ -126,6 +151,7 @@ export function createProductCard(data: Product, i: number): HTMLElement {
         rightButton.addEventListener('click', () => {
             if (trans !== -450) {
                 trans -= 450;
+                sessionStorage.setItem('width', `${trans}`);
             }
             document.querySelectorAll('.card-fish__img').forEach((curImg) => {
                 let curImg1 = curImg as HTMLElement;
@@ -141,11 +167,14 @@ export function createProductCard(data: Product, i: number): HTMLElement {
         }
         background.addEventListener('click', (target2) => {
             if (target2.target === background) {
+                sessionStorage.setItem('width', '0');
                 closeWindow(background, mainPage);
+                window.location.hash = `/shop`;
             }
         });
         cardExit.addEventListener('click', (target3) => {
             if (target3.target === cardExit) {
+                sessionStorage.setItem('width', '0');
                 closeWindow(background, mainPage);
                 window.location.hash = `/shop`;
             }

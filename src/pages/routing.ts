@@ -5,6 +5,7 @@ import { createContactsPage } from './contacts/contacts';
 import { createMain } from './home/home';
 import { createError } from './error/error';
 import { createProfilePage } from './profile';
+import { productList } from './shop/getProducts';
 
 let submitLogin = false;
 const customerHeaderUserEl = document.querySelector('.logo-userName') as HTMLElement;
@@ -65,6 +66,10 @@ function routeChange() {
         renderPage(hash);
     });
 }
+
+productList.forEach((el) => {
+    console.log(el[0].slug.en);
+});
 
 export function renderPage(path: string) {
     switch (path) {
