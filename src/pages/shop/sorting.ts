@@ -1,4 +1,5 @@
 import { ProductAndElement, ProductComplianceList } from './types';
+//  import { getSearch } from './searchProducts';
 
 export async function sorting(
     list: ProductComplianceList,

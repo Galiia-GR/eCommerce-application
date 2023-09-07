@@ -19,22 +19,22 @@ const dropContent = helpCreateEl('div', 'dropdown-content');
 sortTypesDrop.append(dropContent);
 
 const typeAngel = helpCreateEl('a', 'dropdown-content__item');
-typeAngel.setAttribute('id', 'c44c0ab5-8c28-47f3-99f3-36a5bab8da78');
+typeAngel.setAttribute('id', 'c4c02c5a-bc26-4afa-9a2c-ca9b149b2a19');
 typeAngel.setAttribute('href', '#/shop');
 typeAngel.textContent = 'angelfish';
 
 const typeButterfly = helpCreateEl('a', 'dropdown-content__item');
-typeButterfly.setAttribute('id', '386958c8-1b60-4f1e-b76c-446e683a0cfd');
+typeButterfly.setAttribute('id', 'fed999d4-e08c-4a17-95e1-3546871be317');
 typeButterfly.setAttribute('href', '#/shop');
 typeButterfly.textContent = 'butterflyfish';
 
 const typeClown = helpCreateEl('a', 'dropdown-content__item');
-typeClown.setAttribute('id', '4ba6908f-25c6-408e-80d5-118b7cb5c606');
+typeClown.setAttribute('id', '9212e590-5346-49a0-bde1-b189552ebe02');
 typeClown.setAttribute('href', '#/shop');
 typeClown.textContent = 'clownfish';
 
 const typeSurgeon = helpCreateEl('a', 'dropdown-content__item');
-typeSurgeon.setAttribute('id', 'be96ce98-dbec-43b9-b78d-595d193af4d7');
+typeSurgeon.setAttribute('id', '00fa4e4c-fc07-43ee-a751-30ff9578aadc');
 typeSurgeon.setAttribute('href', '#/shop');
 typeSurgeon.textContent = 'surgeonfish';
 

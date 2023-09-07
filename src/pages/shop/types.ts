@@ -1,5 +1,6 @@
 export type Product = {
     id: string;
+    categories: Array<{ id: string }>;
     name: { en: string };
     masterVariant: {
         images: Array<{ url: string }>;
