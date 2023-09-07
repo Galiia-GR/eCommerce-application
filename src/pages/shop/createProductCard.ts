@@ -1,5 +1,5 @@
 import { helpCreateEl } from '../global/global';
-import { openWindow, closeWindow } from '../login';
+import { openWindow } from '../login';
 import { Product } from './types';
 
 export function createProductCard(data: Product, i: number): HTMLElement {
@@ -168,15 +168,19 @@ export function createProductCard(data: Product, i: number): HTMLElement {
         background.addEventListener('click', (target2) => {
             if (target2.target === background) {
                 sessionStorage.setItem('width', '0');
-                closeWindow(background, mainPage);
                 window.location.hash = `/shop`;
+                mainPage.querySelectorAll('.card-fish__background').forEach((cl) => {
+                    mainPage.removeChild(cl);
+                });
             }
         });
         cardExit.addEventListener('click', (target3) => {
             if (target3.target === cardExit) {
                 sessionStorage.setItem('width', '0');
-                closeWindow(background, mainPage);
                 window.location.hash = `/shop`;
+                mainPage.querySelectorAll('.card-fish__background').forEach((cl) => {
+                    mainPage.removeChild(cl);
+                });
             }
         });
 
