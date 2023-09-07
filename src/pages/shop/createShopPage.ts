@@ -1,4 +1,4 @@
-import { productList } from './getProducts';
+import { productList, getProductList } from './getProducts';
 import { updateShopPage } from './updateShopPage';
 import { elements } from './shopElements';
 import { getSearch } from './searchProducts';
@@ -13,7 +13,6 @@ export async function createShopPage() {
     await updateShopPage(productList, elements.sectionShopContainer);
 
     const typeContain = document.querySelectorAll('.dropdown-content__item');
-    console.log('sdfsdfkm');
 
     typeContain.forEach((el) => {
         el.addEventListener('click', () => {
@@ -24,11 +23,16 @@ export async function createShopPage() {
 
     async function handleCategoryClick(categoryId: string) {
         try {
-            const options = {
-                categoryId,
-            };
-            const productSort = await getSearch(options);
-            console.log(productSort);
+            if (categoryId === 'all') {
+                await updateShopPage(productList, elements.sectionShopContainer);
+            } else {
+                const options = {
+                    categoryId,
+                };
+                const productSort = await getSearch(options);
+                const productSortList = await getProductList(productSort);
+                await updateShopPage(productSortList, elements.sectionShopContainer);
+            }
         } catch (error) {
             console.error('Произошла ошибка:', error);
         }

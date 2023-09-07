@@ -31,7 +31,7 @@ export async function getSearch(options: {
         },
     });
 
-    const productsArrEcom = response.data;
+    const productsArrEcom = response.data.results;
 
     return productsArrEcom;
 }

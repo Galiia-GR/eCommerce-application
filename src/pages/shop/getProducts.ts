@@ -21,7 +21,7 @@ export async function getProducts(): Promise<ProductList> {
     return productsArrEcom;
 }
 
-async function getProductList(productsArrEcom: ProductList): Promise<ProductComplianceList> {
+export async function getProductList(productsArrEcom: ProductList): Promise<ProductComplianceList> {
     console.log(productsArrEcom);
 
     const productComplianceList: ProductComplianceList = productsArrEcom.map(

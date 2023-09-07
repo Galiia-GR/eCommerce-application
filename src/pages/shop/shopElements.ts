@@ -18,6 +18,11 @@ buttonDrop.innerText = 'Select type';
 const dropContent = helpCreateEl('div', 'dropdown-content');
 sortTypesDrop.append(dropContent);
 
+const typeAll = helpCreateEl('a', 'dropdown-content__item');
+typeAll.setAttribute('id', 'all');
+typeAll.setAttribute('href', '#/shop');
+typeAll.textContent = 'all';
+
 const typeAngel = helpCreateEl('a', 'dropdown-content__item');
 typeAngel.setAttribute('id', 'c4c02c5a-bc26-4afa-9a2c-ca9b149b2a19');
 typeAngel.setAttribute('href', '#/shop');
@@ -38,7 +43,7 @@ typeSurgeon.setAttribute('id', '00fa4e4c-fc07-43ee-a751-30ff9578aadc');
 typeSurgeon.setAttribute('href', '#/shop');
 typeSurgeon.textContent = 'surgeonfish';
 
-dropContent.append(typeAngel, typeButterfly, typeClown, typeSurgeon);
+dropContent.append(typeAll, typeAngel, typeButterfly, typeClown, typeSurgeon);
 
 const sortPrice = helpCreateEl('button', 'shop-sort__button');
 const imgSort = helpCreateEl('img', 'img-sort') as HTMLImageElement;
