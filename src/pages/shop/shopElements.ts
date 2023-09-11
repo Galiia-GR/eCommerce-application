@@ -46,12 +46,12 @@ typeSurgeon.textContent = 'surgeonfish';
 dropContent.append(typeAll, typeAngel, typeButterfly, typeClown, typeSurgeon);
 
 const sortPrice = helpCreateEl('button', 'shop-sort__button');
-const imgSort = helpCreateEl('img', 'img-sort') as HTMLImageElement;
+const imgSort = helpCreateEl('img', 'img-sort low-high') as HTMLImageElement;
 imgSort.src = icoSort;
 sortPrice.append(imgSort);
 
 const sortPriceAbc = helpCreateEl('button', 'shop-sort-abc__button');
-const imgSortAbc = helpCreateEl('img', 'img-sort') as HTMLImageElement;
+const imgSortAbc = helpCreateEl('img', 'img-sort abc') as HTMLImageElement;
 imgSortAbc.src = icoAbc;
 sortPriceAbc.append(imgSortAbc);
 

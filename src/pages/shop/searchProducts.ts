@@ -6,21 +6,28 @@ export async function getSearch(options: {
     data?: string;
     value?: string;
     categoryId?: string;
+    priceRange?: string;
     color?: string;
     type?: string;
     maxPrice?: number;
 }): Promise<ProductList> {
     const token = acessToken.toString();
 
-    const { categoryId } = options;
+    const { categoryId, data, value } = options;
     const filters: string[] = [];
-
-    filters.push(`categories.id: subtree("${categoryId}")`);
+    if (categoryId) {
+        filters.push(`categories.id: subtree("${categoryId}")`);
+    }
 
     const params: Record<string, string | number | string[]> = {
         limit: 500,
         filter: filters,
     };
+    if (data && value) {
+        params.sort = `${data} ${value}`;
+    }
+
+    console.log(params);
 
     const response = await axios({
         url: `https://api.us-central1.gcp.commercetools.com/ecommercerszxc22845345034582/product-projections/search`,

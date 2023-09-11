@@ -68,36 +68,30 @@ function routeChange() {
     });
 }
 
-productList.forEach((el) => {
-    console.log(el[0].slug.en);
-});
+// productList.forEach((el) => {
+//     console.log(el[0].slug.en);
+// });
 
 export function renderPage(path: string) {
     switch (path) {
         case '/': {
             const mainTag = document.querySelector('main') as HTMLElement;
             mainTag.innerHTML = '';
-            console.log('render home');
             return createMain();
         }
         case '/shop': {
-            console.log('render shop');
             return createShopPage();
         }
         case '/profile': {
-            console.log('render profile');
             return createProfilePage();
         }
         case '/shipping': {
-            console.log('render shipping');
             return createShippingPage();
         }
         case '/about': {
-            console.log('render about');
             return createAboutUsPage();
         }
         case '/contacts': {
-            console.log('render contact');
             return createContactsPage();
         }
         case '/login': {
@@ -107,7 +101,7 @@ export function renderPage(path: string) {
             } else if (loginOpen.textContent === 'LOGIN' && !submitLogin) {
                 loginOpen.click();
             }
-            return console.log('render login');
+            return undefined;
         }
         case '/register': {
             const RegisterOpen = document.querySelector('.REGISTER') as HTMLElement;
@@ -116,7 +110,7 @@ export function renderPage(path: string) {
             } else if (RegisterOpen.textContent === 'REGISTER' && !submitLogin) {
                 RegisterOpen.click();
             }
-            return console.log('render register');
+            return undefined;
         }
         default: {
             const res: ProductAndElement | undefined = productList.find(

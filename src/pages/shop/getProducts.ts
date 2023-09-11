@@ -22,8 +22,6 @@ export async function getProducts(): Promise<ProductList> {
 }
 
 export async function getProductList(productsArrEcom: ProductList): Promise<ProductComplianceList> {
-    console.log(productsArrEcom);
-
     const productComplianceList: ProductComplianceList = productsArrEcom.map(
         (e: Product, i: number): ProductAndElement => {
             const r: ProductAndElement = [e, createProductCard(e, i)];

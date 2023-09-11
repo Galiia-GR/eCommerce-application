@@ -37,4 +37,63 @@ export async function createShopPage() {
             console.error('Произошла ошибка:', error);
         }
     }
+
+    const sortPriceButton = document.querySelector('.img-sort');
+    const sortAbcButton = document.querySelector('.abc');
+
+    sortPriceButton?.addEventListener('click', () => {
+        if (sortPriceButton.classList.contains('high-low')) {
+            sortPriceButton.classList.remove('high-low');
+            sortPriceButton.classList.add('low-high');
+
+            const options: { data: string; value: string } = {
+                data: 'price',
+                value: 'desc',
+            };
+            console.log(options);
+            handleCategoryPriceAbc(options);
+        } else {
+            sortPriceButton.classList.remove('low-high');
+            sortPriceButton.classList.add('high-low');
+
+            const options: { data: string; value: string } = {
+                data: 'price',
+                value: 'asc',
+            };
+            console.log(options);
+            handleCategoryPriceAbc(options);
+        }
+    });
+
+    sortAbcButton?.addEventListener('click', () => {
+        console.log('you pree me abc');
+        if (sortAbcButton.classList.contains('cba')) {
+            sortAbcButton.classList.remove('cba');
+            sortAbcButton.classList.add('abc');
+            const options: { data: string; value: string } = {
+                data: 'name.en',
+                value: 'desc',
+            };
+            console.log(options);
+            handleCategoryPriceAbc(options);
+        } else {
+            sortAbcButton.classList.remove('abc');
+            sortAbcButton.classList.add('cba');
+            const options: { data: string; value: string } = {
+                data: 'name.en',
+                value: 'asc',
+            };
+            handleCategoryPriceAbc(options);
+        }
+    });
+
+    async function handleCategoryPriceAbc(options: { data: string; value: string }) {
+        try {
+            const productSort = await getSearch(options);
+            const productSortList = await getProductList(productSort);
+            await updateShopPage(productSortList, elements.sectionShopContainer);
+        } catch (error) {
+            console.error('Произошла ошибка:', error);
+        }
+    }
 }
