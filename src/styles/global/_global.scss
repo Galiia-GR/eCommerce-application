@@ -168,16 +168,16 @@ body {
     justify-content: center;
     background-color: aliceblue;
     padding: 30px 30px 0 30px;
-    margin: 100px 350px 100px 350px;
+    margin: 50px 350px 100px 350px;
     border-radius: 25px;
     border: solid 5px $color-primary-dark-blue;
     @include media-tablet {
         padding: 20px 20px 0 20px;
-        margin: 100px 150px 100px 150px;
+        margin: 50px 150px 100px 150px;
     }
     @include media-mobile {
         padding: 10px 10px 0 10px;
-        margin: 100px 50px 100px 50px;
+        margin: 50px 50px 100px 50px;
     }
 }
 
@@ -202,6 +202,7 @@ body {
 .img__404 {
     max-width: 100%;
     height: auto;
+    padding-bottom: 20px;
 }
 
 .shipping-container,
@@ -441,11 +442,13 @@ body {
     right: 28px;
 }
 
-.card-fish__arrow_right:hover, .card-fish__arrow_left:hover {
+.card-fish__arrow_right:hover,
+.card-fish__arrow_left:hover {
     background-color: rgb(125, 159, 191);
-} 
+}
 
-.card-fish__arrow_right:active, .card-fish__arrow_left:active {
+.card-fish__arrow_right:active,
+.card-fish__arrow_left:active {
     background-color: rgb(109, 140, 170);
 }
 
@@ -473,7 +476,7 @@ body {
     position: absolute;
     bottom: 30px;
     right: 28px;
-    text-decoration:underline;
+    text-decoration: underline;
 }
 
 .card-fish__description::-webkit-scrollbar {
@@ -588,12 +591,12 @@ body {
     }
 
     .profile::before {
-        content: "";
+        content: '';
         animation: none;
     }
 
     .profile::after {
-        content: "";
+        content: '';
         animation: none;
     }
 
@@ -609,11 +612,13 @@ body {
     }
 }
 
-.card-fish__button:hover, .card-fish__exit:hover {
+.card-fish__button:hover,
+.card-fish__exit:hover {
     background-color: rgb(139, 174, 207);
 }
 
-.card-fish__button:active, .card-fish__exit:active {
+.card-fish__button:active,
+.card-fish__exit:active {
     background-color: rgb(103, 134, 163);
 }
 

@@ -1,6 +1,6 @@
 import { productList, getProductList } from './getProducts';
 import { updateShopPage } from './updateShopPage';
-import { elements } from './shopElements';
+import { elements, dropContent, dropContentColor } from './shopElements';
 import { getSearch } from './searchProducts';
 
 export async function createShopPage() {
@@ -11,13 +11,32 @@ export async function createShopPage() {
     elements.sectionShop.append(elements.sectionShopContainer);
 
     await updateShopPage(productList, elements.sectionShopContainer);
+    const titleSelectType = document.querySelector('.shop-sort-buttonType') as HTMLElement;
+    const titleSelectColor = document.querySelector('.shop-sort-buttonColor') as HTMLElement;
 
     const typeContain = document.querySelectorAll('.dropdown-content__item');
+    const typeColorContain = document.querySelectorAll('.dropdown-content__color');
 
     typeContain.forEach((el) => {
         el.addEventListener('click', () => {
             const categoryId = `${el.getAttribute('id')}`;
             handleCategoryClick(categoryId);
+            dropContent.classList.remove('show');
+            titleSelectType.textContent = el.textContent;
+            titleSelectColor.textContent = 'Select color';
+            titleSelectColor.style.color = 'white';
+        });
+    });
+
+    typeColorContain.forEach((el) => {
+        el.addEventListener('click', () => {
+            const color = `${el.getAttribute('id')}`;
+            dropContentColor.classList.remove('show');
+            titleSelectType.textContent = 'Select type';
+            const htmlElement = el as HTMLElement;
+            titleSelectColor.textContent = el.textContent;
+            titleSelectColor.style.color = htmlElement.style.backgroundColor;
+            handleColorClick(color);
         });
     });
 
@@ -25,9 +44,32 @@ export async function createShopPage() {
         try {
             if (categoryId === 'all') {
                 await updateShopPage(productList, elements.sectionShopContainer);
+                titleSelectType.textContent = 'Select type';
+                titleSelectColor.textContent = 'Select color';
+                titleSelectColor.style.color = 'white';
             } else {
                 const options = {
                     categoryId,
+                };
+                const productSort = await getSearch(options);
+                const productSortList = await getProductList(productSort);
+                await updateShopPage(productSortList, elements.sectionShopContainer);
+            }
+        } catch (error) {
+            console.error('Произошла ошибка:', error);
+        }
+    }
+
+    async function handleColorClick(color: string) {
+        try {
+            if (color === 'all') {
+                await updateShopPage(productList, elements.sectionShopContainer);
+                titleSelectType.textContent = 'Select type';
+                titleSelectColor.textContent = 'Select color';
+                titleSelectColor.style.color = 'white';
+            } else {
+                const options = {
+                    color,
                 };
                 const productSort = await getSearch(options);
                 const productSortList = await getProductList(productSort);

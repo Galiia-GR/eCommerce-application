@@ -8,15 +8,17 @@ export async function getSearch(options: {
     categoryId?: string;
     priceRange?: string;
     color?: string;
-    type?: string;
-    maxPrice?: number;
 }): Promise<ProductList> {
     const token = acessToken.toString();
 
-    const { categoryId, data, value } = options;
+    const { categoryId, data, value, color } = options;
     const filters: string[] = [];
     if (categoryId) {
         filters.push(`categories.id: subtree("${categoryId}")`);
+    }
+
+    if (color) {
+        filters.push(`categories.id: subtree("${color}")`);
     }
 
     const params: Record<string, string | number | string[]> = {
@@ -26,8 +28,6 @@ export async function getSearch(options: {
     if (data && value) {
         params.sort = `${data} ${value}`;
     }
-
-    console.log(params);
 
     const response = await axios({
         url: `https://api.us-central1.gcp.commercetools.com/ecommercerszxc22845345034582/product-projections/search`,
