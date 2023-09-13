@@ -13,6 +13,7 @@ import './pages/register/updateCustomer';
 import './pages/register/setDefaultShipping';
 import './pages/global/hamburger';
 import './pages/login/signUp/autoSignUp';
+import './pages/home/connectHomeShop';
 
 window.location.hash = '/';
 sessionStorage.setItem('width', '0');

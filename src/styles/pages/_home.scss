@@ -64,6 +64,12 @@
     }
 }
 
+.home-fish__item:hover {
+    cursor: pointer;
+    transform: translate3d(0, 2px, -2px);
+    box-shadow: 6px 6px 6px #3b3b3b;
+}
+
 .home-fish__title {
     color: $color-primary-dark-sand;
     font-size: 22px;

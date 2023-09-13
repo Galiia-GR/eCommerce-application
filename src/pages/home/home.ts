@@ -58,9 +58,9 @@ export function createMain() {
         'Copperband butterfly',
         'Royal angelfish',
         'Palete surgeonfish',
-        'Mandarinfish',
+        'Mandarinfish clownfish',
         'Lined surgeonfish',
-        'Purple tang',
+        'Purple tang surgeonfish',
         'Freshwater angelfish',
         'Ocellaris clownfish',
         "Clark's anemonefish",
@@ -71,8 +71,8 @@ export function createMain() {
         'Clown loach',
         'Threadfin butterflyfish',
         'Clown triggerfish',
-        'Emperor juvenile fish',
-        'Emperor angelfish',
+        'Emperor angelfish juvenile',
+        'Emperor angelfish adult',
     ];
 
     for (let i = 0; i < arrHomeFish.length; i += 1) {
@@ -89,8 +89,19 @@ export function createMain() {
 
         title.textContent = `${arrHomeFishNames[i]}`;
         img.src = arrHomeFish[i];
-        item.setAttribute('id', `${i}`);
+        item.setAttribute('id', `${arrHomeFishNames[i]}`);
     }
+
+    const buble = helpCreateEl('div', 'buble');
+    mainContainer.appendChild(buble);
+    buble.innerHTML = `<div class="bublcontent">
+    </div>
+    <div class="bubl1"></div>
+    <div class="bubl2"></div>
+    <div class="bubl3"></div>
+</div>`;
+
+    mainContainer.appendChild(buble);
 }
 
 export function createHomePage() {

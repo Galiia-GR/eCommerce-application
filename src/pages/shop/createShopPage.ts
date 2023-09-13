@@ -92,7 +92,6 @@ export async function createShopPage() {
                 data: 'price',
                 value: 'desc',
             };
-            console.log(options);
             handleCategoryPriceAbc(options);
         } else {
             sortPriceButton.classList.remove('low-high');
@@ -102,13 +101,11 @@ export async function createShopPage() {
                 data: 'price',
                 value: 'asc',
             };
-            console.log(options);
             handleCategoryPriceAbc(options);
         }
     });
 
     sortAbcButton?.addEventListener('click', () => {
-        console.log('you pree me abc');
         if (sortAbcButton.classList.contains('cba')) {
             sortAbcButton.classList.remove('cba');
             sortAbcButton.classList.add('abc');
@@ -116,7 +113,6 @@ export async function createShopPage() {
                 data: 'name.en',
                 value: 'desc',
             };
-            console.log(options);
             handleCategoryPriceAbc(options);
         } else {
             sortAbcButton.classList.remove('abc');
