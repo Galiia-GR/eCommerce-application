@@ -1,4 +1,4 @@
-import footprintImg from '../../assets/images/footprintImg.png';
+import fishHome from '../../assets/images/fishHome.png';
 import git from '../../assets/images/gitSvg.svg';
 import rss from '../../assets/images/rss.svg';
 
@@ -27,7 +27,8 @@ export function createHeader() {
     const logoImg = helpCreateEl('img', 'logo_img') as HTMLImageElement;
     headerLogoLangBlock.append(logo);
     logoImg.setAttribute('alt', 'logo');
-    logoImg.src = footprintImg;
+
+    logoImg.src = fishHome;
     logo.append(logoImg);
     const logoLang = helpCreateEl('div', 'logo-userName');
     headerLogoLangBlock.append(logoLang);
@@ -38,7 +39,7 @@ export function createHeader() {
 
     const navigation = helpCreateEl('ul', 'navigation');
     navContainer.append(navigation);
-    const arrNav = ['SHOP', 'SHIPPING', 'ABOUT', 'CONTACTS', 'LOGIN', 'REGISTER'];
+    const arrNav = ['SHOP', 'SHIPPING', 'ABOUT', 'CONTACTS', 'LOGIN', 'REGISTER', 'PROFILE'];
 
     for (let i = 0; i < arrNav.length; i += 1) {
         const item = helpCreateEl('li', 'navigation-item');

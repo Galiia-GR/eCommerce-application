@@ -2,7 +2,7 @@
     color: $color-primary-sand;
     text-align: center;
     text-shadow: 2px 2px 2px #1f1f1f;
-    font-size: 72px;
+    font-size: 64px;
     padding-top: 40px;
     @include media-tablet {
         font-size: 55px;
@@ -14,9 +14,8 @@
     }
 }
 
-.home-cat__container {
+.home-fish__container {
     display: flex;
-    justify-content: space-between;
     flex-direction: column;
     gap: 10px;
     @include media-tablet {
@@ -27,7 +26,7 @@
     }
 }
 
-.home-cat__img {
+.home-fish__img {
     margin-top: 20px;
     width: 80px;
     height: 60px;
@@ -45,12 +44,12 @@
     }
 }
 
-.home-cat__item {
+.home-fish__item {
     width: 110px;
     height: 110px;
-    border: 5px solid $color-primary-dark-blue;
+    border: 3px solid $color-primary-blue;
     border-radius: 55%;
-    background-color: $color-primary-sand;
+    background-image: linear-gradient(to top, #00bcd2, #79caeb, #b6d8f7, #e2e9fc, #ffffff);
     display: flex;
     flex-direction: column;
     align-self: center;
@@ -65,11 +64,18 @@
     }
 }
 
-.home-cat__title {
+.home-fish__item:hover {
+    cursor: pointer;
+    transform: translate3d(0, 2px, -2px);
+    box-shadow: 6px 6px 6px #3b3b3b;
+}
+
+.home-fish__title {
     color: $color-primary-dark-sand;
     font-size: 22px;
     font-weight: bold;
     align-self: center;
+    text-align: center;
     @include media-tablet {
         font-size: 18px;
     }
@@ -78,8 +84,9 @@
     }
 }
 
-.home-cats-container {
+.home-fish-container {
     padding-top: 40px;
+    padding-bottom: 40px;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(4, 1fr);

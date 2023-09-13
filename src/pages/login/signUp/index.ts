@@ -11,5 +11,6 @@ export async function signUpCustomer(userEmail: string, userPassword: string): P
         },
     });
     const customerfirstName = response.data.firstName;
+    localStorage.setItem('version', response.data.version);
     return customerfirstName;
 }

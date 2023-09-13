@@ -1,9 +1,12 @@
 import { createAboutUsPage } from './about/about';
 import { createShippingPage } from './shipping/shipping';
-import { createShopPage } from './shop/shop';
+import { createShopPage } from './shop/createShopPage';
 import { createContactsPage } from './contacts/contacts';
 import { createMain } from './home/home';
 import { createError } from './error/error';
+import { createProfilePage } from './profile';
+import { productList } from './shop/getProducts';
+import { ProductAndElement } from './shop/types';
 
 let submitLogin = false;
 const customerHeaderUserEl = document.querySelector('.logo-userName') as HTMLElement;
@@ -32,6 +35,8 @@ function menuItemClickHandle(event: Event) {
         window.location.hash = '/';
     } else if (navClikedEl === 'SHOP') {
         window.location.hash = '/shop';
+    } else if (navClikedEl === 'PROFILE') {
+        window.location.hash = '/profile';
     } else if (navClikedEl === 'SHIPPING') {
         window.location.hash = '/shipping';
     } else if (navClikedEl === 'ABOUT') {
@@ -63,28 +68,30 @@ function routeChange() {
     });
 }
 
+// productList.forEach((el) => {
+//     console.log(el[0].slug.en);
+// });
+
 export function renderPage(path: string) {
     switch (path) {
         case '/': {
             const mainTag = document.querySelector('main') as HTMLElement;
             mainTag.innerHTML = '';
-            console.log('render home');
             return createMain();
         }
         case '/shop': {
-            console.log('render shop');
             return createShopPage();
         }
+        case '/profile': {
+            return createProfilePage();
+        }
         case '/shipping': {
-            console.log('render shipping');
             return createShippingPage();
         }
         case '/about': {
-            console.log('render about');
             return createAboutUsPage();
         }
         case '/contacts': {
-            console.log('render contact');
             return createContactsPage();
         }
         case '/login': {
@@ -94,7 +101,7 @@ export function renderPage(path: string) {
             } else if (loginOpen.textContent === 'LOGIN' && !submitLogin) {
                 loginOpen.click();
             }
-            return console.log('render login');
+            return undefined;
         }
         case '/register': {
             const RegisterOpen = document.querySelector('.REGISTER') as HTMLElement;
@@ -103,10 +110,19 @@ export function renderPage(path: string) {
             } else if (RegisterOpen.textContent === 'REGISTER' && !submitLogin) {
                 RegisterOpen.click();
             }
-            return console.log('render register');
+            return undefined;
         }
-        default:
-            return createError();
+        default: {
+            const res: ProductAndElement | undefined = productList.find(
+                (e) => `#/shop/${e[0].slug.en}` === window.location.hash
+            );
+            if (res) {
+                res[1].click();
+            } else {
+                return createError();
+            }
+            return undefined;
+        }
     }
 }
 
