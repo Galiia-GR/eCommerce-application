@@ -134,4 +134,22 @@ export async function createShopPage() {
             console.error('Произошла ошибка:', error);
         }
     }
+
+    const inputContainer = document.querySelector('.shop-search') as HTMLInputElement;
+
+    inputContainer?.addEventListener('input', () => {
+        const searchTextInput = inputContainer.value.toLocaleLowerCase();
+
+        const temp = searchTextInput[0].toLocaleUpperCase();
+
+        const appendForSearch = temp + searchTextInput.slice(1);
+
+        console.log(appendForSearch);
+
+        productList.forEach((data) => {
+            if (data[0].name.en.includes(appendForSearch)) {
+                console.log('I found');
+            }
+        });
+    });
 }
