@@ -140,16 +140,13 @@ export async function createShopPage() {
     inputContainer?.addEventListener('input', () => {
         const searchTextInput = inputContainer.value.toLocaleLowerCase();
 
-        const temp = searchTextInput[0].toLocaleUpperCase();
-
-        const appendForSearch = temp + searchTextInput.slice(1);
-
-        console.log(appendForSearch);
-
-        productList.forEach((data) => {
-            if (data[0].name.en.includes(appendForSearch)) {
-                console.log('I found');
-            }
-        });
+        if (searchTextInput) {
+            updateShopPage(
+                [...productList].filter((data) => data[0].name.en.toLocaleLowerCase().includes(searchTextInput)),
+                elements.sectionShopContainer
+            );
+        } else {
+            updateShopPage(productList, elements.sectionShopContainer);
+        }
     });
 }
