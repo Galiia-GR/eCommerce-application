@@ -1,8 +1,8 @@
 import axios from 'axios';
-import { getToken } from '../getBearerToken';
+import { acessToken } from '../getBearerToken';
 
 export async function updateDefShippingCustomer(id: string, dataId: string): Promise<object> {
-    const token = (await getToken()).toString();
+    const token = acessToken.toString();
     const response = await axios.post(
         `https://api.us-central1.gcp.commercetools.com/ecommercerszxc22845345034582/customers/${id}`,
         {
@@ -21,6 +21,5 @@ export async function updateDefShippingCustomer(id: string, dataId: string): Pro
         }
     );
 
-    console.log(response);
     return response;
 }

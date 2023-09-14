@@ -19,6 +19,7 @@ export async function getCustomerToken(userEmail: string, userPassword: string):
             'Content-Type': 'application/x-www-form-urlencoded',
         },
     });
-    console.log(response.data.refresh_token);
+    localStorage.setItem('accessToken', response.data.access_token);
+    localStorage.setItem('refreshToken', response.data.refresh_token);
     return response.data.access_token;
 }
