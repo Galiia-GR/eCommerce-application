@@ -161,6 +161,7 @@ input:active {
     opacity: 0;
     transition: 0.2s;
     position: fixed;
+    z-index: 999;
 }
 
 .account-window__header {
@@ -211,7 +212,7 @@ input:active {
     display: block;
 }
 
-.error {
+.error, .error1 {
     color: rgb(255, 103, 103);
     font-weight: 500;
     font-size: 13px;

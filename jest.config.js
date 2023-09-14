@@ -2,4 +2,7 @@
 module.exports = {
     preset: 'ts-jest',
     testEnvironment: 'jest-environment-jsdom',
+    moduleNameMapper: {
+        '\\.(jpg|jpeg|png|gif|svg)$': 'identity-obj-proxy',
+    },
 };

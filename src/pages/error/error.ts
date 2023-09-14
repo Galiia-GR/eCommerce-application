@@ -1,5 +1,5 @@
 import { helpCreateEl } from '../global/global';
-import foot1 from '../../assets/images/404_1.png';
+import foot1 from '../../assets/images/error.png';
 
 export function createError() {
     const mainTag = document.querySelector('.main') as HTMLElement;
@@ -16,5 +16,5 @@ export function createError() {
     mainTag.append(sectionError);
     sectionError.append(headerError);
     sectionError.append(footsImgContainer);
-    headerError.innerText = 'Oops! 404: Error! Page not found...';
+    headerError.innerText = 'Oops! 404: Error! Page not found... See you soon!';
 }
