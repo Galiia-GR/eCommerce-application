@@ -1,7 +1,7 @@
-import { productList, getProductList } from './getProducts';
-import { updateShopPage } from './updateShopPage';
+import { productList } from './getProducts';
+import { updateShopPage, updateShopPageWithParams, smartUpdate } from './updateShopPage';
 import { elements, dropContent, dropContentColor } from './shopElements';
-import { getSearch } from './searchProducts';
+import { paramsState } from './paramsState';
 
 export async function createShopPage() {
     const mainTag = document.querySelector('.main') as HTMLElement;
@@ -23,8 +23,6 @@ export async function createShopPage() {
             handleCategoryClick(categoryId);
             dropContent.classList.remove('show');
             titleSelectType.textContent = el.textContent;
-            titleSelectColor.textContent = 'Select color';
-            titleSelectColor.style.color = 'white';
         });
     });
 
@@ -32,7 +30,6 @@ export async function createShopPage() {
         el.addEventListener('click', () => {
             const color = `${el.getAttribute('id')}`;
             dropContentColor.classList.remove('show');
-            titleSelectType.textContent = 'Select type';
             const htmlElement = el as HTMLElement;
             titleSelectColor.textContent = el.textContent;
             titleSelectColor.style.color = htmlElement.style.backgroundColor;
@@ -43,17 +40,12 @@ export async function createShopPage() {
     async function handleCategoryClick(categoryId: string) {
         try {
             if (categoryId === 'all') {
-                await updateShopPage(productList, elements.sectionShopContainer);
+                paramsState.filter.category = '';
                 titleSelectType.textContent = 'Select type';
-                titleSelectColor.textContent = 'Select color';
-                titleSelectColor.style.color = 'white';
+                await smartUpdate();
             } else {
-                const options = {
-                    categoryId,
-                };
-                const productSort = await getSearch(options);
-                const productSortList = await getProductList(productSort);
-                await updateShopPage(productSortList, elements.sectionShopContainer);
+                paramsState.filter.category = categoryId;
+                await updateShopPageWithParams();
             }
         } catch (error) {
             console.error('Произошла ошибка:', error);
@@ -63,17 +55,13 @@ export async function createShopPage() {
     async function handleColorClick(color: string) {
         try {
             if (color === 'all') {
-                await updateShopPage(productList, elements.sectionShopContainer);
-                titleSelectType.textContent = 'Select type';
+                paramsState.filter.color = '';
                 titleSelectColor.textContent = 'Select color';
                 titleSelectColor.style.color = 'white';
+                await smartUpdate();
             } else {
-                const options = {
-                    color,
-                };
-                const productSort = await getSearch(options);
-                const productSortList = await getProductList(productSort);
-                await updateShopPage(productSortList, elements.sectionShopContainer);
+                paramsState.filter.color = color;
+                await updateShopPageWithParams();
             }
         } catch (error) {
             console.error('Произошла ошибка:', error);
@@ -83,57 +71,45 @@ export async function createShopPage() {
     const sortPriceButton = document.querySelector('.img-sort');
     const sortAbcButton = document.querySelector('.abc');
 
-    sortPriceButton?.addEventListener('click', () => {
-        if (sortPriceButton.classList.contains('high-low')) {
-            sortPriceButton.classList.remove('high-low');
-            sortPriceButton.classList.add('low-high');
+    sortPriceButton?.addEventListener('click', async () => {
+        switch (paramsState.sort.price) {
+            case 'asc':
+                sortPriceButton.classList.remove('high-low');
+                sortPriceButton.classList.add('low-high');
+                break;
+            case 'desc':
+                sortPriceButton.classList.remove('low-high');
+                sortPriceButton.classList.add('high-low');
 
-            const options: { data: string; value: string } = {
-                data: 'price',
-                value: 'desc',
-            };
-            handleCategoryPriceAbc(options);
-        } else {
-            sortPriceButton.classList.remove('low-high');
-            sortPriceButton.classList.add('high-low');
-
-            const options: { data: string; value: string } = {
-                data: 'price',
-                value: 'asc',
-            };
-            handleCategoryPriceAbc(options);
+                break;
+            default: {
+                sortPriceButton.classList.remove('low-high');
+                sortPriceButton.classList.add('high-low');
+            }
         }
+        paramsState.sort.setPrice();
+        await smartUpdate();
     });
 
-    sortAbcButton?.addEventListener('click', () => {
-        if (sortAbcButton.classList.contains('cba')) {
-            sortAbcButton.classList.remove('cba');
-            sortAbcButton.classList.add('abc');
-            const options: { data: string; value: string } = {
-                data: 'name.en',
-                value: 'desc',
-            };
-            handleCategoryPriceAbc(options);
-        } else {
-            sortAbcButton.classList.remove('abc');
-            sortAbcButton.classList.add('cba');
-            const options: { data: string; value: string } = {
-                data: 'name.en',
-                value: 'asc',
-            };
-            handleCategoryPriceAbc(options);
-        }
-    });
+    sortAbcButton?.addEventListener('click', async () => {
+        switch (paramsState.sort.name) {
+            case 'asc':
+                sortAbcButton.classList.remove('cba');
+                sortAbcButton.classList.add('abc');
+                break;
+            case 'desc':
+                sortAbcButton.classList.remove('abc');
+                sortAbcButton.classList.add('cba');
 
-    async function handleCategoryPriceAbc(options: { data: string; value: string }) {
-        try {
-            const productSort = await getSearch(options);
-            const productSortList = await getProductList(productSort);
-            await updateShopPage(productSortList, elements.sectionShopContainer);
-        } catch (error) {
-            console.error('Произошла ошибка:', error);
+                break;
+            default: {
+                sortAbcButton.classList.remove('abc');
+                sortAbcButton.classList.add('cba');
+            }
         }
-    }
+        paramsState.sort.setName();
+        await smartUpdate();
+    });
 
     const inputContainer = document.querySelector('.shop-search') as HTMLInputElement;
 
