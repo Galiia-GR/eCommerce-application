@@ -2,6 +2,8 @@ import { productList } from './getProducts';
 import { updateShopPage, updateShopPageWithParams, smartUpdate } from './updateShopPage';
 import { elements, dropContent, dropContentColor } from './shopElements';
 import { paramsState } from './paramsState';
+import { helpCreateEl } from '../global/global';
+import icoArrow from '../../assets/images/equal.svg';
 
 export async function createShopPage() {
     const mainTag = document.querySelector('.main') as HTMLElement;
@@ -125,4 +127,20 @@ export async function createShopPage() {
             updateShopPage(productList, elements.sectionShopContainer);
         }
     });
+
+    drawPagin();
+}
+
+function drawPagin() {
+    const sectionShop = document.querySelector('.shop');
+    const paginShopContainer = helpCreateEl('div', 'pagin-container');
+    const prevPagShop = helpCreateEl('img', 'fish-prev') as HTMLImageElement;
+    const numPagShop = helpCreateEl('span', 'fish-num');
+    const nextPagShop = helpCreateEl('img', 'fish-next') as HTMLImageElement;
+    nextPagShop.src = icoArrow;
+    prevPagShop.src = icoArrow;
+    numPagShop.textContent = '1';
+    paginShopContainer.append(prevPagShop, numPagShop, nextPagShop);
+
+    sectionShop?.append(paginShopContainer);
 }
