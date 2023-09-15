@@ -213,7 +213,7 @@ body {
     color: $color-primary-dark-sand;
 }
 
-.profile-scroll {
+.profile-scroll, .basket-scroll {
     position: fixed;
     left: 7%;
     right: 7%;
@@ -222,7 +222,7 @@ body {
     top: 60px;
 }
 
-.profile {
+.profile, .basket {
     background-color: rgba($color: #ffffff, $alpha: 0.9);
     margin: 0 auto;
     display: flex;
@@ -235,6 +235,7 @@ body {
     font-weight: 500;
     gap: 4px;
     width: 100%;
+    min-height: 100%;
 }
 
 .profile input {

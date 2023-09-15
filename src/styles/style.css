@@ -243,7 +243,8 @@ body {
     color: rgb(216, 209, 198);
 }
 
-.profile-scroll {
+.profile-scroll,
+.basket-scroll {
     position: fixed;
     left: 7%;
     right: 7%;
@@ -252,7 +253,8 @@ body {
     top: 60px;
 }
 
-.profile {
+.profile,
+.basket {
     background-color: rgba(255, 255, 255, 0.9);
     margin: 0 auto;
     display: flex;
@@ -265,6 +267,7 @@ body {
     font-weight: 500;
     gap: 4px;
     width: 100%;
+    min-height: 100%;
 }
 
 .profile input {
@@ -1654,21 +1657,18 @@ input:active {
 }
 
 .home-fish__img {
-    margin-top: 20px;
     width: 80px;
     height: 60px;
     align-self: center;
 }
 @media (min-width: 768px) and (max-width: 1180px) {
     .home-fish__img {
-        margin-top: 20px;
         width: 70px;
         height: 50px;
     }
 }
 @media (min-width: 300px) and (max-width: 767px) {
     .home-fish__img {
-        margin-top: 20px;
         width: 60px;
         height: 40px;
     }
@@ -1683,6 +1683,11 @@ input:active {
     display: flex;
     flex-direction: column;
     align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    z-index: 3;
 }
 @media (min-width: 768px) and (max-width: 1180px) {
     .home-fish__item {
@@ -1698,10 +1703,45 @@ input:active {
     }
 }
 
+@keyframes bubble {
+    0% {
+        width: 114px;
+    }
+    10% {
+        width: 116px;
+    }
+    20% {
+        width: 118px;
+    }
+    30% {
+        width: 120px;
+    }
+    40% {
+        width: 122px;
+    }
+    50% {
+        width: 124px;
+    }
+    60% {
+        width: 126px;
+    }
+    70% {
+        width: 124px;
+    }
+    80% {
+        width: 122px;
+    }
+    90% {
+        width: 120px;
+    }
+    100% {
+        width: 118px;
+    }
+}
 .home-fish__item:hover {
     cursor: pointer;
-    transform: translate3d(0, 2px, -2px);
-    box-shadow: 6px 6px 6px #3b3b3b;
+    box-shadow: 3px 3px 3px #3b3b3b;
+    animation: bubble ease-in forwards 0.3s;
 }
 
 .home-fish__title {
