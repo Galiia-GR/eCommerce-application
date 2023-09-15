@@ -48,9 +48,6 @@
     border-radius: 55%;
     background-image: linear-gradient(to top, #00bcd2, #79caeb, #b6d8f7, #e2e9fc, #ffffff);
     display: flex;
-    flex-direction: column;
-    align-self: center;
-    display: flex;
     justify-content: center;
     align-items: center;
     transition: 0.5s;
@@ -123,7 +120,6 @@
 }
 
 .home-fish__item:hover {
-    cursor: pointer;
     box-shadow: 5px 5px 10px 1px #3b3b3b;
     animation: bubble ease-in forwards 0.3s;
 }
