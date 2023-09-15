@@ -1,6 +1,7 @@
 import { helpCreateEl } from '../global/global';
 import { openWindow } from '../login';
 import { Product } from './types';
+import { basketAdd } from './basketAdd';
 
 export function createProductCard(data: Product, i: number): HTMLElement {
     let cardFishOpen = false;
@@ -80,6 +81,9 @@ export function createProductCard(data: Product, i: number): HTMLElement {
         let cardDiscount = helpCreateEl('div', 'card-fish__discount');
 
         cardAddButton.textContent = 'Add to cart';
+        cardAddButton.addEventListener('click', () => {
+            basketAdd(String(localStorage.getItem('basket')), data.id);
+        });
         cardExit.textContent = '×';
 
         data.masterVariant.images.forEach((el) => {

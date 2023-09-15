@@ -21,6 +21,9 @@ export async function autoSignUpCustomer(): Promise<void> {
         customerHeaderUserEl.textContent = `Home ${customerfirstName}`;
         loginOpen.textContent = 'LOG OUT';
     } else {
+        if (localStorage.getItem('anonymousToken')) {
+            return undefined;
+        }
         const response1 = await axios({
             url: 'https://auth.us-central1.gcp.commercetools.com/oauth/ecommercerszxc22845345034582/anonymous/token',
             method: 'post',
@@ -35,6 +38,8 @@ export async function autoSignUpCustomer(): Promise<void> {
         });
         localStorage.setItem('anonymousToken', response1.data.access_token);
     }
+
+    return undefined;
 }
 
 autoSignUpCustomer();

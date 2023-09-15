@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-export async function createBasket(): Promise<string> {
+export async function createBasket(): Promise<string | undefined> {
+    if (localStorage.getItem('basket')) {
+        return undefined;
+    }
+
     let response;
 
     if (localStorage.getItem('accessToken')) {
@@ -31,6 +35,8 @@ export async function createBasket(): Promise<string> {
         );
     }
 
+    localStorage.setItem('basket', response.data.id);
+    localStorage.setItem('basketVersion', response.data.version);
     console.log(await response.data);
     return response.data;
 }
