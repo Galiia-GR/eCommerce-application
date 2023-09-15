@@ -1,6 +1,10 @@
+import axios from 'axios';
 import { helpCreateEl } from '../global/global';
 import { signUpCustomer } from './signUp';
 import { addError } from '../register';
+
+let clientId = 'ZRQmbO9VlpcxkW02x53wkkKs';
+let clientSecret = '92GxY9MdGYusDRy-h9d6rtXKxtE7cm8Y';
 
 export const loginBack = helpCreateEl('div', 'account-background') as HTMLElement;
 
@@ -219,12 +223,25 @@ export function createLoginWindow(): void {
             }
         });
     });
-    loginOpen.addEventListener('click', () => {
+    loginOpen.addEventListener('click', async () => {
         if (localStorage.getItem('accessToken')) {
             localStorage.clear();
             loginOpen.textContent = 'LOGIN';
             const customerHeaderUserEl = document.querySelector('.logo-userName') as HTMLElement;
             customerHeaderUserEl.textContent = `Home`;
+            const response1 = await axios({
+                url: 'https://auth.us-central1.gcp.commercetools.com/oauth/ecommercerszxc22845345034582/anonymous/token',
+                method: 'post',
+                params: {
+                    grant_type: 'client_credentials',
+                    scope: 'manage_project:ecommercerszxc22845345034582',
+                },
+                headers: {
+                    Authorization: `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+            });
+            localStorage.setItem('anonymousToken', response1.data.access_token);
         } else {
             openWindow(loginBack, mainPage);
         }
