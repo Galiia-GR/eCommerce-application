@@ -15,3 +15,18 @@ export type Product = {
 export type ProductList = Array<Product>;
 export type ProductAndElement = [Product, HTMLElement];
 export type ProductComplianceList = Array<ProductAndElement>;
+export type ParamsState = {
+    filter: {
+        category: string;
+        color: string;
+        getFilter: { (): null | string[] };
+    };
+    sort: {
+        price: string;
+        name: string;
+        setPrice: { (): void };
+        setName: { (): void };
+        getSort: { (): null | string[] };
+    };
+    paramsRecord: { (): Record<string, string | number | string[]> };
+};
