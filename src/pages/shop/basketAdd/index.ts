@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export async function basketAdd(basketId: string, productId: string): Promise<string> {
+export async function basketAdd(basketId: string, productId1: string): Promise<string> {
     let response;
 
     if (localStorage.getItem('accessToken')) {
@@ -12,7 +12,7 @@ export async function basketAdd(basketId: string, productId: string): Promise<st
                     actions: [
                         {
                             action: 'addLineItem',
-                            productId: productId,
+                            productId: productId1,
                             variantId: 1,
                             quantity: 1,
                         },
@@ -33,7 +33,7 @@ export async function basketAdd(basketId: string, productId: string): Promise<st
                     actions: [
                         {
                             action: 'addLineItem',
-                            productId: productId,
+                            productId: productId1,
                             variantId: 1,
                             quantity: 1,
                         },
@@ -55,7 +55,7 @@ export async function basketAdd(basketId: string, productId: string): Promise<st
                 actions: [
                     {
                         action: 'addLineItem',
-                        productId: productId,
+                        productId: productId1,
                         variantId: 1,
                         quantity: 1,
                     },
