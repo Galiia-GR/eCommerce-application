@@ -2,6 +2,7 @@ import { helpCreateEl } from '../global/global';
 import { openWindow } from '../login';
 import { Product } from './types';
 import { basketAdd } from './basketAdd';
+import icoDelete from '../../assets/images/delete.png';
 
 export function createProductCard(data: Product, i: number): HTMLElement {
     let cardFishOpen = false;
@@ -37,6 +38,19 @@ export function createProductCard(data: Product, i: number): HTMLElement {
     costContainer.append(cost);
     costContainer.append(discount);
     costContainer.append(currency);
+
+    const howManyContainer = helpCreateEl('div', 'how-many-container');
+    containerItem.append(howManyContainer);
+
+    const buttonMinus = helpCreateEl('button', 'button-minus');
+    const howMany = helpCreateEl('p', 'how-many');
+    howMany.textContent = 'num';
+    buttonMinus.textContent = '-';
+    const buttonPlus = helpCreateEl('button', 'button-plus');
+    buttonPlus.textContent = '+';
+    const buttonDelete = helpCreateEl('img', 'button-delete') as HTMLImageElement;
+    buttonDelete.src = icoDelete;
+    howManyContainer.append(buttonMinus, howMany, buttonPlus, buttonDelete);
 
     const getSum = `${data.masterVariant.prices[0].value.centAmount}`;
 
@@ -77,14 +91,24 @@ export function createProductCard(data: Product, i: number): HTMLElement {
         let cardDescribe = helpCreateEl('div', 'card-fish__description');
         let cardPrice = helpCreateEl('div', 'card-fish__price');
         let cardAddButton = helpCreateEl('button', 'card-fish__button');
+        let contHowMany = helpCreateEl('div', 'how-many-contain');
+        let buttonMin = helpCreateEl('button', 'button-minus');
+        let buttonDel = helpCreateEl('img', 'button-delete') as HTMLImageElement;
+        buttonDel.src = icoDelete;
+        let count = helpCreateEl('p', 'how-many');
+        let buttonPl = helpCreateEl('button', 'button-plus');
         let cardExit = helpCreateEl('button', 'card-fish__exit');
         let cardDiscount = helpCreateEl('div', 'card-fish__discount');
+        contHowMany.append(buttonMin, count, buttonPl, buttonDel);
 
         cardAddButton.textContent = 'Add to cart';
         cardAddButton.addEventListener('click', () => {
             basketAdd(String(localStorage.getItem('basket')), data.id);
         });
         cardExit.textContent = '×';
+        buttonMin.textContent = '-';
+        buttonPl.textContent = '+';
+        count.textContent = 'num';
 
         data.masterVariant.images.forEach((el) => {
             let cardImg = helpCreateEl('img', 'card-fish__img') as HTMLImageElement;
@@ -131,7 +155,16 @@ export function createProductCard(data: Product, i: number): HTMLElement {
         cardPrice.innerText = `${costPartFirst},${costPartSecond} USD`;
 
         background.append(card);
-        card.append(cardTitle, cardImgsContainer, cardDescribe, cardAddButton, cardPrice, cardDiscount, cardExit);
+        card.append(
+            cardTitle,
+            cardImgsContainer,
+            cardDescribe,
+            cardAddButton,
+            cardPrice,
+            contHowMany,
+            cardDiscount,
+            cardExit
+        );
 
         let leftButton = helpCreateEl('div', 'card-fish__arrow_left');
         cardImgsContainer.append(leftButton);

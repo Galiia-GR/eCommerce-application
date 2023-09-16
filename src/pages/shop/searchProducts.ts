@@ -1,33 +1,13 @@
 import axios from 'axios';
 import { acessToken } from '../register/getBearerToken';
-import { ProductList } from './types';
+import { ProductList, ParamsState } from './types';
 
-export async function getSearch(options: {
-    data?: string;
-    value?: string;
-    categoryId?: string;
-    priceRange?: string;
-    color?: string;
-}): Promise<ProductList> {
+export async function getSearch(options: ParamsState): Promise<ProductList> {
     const token = acessToken.toString();
 
-    const { categoryId, data, value, color } = options;
-    const filters: string[] = [];
-    if (categoryId) {
-        filters.push(`categories.id: subtree("${categoryId}")`);
-    }
+    const params: Record<string, string | number | string[]> = options.paramsRecord();
 
-    if (color) {
-        filters.push(`categories.id: subtree("${color}")`);
-    }
-
-    const params: Record<string, string | number | string[]> = {
-        limit: 500,
-        filter: filters,
-    };
-    if (data && value) {
-        params.sort = `${data} ${value}`;
-    }
+    console.log('?????????????????');
 
     const response = await axios({
         url: `https://api.us-central1.gcp.commercetools.com/ecommercerszxc22845345034582/product-projections/search`,
