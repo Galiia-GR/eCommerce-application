@@ -29,3 +29,7 @@ export interface responseCustomer {
     defaultShippingAddressId: string;
     defaultBillingAddressId: string;
 }
+
+export interface basketData {
+    lineItems: [];
+}
