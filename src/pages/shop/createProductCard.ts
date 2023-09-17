@@ -142,7 +142,9 @@ export function createProductCard(data: Product, i: number): HTMLElement {
 
             cardAddButton.textContent = 'Add to cart';
             cardAddButton.addEventListener('click', () => {
-                basketAdd(String(localStorage.getItem('basket')), data.id, Number(count.textContent));
+                basketAdd(String(localStorage.getItem('basket')), data.id, Number(count.textContent)).then((result) => {
+                    console.log(result);
+                });
             });
 
             data.masterVariant.images.forEach((el) => {

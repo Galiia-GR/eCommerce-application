@@ -37,6 +37,6 @@ export async function createBasket(): Promise<string | undefined> {
 
     localStorage.setItem('basket', response.data.id);
     localStorage.setItem('basketVersion', response.data.version);
-    console.log(await response.data);
+    console.log(await response.data, 'UUU');
     return response.data;
 }
