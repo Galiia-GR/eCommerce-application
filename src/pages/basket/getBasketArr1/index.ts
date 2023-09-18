@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export async function getBasketArr(basketId: string): Promise<[] | undefined> {
+export async function getBasketArr1(basketId: string): Promise<[] | undefined> {
     if (localStorage.getItem('basket')) {
         let response;
 

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getBasketArr } from 'src/pages/shop/getBasketArr';
+import { getBasketArr1 } from './getBasketArr1';
 
 interface arrEl {
     name: {
@@ -7,18 +7,21 @@ interface arrEl {
     };
     id: string;
     quantity: number;
+    productId: string;
 }
 
-export async function basketDeleteAll(basketId: string, itemName: string): Promise<string | undefined> {
+export async function basketDeleteOne(basketId: string, itemName: string): Promise<string | undefined> {
     let response;
     let basId;
 
-    const basketDat = (await getBasketArr(String(localStorage.getItem('basket')))) as [];
+    const basketDat = (await getBasketArr1(String(localStorage.getItem('basket')))) as [];
     let itemQuantityFix = 1;
 
     basketDat.forEach((el: arrEl) => {
         if (el.name.en === itemName) {
-            itemQuantityFix = el.quantity;
+            if (el.quantity === 1) {
+                itemQuantityFix = 0;
+            }
             basId = el.id;
         }
     });
