@@ -698,6 +698,14 @@ body {
     border: solid 2px rgba(216, 78, 78, 0.7);
 }
 
+.shop-sorting {
+    margin-top: 36px;
+}
+
+.shop-search {
+    padding-left: 15px;
+}
+
 .hamburger__line::after,
 .hamburger::after,
 .hamburger::before {
