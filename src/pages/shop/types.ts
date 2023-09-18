@@ -34,6 +34,7 @@ export type ParamsState = {
 export type prodsCart = {
     id: string;
     lineItems: Array<{
+        productId: string;
         id: string;
         name: { en: string };
         price: {
