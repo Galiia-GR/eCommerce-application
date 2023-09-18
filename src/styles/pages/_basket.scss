@@ -33,6 +33,13 @@
     padding: 20px;
     border: 1px solid rgb(88, 152, 186, 0.5);
     border-radius: 20px;
+    @include media-tablet {
+        gap: 20px;
+    }
+    @include media-mobile {
+        gap: 5px;
+        flex-direction: column;
+    }
 }
 
 .product-img {
@@ -49,8 +56,12 @@
 }
 
 .total-sum-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     align-self: flex-end;
     padding: 50px;
+    gap: 10px;
 }
 
 .product-price-container {
@@ -86,4 +97,10 @@
 
 .how-many-basket {
     color: $color-primary-dark-blue;
+}
+
+.input-promocode {
+    border: 2px solid $color-primary-blue;
+    border-radius: 20px;
+    height: 25px;
 }
