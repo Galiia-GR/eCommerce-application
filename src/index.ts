@@ -14,6 +14,7 @@ import './pages/register/setDefaultShipping';
 import './pages/global/hamburger';
 import './pages/login/signUp/autoSignUp';
 import './pages/home/connectHomeShop';
+import './pages/basket/createBasket';
 
 window.location.hash = '/';
 sessionStorage.setItem('width', '0');

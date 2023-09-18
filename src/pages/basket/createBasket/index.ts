@@ -40,3 +40,5 @@ export async function createBasket(): Promise<string | undefined> {
     console.log(await response.data);
     return response.data;
 }
+
+createBasket();
