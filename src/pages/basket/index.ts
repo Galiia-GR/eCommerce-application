@@ -1,10 +1,13 @@
 import { helpCreateEl } from '../global/global';
+import { basketDeleteAll } from './basketDelall';
+import { basketDeleteOne } from './basketDelone';
 import { createBasket } from './createBasket';
 import { getBasket } from './getBasket';
 import icoDelete from '../../assets/images/delete.png';
 import icoCart from '../../assets/images/cart.png';
 import { basketPromo } from '../shop/basketPromo';
 import { prodsCart } from '../shop/types';
+import { basketAddOne } from './basketAddOne';
 
 export async function createBasketPage() {
     const mainTag = document.querySelector('.main') as HTMLElement;
@@ -101,10 +104,24 @@ function drawBasketItems(response: prodsCart) {
         const howMany = helpCreateEl('p', 'how-many-basket');
         howMany.textContent = `${el.quantity}`;
         buttonMinus.textContent = '-';
+        buttonMinus.addEventListener('click', async () => {
+            if (Number(howMany.textContent) !== 1) {
+                howMany.textContent = await String(Number(howMany.textContent) - 1);
+                await basketDeleteOne(String(localStorage.getItem('basket')), el.name.en);
+            }
+        });
         const buttonPlus = helpCreateEl('button', 'button-plus');
         buttonPlus.textContent = '+';
+        buttonPlus.addEventListener('click', async () => {
+            howMany.textContent = await String(Number(howMany.textContent) + 1);
+            await basketAddOne(String(localStorage.getItem('basket')), el.productId);
+        });
         const buttonDelete = helpCreateEl('img', 'button-delete') as HTMLImageElement;
         buttonDelete.src = icoDelete;
+        buttonDelete.addEventListener('click', async () => {
+            await basketDeleteAll(String(localStorage.getItem('basket')), el.name.en);
+            createBasketPage();
+        });
 
         basketItem.append(imgProduct, titleProduct, priceProductContain, howManyContainer);
         howManyContainer.append(buttonMinus, howMany, buttonPlus, buttonDelete);
