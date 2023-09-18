@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { prodsCart } from '../../shop/types';
 
-export async function basketPromo(basketId: string, code: string): Promise<string> {
+export async function basketPromo(basketId: string, code: string): Promise<prodsCart> {
     let response;
 
     if (localStorage.getItem('accessToken')) {
