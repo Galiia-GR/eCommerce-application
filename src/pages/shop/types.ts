@@ -41,7 +41,14 @@ export type prodsCart = {
                 currencyCode: string;
                 centAmount: number;
             };
+            discounted: {
+                value: {
+                    currencyCode: string;
+                    centAmount: number;
+                };
+            };
         };
+        value: { centAmount: number };
         quantity: number;
         variant: {
             images: Array<{ url: string }>;

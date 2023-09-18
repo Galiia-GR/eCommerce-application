@@ -2282,6 +2282,11 @@ input:active {
     border: 2px solid rgb(88, 152, 186);
     border-radius: 20px;
     height: 25px;
+    width: 200px;
+}
+
+.input-text {
+    width: 200px;
 }
 
 /*# sourceMappingURL=style.css.map */

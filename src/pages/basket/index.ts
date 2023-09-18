@@ -15,13 +15,12 @@ export async function createBasketPage() {
     sectionBasketContainer.append(sectionBasket);
     await createBasket();
 
-    const cartItems = getBasket(`${localStorage.getItem('basket')}`).then((result) => {
+    const cartItems = await getBasket(`${localStorage.getItem('basket')}`).then((result) => {
         const response = result;
         return response;
     });
 
-    const productsCart = await cartItems;
-    const arrCartItems = productsCart?.lineItems;
+    const arrCartItems = cartItems?.lineItems;
 
     const basketContain = document.querySelector('.basket') as HTMLElement;
 
@@ -30,8 +29,11 @@ export async function createBasketPage() {
     const basketImg = helpCreateEl('img', 'basket-title-img') as HTMLImageElement;
     basketImg.src = icoCart;
     basketTitle.textContent = 'you cart';
+    const tipPromo = helpCreateEl('p', 'promo');
+    tipPromo.textContent = 'your promo code: GOLDEN';
+    tipPromo.style.color = 'orange';
 
-    basketTitleContain.append(basketImg, basketTitle);
+    basketTitleContain.append(basketImg, basketTitle, tipPromo);
 
     const productsBasketContain = helpCreateEl('div', 'products-basket');
 
@@ -51,25 +53,40 @@ export async function createBasketPage() {
     totalSumContain.append(inputPromocode, inputText, totalSum, totalSumPromo, totalButton);
 
     if (arrCartItems) {
-        drawBasketItems(productsCart);
+        productsBasketContain.innerHTML = '';
+        drawBasketItems(cartItems);
     }
-    const sum = String(productsCart?.totalPrice.centAmount);
+    const sum = String(cartItems?.totalPrice.centAmount);
     const valuePartFirst = sum.slice(0, -2);
     const valuePartSecond = sum.slice(sum.length - 2);
     totalSum.textContent = `total ${valuePartFirst},${valuePartSecond} USD`;
 
-    inputPromocode.addEventListener('input', () => {
+    inputPromocode.addEventListener('input', async () => {
         const valueCode = inputPromocode.value;
         if (!valueCode) {
             inputText.textContent = '';
         } else if (valueCode === 'GOLDEN') {
             inputText.textContent = `success promo code ${valueCode}`;
             inputText.style.color = 'green';
-            basketPromo(String(localStorage.getItem('basket')), `${valueCode}`).then((result) => {
-                console.log(result);
-            });
+            const cartItemsPromo = await basketPromo(String(localStorage.getItem('basket')), `${valueCode}`).then(
+                (result) => {
+                    const response = result;
+                    return response;
+                }
+            );
+            const arrCartItemsPromo = cartItemsPromo.lineItems;
+            if (arrCartItemsPromo) {
+                productsBasketContain.innerHTML = '';
+                drawBasketItems(cartItemsPromo);
+            }
+            const sumPromo = String(cartItemsPromo?.totalPrice.centAmount);
+            const valuePartFirstPromo = sumPromo.slice(0, -2);
+            const valuePartSecondPromo = sumPromo.slice(sum.length - 2);
+            totalSum.textContent = `total ${valuePartFirstPromo},${valuePartSecondPromo} USD`;
+
+            console.log(cartItemsPromo);
         } else {
-            inputText.textContent = `invalid promo code ${valueCode}`;
+            inputText.textContent = `invalid promo code: ${valueCode}`;
             inputText.style.color = 'red';
         }
     });
@@ -77,6 +94,8 @@ export async function createBasketPage() {
 
 function drawBasketItems(response: prodsCart) {
     const arrCartItems = response?.lineItems;
+    console.log(arrCartItems);
+
     arrCartItems.forEach((el) => {
         const basketItem = helpCreateEl('div', 'basket-item');
         const imgProduct = helpCreateEl('img', 'product-img') as HTMLImageElement;
@@ -86,15 +105,27 @@ function drawBasketItems(response: prodsCart) {
         const priceProductContain = helpCreateEl('div', 'product-price-container');
         const priceProduct = helpCreateEl('p', 'product-price');
         const priceDiscount = helpCreateEl('p', 'product-price-discount');
-        const getSum = `${el.price.value.centAmount}`;
-        console.log(getSum);
-        const valuePartFirst = getSum.slice(0, -2);
-        const valuePartSecond = getSum.slice(getSum.length - 2);
-
         const currency = `${el.price.value.currencyCode}`;
-        priceProduct.textContent = `${valuePartFirst},${valuePartSecond} ${currency}`;
-        priceDiscount.textContent = 'promo';
-        priceProductContain.append(priceProduct, priceDiscount);
+
+        if (el.price.discounted && el.price.discounted.value !== undefined) {
+            const discountPrice = `${el.price.discounted.value.centAmount}`;
+            const valuePartFirst = discountPrice.slice(0, -2);
+            const valuePartSecond = discountPrice.slice(discountPrice.length - 2);
+            priceDiscount.textContent = `${valuePartFirst},${valuePartSecond} ${currency}`;
+
+            const getSum = `${el.price.value.centAmount}`;
+            const valuePartFirstPrice = getSum.slice(0, -2);
+            const valuePartSecondPrice = getSum.slice(getSum.length - 2);
+            priceProduct.textContent = `${valuePartFirstPrice},${valuePartSecondPrice} ${currency}`;
+            priceProduct.style.textDecoration = 'line-through';
+            priceProduct.style.fontSize = '16px';
+        } else {
+            priceDiscount.textContent = '';
+            const getSum = `${el.price.value.centAmount}`;
+            const valuePartFirstPrice = getSum.slice(0, -2);
+            const valuePartSecondPrice = getSum.slice(getSum.length - 2);
+            priceProduct.textContent = `${valuePartFirstPrice},${valuePartSecondPrice} ${currency}`;
+        }
 
         const howManyContainer = helpCreateEl('div', 'how-many-container');
         const buttonMinus = helpCreateEl('button', 'button-minus');
@@ -105,6 +136,8 @@ function drawBasketItems(response: prodsCart) {
         buttonPlus.textContent = '+';
         const buttonDelete = helpCreateEl('img', 'button-delete') as HTMLImageElement;
         buttonDelete.src = icoDelete;
+
+        priceProductContain.append(priceProduct, priceDiscount);
 
         basketItem.append(imgProduct, titleProduct, priceProductContain, howManyContainer);
         howManyContainer.append(buttonMinus, howMany, buttonPlus, buttonDelete);
