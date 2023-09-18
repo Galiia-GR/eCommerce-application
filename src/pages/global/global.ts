@@ -1,6 +1,7 @@
 import fishHome from '../../assets/images/fishHome.png';
 import git from '../../assets/images/gitSvg.svg';
 import rss from '../../assets/images/rss.svg';
+import icoBasket from '../../assets/images/cartHome.png';
 
 export function helpCreateEl(tagName: string, className: string) {
     const el = document.createElement(tagName);
@@ -39,7 +40,7 @@ export function createHeader() {
 
     const navigation = helpCreateEl('ul', 'navigation');
     navContainer.append(navigation);
-    const arrNav = ['SHOP', 'SHIPPING', 'ABOUT', 'CONTACTS', 'LOGIN', 'REGISTER', 'PROFILE', 'BASKET'];
+    const arrNav = ['SHOP', 'ABOUT', 'LOGIN', 'REGISTER', 'PROFILE', 'BASKET'];
 
     for (let i = 0; i < arrNav.length; i += 1) {
         const item = helpCreateEl('li', 'navigation-item');
@@ -47,6 +48,11 @@ export function createHeader() {
         navigation.appendChild(item);
         item.textContent = arrNav[i];
     }
+    const basket = document.querySelector('.BASKET') as HTMLElement;
+    basket.textContent = '';
+    const icoCart = helpCreateEl('img', 'basket-home-img BASKET') as HTMLImageElement;
+    basket?.append(icoCart);
+    icoCart.src = icoBasket;
 
     const mainTag = helpCreateEl('main', 'main');
     bodyContainer?.append(mainTag);

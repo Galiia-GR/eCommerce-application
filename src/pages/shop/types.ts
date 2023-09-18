@@ -30,3 +30,24 @@ export type ParamsState = {
     };
     paramsRecord: { (): Record<string, string | number | string[]> };
 };
+
+export type prodsCart = {
+    id: string;
+    lineItems: Array<{
+        id: string;
+        name: { en: string };
+        price: {
+            value: {
+                currencyCode: string;
+                centAmount: number;
+            };
+        };
+        quantity: number;
+        variant: {
+            images: Array<{ url: string }>;
+        };
+    }>;
+    totalPrice: {
+        centAmount: number;
+    };
+};

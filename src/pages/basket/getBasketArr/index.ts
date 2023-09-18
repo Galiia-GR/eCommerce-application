@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { prodsCart } from '../../shop/types';
 
-export async function getBasket(basketId: string): Promise<prodsCart | undefined> {
+export async function getBasketArr(basketId: string): Promise<[] | undefined> {
     if (localStorage.getItem('basket')) {
         let response;
 
@@ -40,8 +39,8 @@ export async function getBasket(basketId: string): Promise<prodsCart | undefined
         }
 
         localStorage.setItem('basketVersion', response.data.version);
-        console.log(await response.data, 'CCC');
-        return response.data;
+        console.log(await response.data);
+        return response.data.lineItems;
     }
     return undefined;
 }
