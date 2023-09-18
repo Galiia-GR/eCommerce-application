@@ -3,6 +3,7 @@ import { openWindow } from '../login';
 import { Product } from './types';
 import { basketAdd } from './basketAdd';
 import icoDelete from '../../assets/images/delete.png';
+import { basketDelete } from './basketDelete';
 
 export function createProductCard(data: Product, i: number): HTMLElement {
     let cardFishOpen = false;
@@ -50,6 +51,9 @@ export function createProductCard(data: Product, i: number): HTMLElement {
     buttonPlus.textContent = '+';
     const buttonDelete = helpCreateEl('img', 'button-delete') as HTMLImageElement;
     buttonDelete.src = icoDelete;
+    buttonDelete.addEventListener('click', () => {
+        basketDelete(String(localStorage.getItem('basket')), data.name.en, String(howMany.textContent));
+    });
     howManyContainer.append(buttonMinus, howMany, buttonPlus, buttonDelete);
 
     let currentCount = 1;
@@ -138,6 +142,10 @@ export function createProductCard(data: Product, i: number): HTMLElement {
             buttonPl.addEventListener('click', () => {
                 curCount += 1;
                 count.textContent = String(curCount);
+            });
+
+            buttonDel.addEventListener('click', () => {
+                basketDelete(String(localStorage.getItem('basket')), data.name.en, String(count.textContent));
             });
 
             cardAddButton.textContent = 'Add to cart';
