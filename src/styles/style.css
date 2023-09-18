@@ -2208,6 +2208,17 @@ input:active {
     border: 1px solid rgba(88, 152, 186, 0.5);
     border-radius: 20px;
 }
+@media (min-width: 768px) and (max-width: 1180px) {
+    .basket-item {
+        gap: 20px;
+    }
+}
+@media (min-width: 300px) and (max-width: 767px) {
+    .basket-item {
+        gap: 5px;
+        flex-direction: column;
+    }
+}
 
 .product-img {
     width: 70px;
@@ -2223,8 +2234,12 @@ input:active {
 }
 
 .total-sum-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     align-self: flex-end;
     padding: 50px;
+    gap: 10px;
 }
 
 .product-price-container {
@@ -2261,6 +2276,12 @@ input:active {
 
 .how-many-basket {
     color: rgb(60, 82, 113);
+}
+
+.input-promocode {
+    border: 2px solid rgb(88, 152, 186);
+    border-radius: 20px;
+    height: 25px;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -32,6 +32,7 @@ export type ParamsState = {
 };
 
 export type prodsCart = {
+    id: string;
     lineItems: Array<{
         id: string;
         name: { en: string };
@@ -45,8 +46,8 @@ export type prodsCart = {
         variant: {
             images: Array<{ url: string }>;
         };
-        totalPrice: {
-            centAmount: number;
-        };
     }>;
+    totalPrice: {
+        centAmount: number;
+    };
 };

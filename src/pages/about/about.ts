@@ -7,5 +7,6 @@ export function createAboutUsPage() {
     const sectionAboutContainer = helpCreateEl('div', 'about-container');
     mainTag.append(sectionAbout);
     sectionAbout.append(sectionAboutContainer);
-    sectionAboutContainer.innerText = 'Not completed yet ABOUT US';
+    sectionAboutContainer.innerText = 'hello please hold on we are doing this section';
+    sectionAboutContainer.style.color = 'red';
 }
