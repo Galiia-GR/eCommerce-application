@@ -7,8 +7,6 @@ export async function getSearch(options: ParamsState): Promise<ProductList> {
 
     const params: Record<string, string | number | string[]> = options.paramsRecord();
 
-    console.log('?????????????????');
-
     const response = await axios({
         url: `https://api.us-central1.gcp.commercetools.com/ecommercerszxc22845345034582/product-projections/search`,
         method: 'get',

@@ -1,7 +1,5 @@
 import { createAboutUsPage } from './about/about';
-import { createShippingPage } from './shipping/shipping';
 import { createShopPage } from './shop/createShopPage';
-import { createContactsPage } from './contacts/contacts';
 import { createMain } from './home/home';
 import { createError } from './error/error';
 import { createProfilePage } from './profile';
@@ -38,14 +36,10 @@ function menuItemClickHandle(event: Event) {
         window.location.hash = '/shop';
     } else if (navClikedEl === 'PROFILE') {
         window.location.hash = '/profile';
-    } else if (navClikedEl === 'SHIPPING') {
-        window.location.hash = '/shipping';
-    } else if (navClikedEl === 'BASKET') {
+    } else if (element.classList.contains('BASKET')) {
         window.location.hash = '/basket';
     } else if (navClikedEl === 'ABOUT') {
         window.location.hash = '/about';
-    } else if (navClikedEl === 'CONTACTS') {
-        window.location.hash = '/contacts';
     } else if (navClikedEl === 'LOGIN') {
         if (submitLogin) {
             window.location.hash = '/';
@@ -71,10 +65,6 @@ function routeChange() {
     });
 }
 
-// productList.forEach((el) => {
-//     console.log(el[0].slug.en);
-// });
-
 export function renderPage(path: string) {
     switch (path) {
         case '/': {
@@ -88,17 +78,11 @@ export function renderPage(path: string) {
         case '/profile': {
             return createProfilePage();
         }
-        case '/shipping': {
-            return createShippingPage();
-        }
         case '/basket': {
             return createBasketPage();
         }
         case '/about': {
             return createAboutUsPage();
-        }
-        case '/contacts': {
-            return createContactsPage();
         }
         case '/login': {
             const loginOpen = document.querySelector('.LOGIN') as HTMLElement;
