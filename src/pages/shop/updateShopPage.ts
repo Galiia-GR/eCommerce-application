@@ -13,14 +13,7 @@ export async function updateShopPage(productComplianceList: ProductComplianceLis
 
 export async function updateShopPageWithParams(): Promise<void> {
     const productSort = await getSearch(paramsState);
-    const productSortList = await getProductList(productSort);
-    await updateShopPage(productSortList, elements.sectionShopContainer);
-}
-
-export async function smartUpdate(): Promise<void> {
-    if (paramsState.filter.getFilter() === null && paramsState.sort.getSort() === null) {
-        await updateShopPage(productList, elements.sectionShopContainer);
-    } else {
-        await updateShopPageWithParams();
-    }
+    productList.length = 0;
+    productList.push(...(await getProductList(productSort)));
+    await updateShopPage(productList, elements.sectionShopContainer);
 }

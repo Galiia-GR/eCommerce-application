@@ -3,7 +3,7 @@ import { createShopPage } from './shop/createShopPage';
 import { createMain } from './home/home';
 import { createError } from './error/error';
 import { createProfilePage } from './profile';
-import { productList } from './shop/getProducts';
+import { allProductList } from './shop/getProducts';
 import { ProductAndElement } from './shop/types';
 import { createBasketPage } from './basket';
 
@@ -103,7 +103,7 @@ export function renderPage(path: string) {
             return undefined;
         }
         default: {
-            const res: ProductAndElement | undefined = productList.find(
+            const res: ProductAndElement | undefined = allProductList.find(
                 (e) => `#/shop/${e[0].slug.en}` === window.location.hash
             );
             if (res) {

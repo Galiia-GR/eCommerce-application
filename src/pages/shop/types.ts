@@ -28,6 +28,14 @@ export type ParamsState = {
         setName: { (): void };
         getSort: { (): null | string[] };
     };
+    pagin: {
+        limit: number;
+        offset: { (): number };
+        total: number;
+        page: number;
+        pageCount: { (): number };
+        setPagin: { (page: number, total?: number): void };
+    };
     paramsRecord: { (): Record<string, string | number | string[]> };
 };
 

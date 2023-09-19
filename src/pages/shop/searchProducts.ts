@@ -16,6 +16,13 @@ export async function getSearch(options: ParamsState): Promise<ProductList> {
         },
     });
 
+    if (options.pagin.limit === 500) {
+        options.pagin.limit = 6;
+    }
+    if (options.pagin.total !== response.data.total) {
+        options.pagin.setPagin(0, response.data.total);
+    }
+
     const productsArrEcom = response.data.results;
 
     return productsArrEcom;
