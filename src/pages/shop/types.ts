@@ -33,6 +33,10 @@ export type ParamsState = {
 
 export type prodsCart = {
     id: string;
+    discountCodes: Array<{
+        id: string;
+        typeId: string;
+    }>;
     lineItems: Array<{
         productId: string;
         id: string;

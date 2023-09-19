@@ -40,7 +40,7 @@ export async function getBasket(basketId: string): Promise<prodsCart | undefined
         }
 
         localStorage.setItem('basketVersion', response.data.version);
-        console.log(await response.data, 'CCC');
+        console.log(await response.data);
         return response.data;
     }
     return undefined;
