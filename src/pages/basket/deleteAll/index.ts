@@ -1,6 +1,5 @@
 import { getBasketArr1 } from '../getBasketArr1';
 import { basketDeleteAll } from '../basketDelall';
-import { createBasketPage } from '..';
 
 interface arrEl {
     name: {
