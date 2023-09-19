@@ -8,6 +8,7 @@ import icoCart from '../../assets/images/cart.png';
 import { basketPromo } from '../shop/basketPromo';
 import { prodsCart } from '../shop/types';
 import { basketAddOne } from './basketAddOne';
+import { basketDeleteAllItems } from './deleteAll';
 
 export async function createBasketPage() {
     const mainTag = document.querySelector('.main') as HTMLElement;
@@ -32,7 +33,7 @@ export async function createBasketPage() {
     const basketTitle = helpCreateEl('h3', 'basket-title');
     const basketImg = helpCreateEl('img', 'basket-title-img') as HTMLImageElement;
     basketImg.src = icoCart;
-    basketTitle.textContent = 'you cart';
+    basketTitle.textContent = 'Your cart';
 
     basketTitleContain.append(basketImg, basketTitle);
 
@@ -48,13 +49,17 @@ export async function createBasketPage() {
     const totalSumPromo = helpCreateEl('p', 'total-sum');
 
     const totalButton = helpCreateEl('button', 'total-button');
-    totalButton.textContent = 'confirm order';
+    totalButton.textContent = 'Clear basket';
+    totalButton.addEventListener('click', async () => {
+        basketDeleteAllItems(createBasketPage);
+    });
 
     basketContain.append(basketTitleContain, productsBasketContain, totalSumContain);
     totalSumContain.append(inputPromocode, inputText, totalSum, totalSumPromo, totalButton);
 
     if (arrCartItems) {
-        drawBasketItems(productsCart);
+        await drawBasketItems(productsCart);
+        await createBasket();
     }
     const sum = String(productsCart?.totalPrice.centAmount);
     const valuePartFirst = sum.slice(0, -2);
@@ -66,13 +71,13 @@ export async function createBasketPage() {
         if (!valueCode) {
             inputText.textContent = '';
         } else if (valueCode === 'GOLDEN') {
-            inputText.textContent = `success promo code ${valueCode}`;
+            inputText.textContent = `Success promo code ${valueCode}`;
             inputText.style.color = 'green';
             basketPromo(String(localStorage.getItem('basket')), `${valueCode}`).then((result) => {
                 console.log(result);
             });
         } else {
-            inputText.textContent = `invalid promo code ${valueCode}`;
+            inputText.textContent = `Invalid promo code ${valueCode}`;
             inputText.style.color = 'red';
         }
     });
@@ -108,6 +113,7 @@ function drawBasketItems(response: prodsCart) {
             if (Number(howMany.textContent) !== 1) {
                 howMany.textContent = await String(Number(howMany.textContent) - 1);
                 await basketDeleteOne(String(localStorage.getItem('basket')), el.name.en);
+                await createBasketPage();
             }
         });
         const buttonPlus = helpCreateEl('button', 'button-plus');
@@ -115,12 +121,13 @@ function drawBasketItems(response: prodsCart) {
         buttonPlus.addEventListener('click', async () => {
             howMany.textContent = await String(Number(howMany.textContent) + 1);
             await basketAddOne(String(localStorage.getItem('basket')), el.productId);
+            await createBasketPage();
         });
         const buttonDelete = helpCreateEl('img', 'button-delete') as HTMLImageElement;
         buttonDelete.src = icoDelete;
         buttonDelete.addEventListener('click', async () => {
             await basketDeleteAll(String(localStorage.getItem('basket')), el.name.en);
-            createBasketPage();
+            await createBasketPage();
         });
 
         basketItem.append(imgProduct, titleProduct, priceProductContain, howManyContainer);

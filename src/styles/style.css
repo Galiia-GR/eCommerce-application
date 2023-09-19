@@ -722,6 +722,25 @@ body {
     padding-left: 15px;
 }
 
+.navigation-item {
+    transform: translateY(-4px);
+}
+
+.BASKET {
+    transform: translateY(-1px);
+    filter: brightness();
+}
+
+.input-promocode {
+    padding: 10px;
+    height: 33px;
+}
+
+.product-img {
+    border-radius: 11px;
+    height: 46px;
+}
+
 .hamburger__line::after,
 .hamburger::after,
 .hamburger::before {
