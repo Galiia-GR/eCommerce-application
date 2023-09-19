@@ -2275,7 +2275,9 @@ input:active {
     align-self: flex-end;
 }
 
-.total-button {
+.total-button,
+.button-go-shop,
+.button-promo {
     background-color: rgb(137, 179, 197);
     display: flex;
     justify-content: center;
@@ -2295,7 +2297,9 @@ input:active {
     font-weight: bold;
 }
 
-.total-button:hover {
+.total-button:hover,
+.button-go-shop:hover,
+.button-promo:hover {
     color: rgb(252, 240, 221);
     text-shadow: 1px 1px 1px rgba(31, 31, 31, 0.6117647059);
     box-shadow: 4px 4px 4px rgba(28, 28, 28, 0.438);
@@ -2310,10 +2314,23 @@ input:active {
     border-radius: 20px;
     height: 25px;
     width: 200px;
+    text-align: center;
+    align-self: center;
 }
 
 .input-text {
     width: 200px;
+}
+
+.button-go-shop {
+    width: 100px;
+    height: 30px;
+}
+
+.button-promo {
+    width: 200px;
+    height: 30px;
+    font-size: 16px;
 }
 
 /*# sourceMappingURL=style.css.map */
