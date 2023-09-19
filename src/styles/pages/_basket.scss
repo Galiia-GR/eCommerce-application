@@ -69,7 +69,8 @@
     gap: 10px;
     align-self: flex-end;
 }
-.total-button {
+.total-button,
+.button-go-shop {
     background-color: rgb(137 179 197);
     display: flex;
     justify-content: center;
@@ -108,4 +109,9 @@
 
 .input-text {
     width: 200px;
+}
+
+.button-go-shop {
+    width: 100px;
+    height: 30px;
 }

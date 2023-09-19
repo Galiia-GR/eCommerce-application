@@ -33,7 +33,6 @@ export async function createBasketPage() {
     basketImg.src = icoCart;
     basketTitle.textContent = 'you cart';
     const tipPromo = helpCreateEl('p', 'promo');
-    tipPromo.textContent = 'your promo code: GOLDEN';
     tipPromo.style.color = 'orange';
 
     basketTitleContain.append(basketImg, basketTitle, tipPromo);
@@ -80,6 +79,7 @@ export async function createBasketPage() {
             const arrCartItemsPromo = cartItemsPromo.lineItems;
             if (arrCartItemsPromo) {
                 productsBasketContain.innerHTML = '';
+                tipPromo.textContent = 'you can use promo code: GOLDEN';
                 drawBasketItems(cartItemsPromo);
             }
             const sumPromo = String(cartItemsPromo?.totalPrice.centAmount);
@@ -96,8 +96,20 @@ export async function createBasketPage() {
 }
 
 function drawBasketItems(response: prodsCart) {
+    const promo = document.querySelector('.promo') as HTMLElement;
     const arrCartItems = response?.lineItems;
-    console.log(arrCartItems);
+    if (arrCartItems.length === 0) {
+        const basketTitle = document.querySelector('.basket-title') as HTMLElement;
+        basketTitle.textContent = 'Your cart is empty';
+        const goShop = helpCreateEl('button', 'button-go-shop');
+        goShop.textContent = 'Shopping';
+        basketTitle.appendChild(goShop);
+        goShop.addEventListener('click', () => {
+            window.location.hash = '/shop';
+        });
+    } else {
+        promo.textContent = 'you can use promo code: GOLDEN';
+    }
 
     arrCartItems.forEach((el) => {
         const basketItem = helpCreateEl('div', 'basket-item');
