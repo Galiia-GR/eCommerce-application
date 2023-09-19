@@ -713,3 +713,22 @@ body {
 .shop-search {
     padding-left: 15px;
 }
+
+.navigation-item {
+  transform: translateY(-4px);
+}
+
+.BASKET {
+  transform: translateY(-1px);
+  filter: brightness();
+}
+
+.input-promocode {
+  padding: 10px;
+  height: 33px;
+}
+
+.product-img {
+  border-radius: 11px;
+  height: 46px;
+}
