@@ -89,7 +89,7 @@ export function createAboutUsPage() {
     descripContr1.textContent =
         "I coordinated team work, created the project's design, actively engaged in architectural discussions, decision-making, and acquired substantial expertise in handling APIs and e-commerce platforms.";
     descripContr2.textContent =
-        'I hold the role of an API specialist in our project, actively contributing to its development. This experience has equipped me with extensive expertise in working with APIs and e-commerce platforms.';
+        'I hold the role of an API worker in our project, actively contributing to its development. This experience has equipped me with extensive expertise in working with APIs and e-commerce platforms.';
     descripContr3.textContent =
         'I introduced scrum to our project. I was part of the project development and gained extensive experience with APIs and e-commerce platforms.';
 
