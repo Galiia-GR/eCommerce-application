@@ -1,16 +1,24 @@
-import { productList } from './getProducts';
-import { updateShopPage, updateShopPageWithParams, smartUpdate } from './updateShopPage';
+import { productList, allProductList } from './getProducts';
+import { updateShopPage, updateShopPageWithParams } from './updateShopPage';
 import { elements, dropContent, dropContentColor } from './shopElements';
 import { paramsState } from './paramsState';
-import { helpCreateEl } from '../global/global';
-import icoArrow from '../../assets/images/equal.svg';
+import { pageChange } from './pagin';
+
+elements.sectionShop?.append(elements.paginShopContainer);
+elements.nextPagShop.addEventListener('click', () => {
+    pageChange(1);
+});
+
+elements.prevPagShop.addEventListener('click', () => {
+    pageChange(-1);
+});
 
 export async function createShopPage() {
     const mainTag = document.querySelector('.main') as HTMLElement;
     mainTag.innerHTML = '';
     mainTag.append(elements.sortingPanel);
     mainTag.append(elements.sectionShop);
-    elements.sectionShop.append(elements.sectionShopContainer);
+    elements.sectionShop.prepend(elements.sectionShopContainer);
 
     await updateShopPage(productList, elements.sectionShopContainer);
     const titleSelectType = document.querySelector('.shop-sort-buttonType') as HTMLElement;
@@ -44,11 +52,10 @@ export async function createShopPage() {
             if (categoryId === 'all') {
                 paramsState.filter.category = '';
                 titleSelectType.textContent = 'Select type';
-                await smartUpdate();
             } else {
                 paramsState.filter.category = categoryId;
-                await updateShopPageWithParams();
             }
+            updateShopPageWithParams();
         } catch (error) {
             console.error('Произошла ошибка:', error);
         }
@@ -60,11 +67,10 @@ export async function createShopPage() {
                 paramsState.filter.color = '';
                 titleSelectColor.textContent = 'Select color';
                 titleSelectColor.style.color = 'white';
-                await smartUpdate();
             } else {
                 paramsState.filter.color = color;
-                await updateShopPageWithParams();
             }
+            updateShopPageWithParams();
         } catch (error) {
             console.error('Произошла ошибка:', error);
         }
@@ -90,7 +96,7 @@ export async function createShopPage() {
             }
         }
         paramsState.sort.setPrice();
-        await smartUpdate();
+        updateShopPageWithParams();
     });
 
     sortAbcButton?.addEventListener('click', async () => {
@@ -110,7 +116,7 @@ export async function createShopPage() {
             }
         }
         paramsState.sort.setName();
-        await smartUpdate();
+        updateShopPageWithParams();
     });
 
     const inputContainer = document.querySelector('.shop-search') as HTMLInputElement;
@@ -120,27 +126,11 @@ export async function createShopPage() {
 
         if (searchTextInput) {
             updateShopPage(
-                [...productList].filter((data) => data[0].name.en.toLocaleLowerCase().includes(searchTextInput)),
+                [...allProductList].filter((data) => data[0].name.en.toLocaleLowerCase().includes(searchTextInput)),
                 elements.sectionShopContainer
             );
         } else {
             updateShopPage(productList, elements.sectionShopContainer);
         }
     });
-
-    drawPagin();
-}
-
-function drawPagin() {
-    const sectionShop = document.querySelector('.shop');
-    const paginShopContainer = helpCreateEl('div', 'pagin-container');
-    const prevPagShop = helpCreateEl('img', 'fish-prev') as HTMLImageElement;
-    const numPagShop = helpCreateEl('span', 'fish-num');
-    const nextPagShop = helpCreateEl('img', 'fish-next') as HTMLImageElement;
-    nextPagShop.src = icoArrow;
-    prevPagShop.src = icoArrow;
-    numPagShop.textContent = '1';
-    paginShopContainer.append(prevPagShop, numPagShop, nextPagShop);
-
-    sectionShop?.append(paginShopContainer);
 }

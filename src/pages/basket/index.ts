@@ -9,8 +9,10 @@ import { basketPromo } from '../shop/basketPromo';
 import { prodsCart } from '../shop/types';
 import { basketAddOne } from './basketAddOne';
 import { basketDeleteAllItems } from './deleteAll';
+import { basketPromoDel } from '../basket/basketPromoDel';
 
 export async function createBasketPage() {
+    let totalTemp: string;
     const mainTag = document.querySelector('.main') as HTMLElement;
     mainTag.innerHTML = '';
     const sectionBasket = helpCreateEl('section', 'basket');
@@ -34,7 +36,6 @@ export async function createBasketPage() {
     basketImg.src = icoCart;
     basketTitle.textContent = 'Your cart';
     const tipPromo = helpCreateEl('p', 'promo');
-    tipPromo.textContent = 'your promo code: GOLDEN';
     tipPromo.style.color = 'orange';
 
     basketTitleContain.append(basketImg, basketTitle, tipPromo);
@@ -43,6 +44,8 @@ export async function createBasketPage() {
 
     const inputPromocode = helpCreateEl('input', 'input-promocode') as HTMLInputElement;
     inputPromocode.setAttribute('placeholder', ' Input promo code here');
+    const buttonDelPromo = helpCreateEl('button', 'button-promo');
+    buttonDelPromo.textContent = 'remove promo';
 
     const inputText = helpCreateEl('p', 'input-text');
 
@@ -57,20 +60,30 @@ export async function createBasketPage() {
     });
 
     basketContain.append(basketTitleContain, productsBasketContain, totalSumContain);
-    totalSumContain.append(inputPromocode, inputText, totalSum, totalSumPromo, totalButton);
+    totalSumContain.append(inputPromocode, inputText, buttonDelPromo, totalSum, totalSumPromo, totalButton);
 
     if (arrCartItems) {
         productsBasketContain.innerHTML = '';
         drawBasketItems(cartItems);
         await createBasket();
     }
-    const sum = String(cartItems?.totalPrice.centAmount);
-    const valuePartFirst = sum.slice(0, -2);
-    const valuePartSecond = sum.slice(sum.length - 2);
-    totalSum.textContent = `total ${valuePartFirst},${valuePartSecond} USD`;
-
+    if (cartItems?.discountCodes.length === 0) {
+        const sum = String(cartItems?.totalPrice.centAmount);
+        const valuePartFirst = sum.slice(0, -2);
+        const valuePartSecond = sum.slice(sum.length - 2);
+        totalSum.textContent = `total ${valuePartFirst},${valuePartSecond} USD`;
+        totalTemp = totalSum.textContent;
+        console.log(totalTemp);
+    } else {
+        const sum = String(cartItems?.totalPrice.centAmount);
+        const valuePartFirst = sum.slice(0, -2);
+        const valuePartSecond = sum.slice(sum.length - 2);
+        totalSumPromo.textContent = `total promo ${valuePartFirst},${valuePartSecond} USD`;
+        totalSumPromo.style.color = 'green';
+    }
     inputPromocode.addEventListener('input', async () => {
         const valueCode = inputPromocode.value;
+
         if (!valueCode) {
             inputText.textContent = '';
         } else if (valueCode === 'GOLDEN') {
@@ -82,28 +95,66 @@ export async function createBasketPage() {
                     return response;
                 }
             );
-            const arrCartItemsPromo = cartItemsPromo.lineItems;
-            if (arrCartItemsPromo) {
-                productsBasketContain.innerHTML = '';
-                drawBasketItems(cartItemsPromo);
-            }
             const sumPromo = String(cartItemsPromo?.totalPrice.centAmount);
             const valuePartFirstPromo = sumPromo.slice(0, -2);
-            const valuePartSecondPromo = sumPromo.slice(sum.length - 2);
-            totalSum.textContent = `total ${valuePartFirstPromo},${valuePartSecondPromo} USD`;
+            const valuePartSecondPromo = sumPromo.slice(sumPromo.length - 2);
+            totalSumPromo.textContent = `total promo ${valuePartFirstPromo},${valuePartSecondPromo} USD`;
+            totalSumPromo.style.color = 'green';
+            const arrCartItemsPromo = cartItemsPromo.lineItems;
 
-            console.log(cartItemsPromo);
+            if (arrCartItemsPromo) {
+                productsBasketContain.innerHTML = '';
+                tipPromo.textContent = 'you can use promo code: GOLDEN';
+                drawBasketItems(cartItemsPromo);
+            }
         } else {
             inputText.textContent = `invalid promo code: ${valueCode}`;
             inputText.textContent = `Invalid promo code ${valueCode}`;
             inputText.style.color = 'red';
         }
     });
+
+    buttonDelPromo.addEventListener('click', async () => {
+        const idPromo = '052950f4-8ed1-4a73-9e35-86e6ed7df706';
+        const cartItemsPromoDel = await basketPromoDel(String(localStorage.getItem('basket')), `${idPromo}`).then(
+            (result) => {
+                const response = result;
+                return response;
+            }
+        );
+        console.log(cartItemsPromoDel);
+
+        if (cartItemsPromoDel?.discountCodes.length === 0) {
+            console.log(true);
+
+            const sum = String(cartItems?.totalPrice.centAmount);
+            const valuePartFirst = sum.slice(0, -2);
+            const valuePartSecond = sum.slice(sum.length - 2);
+            totalSum.textContent = `total ${valuePartFirst},${valuePartSecond} USD`;
+            totalTemp = totalSum.textContent;
+            totalSumPromo.textContent = '';
+            tipPromo.textContent = '';
+            inputText.textContent = '';
+            inputPromocode.value = '';
+        }
+    });
 }
 
 function drawBasketItems(response: prodsCart) {
+    const promo = document.querySelector('.promo') as HTMLElement;
     const arrCartItems = response?.lineItems;
-    console.log(arrCartItems);
+    if (arrCartItems.length === 0) {
+        const basketTitle = document.querySelector('.basket-title') as HTMLElement;
+        basketTitle.textContent = 'Your cart is empty';
+        const goShop = helpCreateEl('button', 'button-go-shop');
+        goShop.textContent = 'Shopping';
+        basketTitle.appendChild(goShop);
+        goShop.addEventListener('click', () => {
+            window.location.hash = '/shop';
+        });
+    } else {
+        promo.textContent = 'you can use promo code: GOLDEN';
+    }
 
     arrCartItems.forEach((el) => {
         const basketItem = helpCreateEl('div', 'basket-item');
