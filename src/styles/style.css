@@ -742,6 +742,10 @@ body {
     height: 46px;
 }
 
+.developers-foto {
+    border-radius: 10000px;
+}
+
 .hamburger__line::after,
 .hamburger::after,
 .hamburger::before {
