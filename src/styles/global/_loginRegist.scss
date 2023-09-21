@@ -212,7 +212,8 @@ input:active {
     display: block;
 }
 
-.error, .error1 {
+.error,
+.error1 {
     color: rgb(255, 103, 103);
     font-weight: 500;
     font-size: 13px;
@@ -281,14 +282,14 @@ input:active {
     .account-window input,
     .double-container select,
     .account-window select {
-    background-color: rgb(255, 253, 249);
-    width: 85%;
-    border: 2px solid rgba(88, 152, 186, 0.7);
-    border-radius: 3px;
-    padding: 15.5px 15px;
-    font-size: 12px;
-    transition: 0.01s;
-    color: rgb(39, 54, 63);
+        background-color: rgb(255, 253, 249);
+        width: 85%;
+        border: 2px solid rgba(88, 152, 186, 0.7);
+        border-radius: 3px;
+        padding: 15.5px 15px;
+        font-size: 12px;
+        transition: 0.01s;
+        color: rgb(39, 54, 63);
     }
 
     .account-window h4 {
@@ -336,14 +337,14 @@ input:active {
     .account-window input,
     .double-container select,
     .account-window select {
-    background-color: rgb(255, 253, 249);
-    width: 85%;
-    border: 2px solid rgba(88, 152, 186, 0.7);
-    border-radius: 3px;
-    padding: 15.5px 15px;
-    font-size: 12px;
-    transition: 0.01s;
-    color: rgb(39, 54, 63);
+        background-color: rgb(255, 253, 249);
+        width: 85%;
+        border: 2px solid rgba(88, 152, 186, 0.7);
+        border-radius: 3px;
+        padding: 15.5px 15px;
+        font-size: 12px;
+        transition: 0.01s;
+        color: rgb(39, 54, 63);
     }
 
     .account-window h4 {

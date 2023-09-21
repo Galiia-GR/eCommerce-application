@@ -142,6 +142,7 @@ body {
 .navigation-item {
     list-style-type: none;
     cursor: pointer;
+    align-self: end;
 }
 .navigation-link {
     text-decoration: none;
@@ -213,7 +214,8 @@ body {
     color: $color-primary-dark-sand;
 }
 
-.profile-scroll {
+.profile-scroll,
+.basket-scroll {
     position: fixed;
     left: 7%;
     right: 7%;
@@ -222,7 +224,9 @@ body {
     top: 60px;
 }
 
-.profile {
+.profile,
+.basket,
+.about {
     background-color: rgba($color: #ffffff, $alpha: 0.9);
     margin: 0 auto;
     display: flex;
@@ -235,6 +239,7 @@ body {
     font-weight: 500;
     gap: 4px;
     width: 100%;
+    min-height: 100%;
 }
 
 .profile input {
@@ -684,4 +689,50 @@ body {
 
 .profile .errorInput {
     border: solid 2px rgba(216, 78, 78, 0.7);
+}
+
+.BASKET {
+    display: flex;
+}
+
+.basket-home-img {
+    width: 55px;
+    cursor: pointer;
+    align-items: flex-end;
+}
+
+.basket-home-img:hover {
+    cursor: pointer;
+    transform: translate3d(0, 2px, -2px);
+}
+
+.shop-sorting {
+    margin-top: 36px;
+}
+
+.shop-search {
+    padding-left: 15px;
+}
+
+.navigation-item {
+  transform: translateY(-4px);
+}
+
+.BASKET {
+  transform: translateY(-1px);
+  filter: brightness();
+}
+
+.input-promocode {
+  padding: 10px;
+  height: 33px;
+}
+
+.product-img {
+  border-radius: 12px;
+  height: 46px;
+}
+
+.developers-foto {
+    border-radius: 10000px;
 }

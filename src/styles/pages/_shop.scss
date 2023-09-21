@@ -107,6 +107,31 @@
     }
 }
 
+.how-many-container {
+    display: flex;
+    align-self: flex-end;
+    gap: 10px;
+    color: $color-primary-sand;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.button-minus,
+.button-plus {
+    display: flex;
+    height: 30px;
+    width: 30px;
+    font-size: 24px;
+    background-color: rgb(137 179 197);
+    color: white;
+    border-radius: 10px;
+    border: 2px solid rgba(239, 237, 237, 0.5);
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+}
+
 .shop-fish__button {
     background-color: rgb(137 179 197);
     display: flex;
@@ -122,7 +147,9 @@
     color: white;
 }
 
-.shop-fish__button:hover {
+.shop-fish__button:hover,
+.button-minus:hover,
+.button-plus:hover {
     color: $color-primary-sand;
     text-shadow: 1px 1px 1px #1f1f1f9c;
     box-shadow: 4px 4px 4px rgba(28, 28, 28, 0.438);
@@ -242,4 +269,66 @@
 .shop-search {
     border: 2px solid $color-primary-blue;
     border-radius: 20px;
+}
+
+.how-many-contain {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 20px;
+    gap: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.button-delete {
+    width: 25px;
+    cursor: pointer;
+}
+
+.button-delete:hover {
+    transform: translate3d(0, 2px, -2px);
+}
+
+.fish-prev,
+.fish-next {
+    align-self: center;
+    padding: 15px;
+    width: 52px;
+    height: 52px;
+    border: 2px solid rgba(239, 237, 237, 0.5);
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: all 0.4s ease;
+    background-color: rgba(137, 179, 197);
+    cursor: pointer;
+}
+
+.fish-num {
+    border: 2px solid rgba(239, 237, 237, 0.5);
+    padding: 15px 18px 15px 18px;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: rgba(137, 179, 197);
+    text-align: center;
+    border-radius: 50%;
+    align-self: center;
+    color: white;
+}
+
+.fish-prev {
+    transform: rotate(180deg);
+}
+
+.pagin-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding-bottom: 30px;
+}
+
+.fish-prev:hover,
+.fish-next:hover {
+    background-color: $color-primary-sand;
 }

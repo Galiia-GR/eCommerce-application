@@ -28,5 +28,46 @@ export type ParamsState = {
         setName: { (): void };
         getSort: { (): null | string[] };
     };
+    pagin: {
+        limit: number;
+        offset: { (): number };
+        total: number;
+        page: number;
+        pageCount: { (): number };
+        setPagin: { (page: number, total?: number): void };
+    };
     paramsRecord: { (): Record<string, string | number | string[]> };
+};
+
+export type prodsCart = {
+    id: string;
+    discountCodes: Array<{
+        id: string;
+        typeId: string;
+    }>;
+    lineItems: Array<{
+        productId: string;
+        id: string;
+        name: { en: string };
+        price: {
+            value: {
+                currencyCode: string;
+                centAmount: number;
+            };
+            discounted: {
+                value: {
+                    currencyCode: string;
+                    centAmount: number;
+                };
+            };
+        };
+        value: { centAmount: number };
+        quantity: number;
+        variant: {
+            images: Array<{ url: string }>;
+        };
+    }>;
+    totalPrice: {
+        centAmount: number;
+    };
 };

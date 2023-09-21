@@ -162,6 +162,7 @@ body {
 .navigation-item {
     list-style-type: none;
     cursor: pointer;
+    align-self: end;
 }
 
 .navigation-link {
@@ -243,7 +244,8 @@ body {
     color: rgb(216, 209, 198);
 }
 
-.profile-scroll {
+.profile-scroll,
+.basket-scroll {
     position: fixed;
     left: 7%;
     right: 7%;
@@ -252,7 +254,9 @@ body {
     top: 60px;
 }
 
-.profile {
+.profile,
+.basket,
+.about {
     background-color: rgba(255, 255, 255, 0.9);
     margin: 0 auto;
     display: flex;
@@ -265,6 +269,7 @@ body {
     font-weight: 500;
     gap: 4px;
     width: 100%;
+    min-height: 100%;
 }
 
 .profile input {
@@ -693,6 +698,52 @@ body {
 
 .profile .errorInput {
     border: solid 2px rgba(216, 78, 78, 0.7);
+}
+
+.BASKET {
+    display: flex;
+}
+
+.basket-home-img {
+    width: 55px;
+    cursor: pointer;
+    align-items: flex-end;
+}
+
+.basket-home-img:hover {
+    cursor: pointer;
+    transform: translate3d(0, 2px, -2px);
+}
+
+.shop-sorting {
+    margin-top: 36px;
+}
+
+.shop-search {
+    padding-left: 15px;
+}
+
+.navigation-item {
+    transform: translateY(-4px);
+}
+
+.BASKET {
+    transform: translateY(-1px);
+    filter: brightness();
+}
+
+.input-promocode {
+    padding: 10px;
+    height: 33px;
+}
+
+.product-img {
+    border-radius: 12px;
+    height: 46px;
+}
+
+.developers-foto {
+    border-radius: 10000px;
 }
 
 .hamburger__line::after,
@@ -1290,9 +1341,9 @@ input:active {
         2235px 791px #fff, 200px 1791px #fff, 180px 2243px #fff, 1017px 564px #fff, 291px 1763px #fff, 437px 1582px #fff,
         193px 2323px #fff, 1543px 122px #fff, 280px 448px #fff, 1063px 686px #fff, 1875px 2039px #fff,
         1555px 2006px #fff;
-    -webkit-animation: animStar 30s infinite linear;
-    -moz-animation: animStar 30s infinite linear;
-    animation: animStar 30s infinite linear;
+    -webkit-animation: animStar 15s infinite linear;
+    -moz-animation: animStar 15s infinite linear;
+    animation: animStar 15s infinite linear;
 }
 
 .bubl1:after {
@@ -1478,9 +1529,9 @@ input:active {
         1871px 1061px #fff, 543px 343px #fff, 649px 804px #fff, 2190px 1514px #fff, 1229px 1159px #fff,
         1287px 2361px #fff, 1078px 75px #fff, 630px 1638px #fff, 1867px 569px #fff, 357px 227px #fff, 1131px 240px #fff,
         755px 1337px #fff, 12px 848px #fff;
-    -webkit-animation: animStar 60s infinite linear;
-    -moz-animation: animStar 60s infinite linear;
-    animation: animStar 60s infinite linear;
+    -webkit-animation: animStar 30s infinite linear;
+    -moz-animation: animStar 30s infinite linear;
+    animation: animStar 30s infinite linear;
 }
 
 .bubl2:after {
@@ -1553,9 +1604,9 @@ input:active {
         1126px 1946px #fff, 1123px 76px #fff, 2037px 2342px #fff, 1592px 1356px #fff, 1988px 2209px #fff,
         578px 827px #fff, 580px 2267px #fff, 1908px 526px #fff, 1415px 130px #fff, 891px 1672px #fff, 2416px 143px #fff,
         311px 615px #fff, 984px 2105px #fff, 501px 594px #fff, 908px 2128px #fff, 2179px 1666px #fff;
-    -webkit-animation: animStar 90s infinite linear;
-    -moz-animation: animStar 90s infinite linear;
-    animation: animStar 90s infinite linear;
+    -webkit-animation: animStar 45s infinite linear;
+    -moz-animation: animStar 45s infinite linear;
+    animation: animStar 45s infinite linear;
 }
 
 .bubl3:after {
@@ -1640,6 +1691,8 @@ input:active {
 .home-fish__container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     gap: 10px;
 }
 @media (min-width: 768px) and (max-width: 1180px) {
@@ -1654,21 +1707,18 @@ input:active {
 }
 
 .home-fish__img {
-    margin-top: 20px;
     width: 80px;
     height: 60px;
     align-self: center;
 }
 @media (min-width: 768px) and (max-width: 1180px) {
     .home-fish__img {
-        margin-top: 20px;
         width: 70px;
         height: 50px;
     }
 }
 @media (min-width: 300px) and (max-width: 767px) {
     .home-fish__img {
-        margin-top: 20px;
         width: 60px;
         height: 40px;
     }
@@ -1681,8 +1731,10 @@ input:active {
     border-radius: 55%;
     background-image: linear-gradient(to top, #00bcd2, #79caeb, #b6d8f7, #e2e9fc, #ffffff);
     display: flex;
-    flex-direction: column;
-    align-self: center;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    z-index: 3;
 }
 @media (min-width: 768px) and (max-width: 1180px) {
     .home-fish__item {
@@ -1698,10 +1750,64 @@ input:active {
     }
 }
 
+@keyframes bubble {
+    0% {
+        width: 114px;
+    }
+    10% {
+        width: 116px;
+    }
+    20% {
+        width: 118px;
+    }
+    30% {
+        width: 120px;
+    }
+    40% {
+        width: 122px;
+    }
+    50% {
+        width: 124px;
+    }
+    60% {
+        width: 126px;
+    }
+    70% {
+        width: 124px;
+    }
+    80% {
+        width: 122px;
+    }
+    90% {
+        width: 120px;
+    }
+    100% {
+        width: 118px;
+    }
+}
+@media (max-width: 380px) {
+    @keyframes bubble {
+        0% {
+            width: 100px;
+        }
+        10% {
+            width: 101px;
+        }
+        20% {
+            width: 102px;
+        }
+        30% {
+            width: 103px;
+        }
+        100% {
+            width: 102px;
+        }
+    }
+}
 .home-fish__item:hover {
+    box-shadow: 5px 5px 10px 1px #3b3b3b;
+    animation: bubble ease-in forwards 0.3s;
     cursor: pointer;
-    transform: translate3d(0, 2px, -2px);
-    box-shadow: 6px 6px 6px #3b3b3b;
 }
 
 .home-fish__title {
@@ -1868,6 +1974,31 @@ input:active {
     }
 }
 
+.how-many-container {
+    display: flex;
+    align-self: flex-end;
+    gap: 10px;
+    color: rgb(252, 240, 221);
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.button-minus,
+.button-plus {
+    display: flex;
+    height: 30px;
+    width: 30px;
+    font-size: 24px;
+    background-color: rgb(137, 179, 197);
+    color: white;
+    border-radius: 10px;
+    border: 2px solid rgba(239, 237, 237, 0.5);
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+}
+
 .shop-fish__button {
     background-color: rgb(137, 179, 197);
     display: flex;
@@ -1883,7 +2014,9 @@ input:active {
     color: white;
 }
 
-.shop-fish__button:hover {
+.shop-fish__button:hover,
+.button-minus:hover,
+.button-plus:hover {
     color: rgb(252, 240, 221);
     text-shadow: 1px 1px 1px rgba(31, 31, 31, 0.6117647059);
     box-shadow: 4px 4px 4px rgba(28, 28, 28, 0.438);
@@ -2006,6 +2139,310 @@ input:active {
 .shop-search {
     border: 2px solid rgb(88, 152, 186);
     border-radius: 20px;
+}
+
+.how-many-contain {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 20px;
+    gap: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.button-delete {
+    width: 25px;
+    cursor: pointer;
+}
+
+.button-delete:hover {
+    transform: translate3d(0, 2px, -2px);
+}
+
+.fish-prev,
+.fish-next {
+    align-self: center;
+    padding: 15px;
+    width: 52px;
+    height: 52px;
+    border: 2px solid rgba(239, 237, 237, 0.5);
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: all 0.4s ease;
+    background-color: rgb(137, 179, 197);
+    cursor: pointer;
+}
+
+.fish-num {
+    border: 2px solid rgba(239, 237, 237, 0.5);
+    padding: 15px 18px 15px 18px;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: rgb(137, 179, 197);
+    text-align: center;
+    border-radius: 50%;
+    align-self: center;
+    color: white;
+}
+
+.fish-prev {
+    transform: rotate(180deg);
+}
+
+.pagin-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding-bottom: 30px;
+}
+
+.fish-prev:hover,
+.fish-next:hover {
+    background-color: rgb(252, 240, 221);
+}
+
+.basket {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.basket-contain {
+    display: flex;
+    align-self: start;
+    gap: 10px;
+}
+
+.basket-title-img {
+    width: 35px;
+}
+
+.basket-title {
+    align-self: start;
+    font-size: 32px;
+}
+
+.products-basket {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.basket-item {
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+    gap: 100px;
+    padding: 20px;
+    border: 1px solid rgba(88, 152, 186, 0.5);
+    border-radius: 20px;
+}
+@media (min-width: 768px) and (max-width: 1180px) {
+    .basket-item {
+        gap: 20px;
+    }
+}
+@media (min-width: 300px) and (max-width: 767px) {
+    .basket-item {
+        gap: 5px;
+        flex-direction: column;
+    }
+}
+
+.product-img {
+    width: 70px;
+}
+
+.product-title {
+    align-self: flex-end;
+    font-weight: bold;
+}
+
+.product-price {
+    font-size: bold;
+}
+
+.total-sum-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-self: flex-end;
+    padding: 50px;
+    gap: 10px;
+}
+
+.product-price-container {
+    display: flex;
+    gap: 10px;
+    align-self: flex-end;
+}
+
+.total-button,
+.button-go-shop,
+.button-promo {
+    background-color: rgb(137, 179, 197);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    border: 2px solid rgba(239, 237, 237, 0.5);
+    cursor: pointer;
+    width: 200px;
+    height: 50px;
+    border-radius: 20px;
+    font-size: 20px;
+    color: white;
+}
+
+.total-sum {
+    text-align: end;
+    font-weight: bold;
+}
+
+.total-button:hover,
+.button-go-shop:hover,
+.button-promo:hover {
+    color: rgb(252, 240, 221);
+    text-shadow: 1px 1px 1px rgba(31, 31, 31, 0.6117647059);
+    box-shadow: 4px 4px 4px rgba(28, 28, 28, 0.438);
+}
+
+.how-many-basket {
+    color: rgb(60, 82, 113);
+}
+
+.input-promocode {
+    border: 2px solid rgb(88, 152, 186);
+    border-radius: 20px;
+    height: 25px;
+    width: 200px;
+    text-align: center;
+    align-self: center;
+}
+
+.input-text {
+    width: 200px;
+}
+
+.button-go-shop {
+    width: 100px;
+    height: 30px;
+}
+
+.button-promo {
+    width: 200px;
+    height: 30px;
+    font-size: 16px;
+}
+
+.about-container {
+    display: flex;
+    font-size: 16px;
+    gap: 30px;
+    justify-content: center;
+}
+@media (min-width: 300px) and (max-width: 767px) {
+    .about-container {
+        font-size: 10px;
+        gap: 10px;
+    }
+}
+
+.developers-contain {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 400px;
+}
+@media (min-width: 768px) and (max-width: 1180px) {
+    .developers-contain {
+        width: 300px;
+    }
+}
+@media (min-width: 768px) and (max-width: 1420px) {
+    .developers-contain {
+        width: 200px;
+    }
+}
+@media (min-width: 300px) and (max-width: 767px) {
+    .developers-contain {
+        width: 80px;
+    }
+}
+
+.developer {
+    width: 200px;
+    height: 200px;
+    border: 3px solid rgb(88, 152, 186);
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: 0.5s;
+}
+@media (min-width: 768px) and (max-width: 1180px) {
+    .developer {
+        width: 150px;
+        height: 150px;
+    }
+}
+@media (min-width: 300px) and (max-width: 767px) {
+    .developer {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+.developers-foto {
+    width: 196px;
+    align-items: center;
+}
+@media (min-width: 768px) and (max-width: 1180px) {
+    .developers-foto {
+        width: 146px;
+        height: 146px;
+    }
+}
+@media (min-width: 300px) and (max-width: 767px) {
+    .developers-foto {
+        width: 76px;
+        height: 76px;
+    }
+}
+
+.developer:hover {
+    box-shadow: 5px 5px 10px 1px #3b3b3b;
+}
+
+.developers-title {
+    font-size: 18px;
+    font-weight: bold;
+    align-self: center;
+    color: rgb(88, 152, 186);
+}
+
+.developers-description {
+    line-height: 1.3;
+    color: rgb(60, 82, 113);
+    font-size: 18px;
+    text-align: justify;
+}
+@media (min-width: 300px) and (max-width: 767px) {
+    .developers-description {
+        font-size: 10px;
+    }
+}
+
+.developers-bio {
+    color: rgb(235, 160, 62);
+}
+
+.RSS {
+    cursor: pointer;
+    text-decoration: none;
 }
 
 /*# sourceMappingURL=style.css.map */

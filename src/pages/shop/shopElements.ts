@@ -1,6 +1,7 @@
 import { helpCreateEl } from '../global/global';
 import icoAbc from '../../assets/images/icoAZ.png';
 import icoSort from '../../assets/images/icoSort.png';
+import icoArrow from '../../assets/images/equal.svg';
 
 const sortingPanel = helpCreateEl('div', 'shop-sorting');
 const sortTypesDrop = helpCreateEl('div', 'shop-sort-dropdown');
@@ -99,10 +100,23 @@ buttonDropColor.addEventListener('click', () => {
     dropContentColor.classList.toggle('show');
 });
 
+const paginShopContainer = helpCreateEl('div', 'pagin-container');
+const prevPagShop = helpCreateEl('img', 'fish-prev') as HTMLImageElement;
+const numPagShop = helpCreateEl('span', 'fish-num');
+const nextPagShop = helpCreateEl('img', 'fish-next') as HTMLImageElement;
+nextPagShop.src = icoArrow;
+prevPagShop.src = icoArrow;
+numPagShop.textContent = '1';
+paginShopContainer.append(prevPagShop, numPagShop, nextPagShop);
+
 const elements = {
     sectionShop: helpCreateEl('section', 'shop'),
     sectionShopContainer: helpCreateEl('div', 'shop-container'),
     sortingPanel: sortingPanel as HTMLElement,
+    paginShopContainer: paginShopContainer as HTMLElement,
+    numPagShop: numPagShop as HTMLElement,
+    nextPagShop: nextPagShop as HTMLElement,
+    prevPagShop: prevPagShop as HTMLElement,
 };
 
 export { elements };
